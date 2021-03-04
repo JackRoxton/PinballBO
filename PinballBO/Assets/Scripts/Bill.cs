@@ -8,8 +8,7 @@ public class Bill : MonoBehaviour
     -> formule de baisse de vélocité selon l'input du joueur ?*/
 
 
-        //inetia tensor, inertia tensor roattion sur le rb
-    private float speed = 0f;
+        //angulardrag et angularvelocity sur le rigidbody pour contrôler la rotation de la bille
     Rigidbody rb;
 
     void Start()
