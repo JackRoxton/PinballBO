@@ -4,15 +4,46 @@ using UnityEngine;
 
 public class Bill : MonoBehaviour
 {
-    // Start is called before the first frame update
+    /*déplacements avec inertie
+    -> formule de baisse de vélocité selon l'input du joueur ?*/
+
+
+        //inetia tensor, inertia tensor roattion sur le rb
+    private float speed = 0f;
+    Rigidbody rb;
+
     void Start()
     {
+        rb = this.GetComponent<Rigidbody>();
+    }
+
+    void Update()
+    {
+        GetInput();
+    }
+
+    void GetInput()
+    {
+        
+        if (Input.GetAxis("Horizontal") > 0)
+        {
+            rb.AddForce(new Vector3(1, 0, 0));
+        }
+        else if (Input.GetAxis("Horizontal") < 0)
+        {
+            rb.AddForce(new Vector3(-1, 0, 0));
+        }
+
+        if (Input.GetAxis("Vertical") > 0)
+        {
+            rb.AddForce(new Vector3(0, 0, 1));
+        }
+        else if (Input.GetAxis("Vertical") < 0)
+        {
+            rb.AddForce(new Vector3(0, 0, -1));
+        }
+
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
