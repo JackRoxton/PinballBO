@@ -16,13 +16,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
+    public void RestartGame()
     {
         
     }
 
-    void Update()
+    public void QuitGame()
     {
-        
+        Debug.Log("Has quit game");
+        Application.Quit();
     }
 }
