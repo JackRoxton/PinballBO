@@ -24,7 +24,10 @@ public class Bill : MonoBehaviour
     void GetInput()
     {
         
-        if (Input.GetAxis("Horizontal") > 0)
+        rb.AddForce(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")));
+         
+
+        /*if (Input.GetAxis("Horizontal") > 0)
         {
             rb.AddForce(new Vector3(1, 0, 0));
         }
@@ -41,7 +44,7 @@ public class Bill : MonoBehaviour
         {
             rb.AddForce(new Vector3(0, 0, -1));
         }
-
+        */
         
     }
 
