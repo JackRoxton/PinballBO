@@ -8,14 +8,12 @@ public class Bumper : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-
-        Debug.Log("Collision");
         Bill bill = collision.collider.GetComponent<Bill>();
         if (bill != null)
         {
-            Debug.Log("Collision with Bill");
-            Vector3 direction = bill.transform.position - transform.position;
-            bill.GetComponent<Rigidbody>().AddForce(direction * force);
+            Vector3 direction = collision.GetContact(0).normal;
+            Debug.Log(direction);
+            bill.GetComponent<Rigidbody>().AddForce(-direction * force);
         }
     }
 }
