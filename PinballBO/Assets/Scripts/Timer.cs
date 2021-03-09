@@ -13,6 +13,7 @@ public class Timer : MonoBehaviour
 
     //Timer
     public float timeTotal = 30f;
+    public GameObject gameManager;
     private float timeLeft;
     private float timeFinished;
     private int bestTime;
@@ -30,7 +31,7 @@ public class Timer : MonoBehaviour
         /*else */
         if (timeLeft < 0)
         {
-            //Game Over
+            
         }
         else
         {
