@@ -9,6 +9,7 @@ public class Timer : MonoBehaviour
     [Range(0, 100)]
     public float fillValue = 50;
     public Image circleFillImage;
+    public Text chronoText;
 
     //Timer
     public float timeTotal = 30f;
@@ -31,6 +32,9 @@ public class Timer : MonoBehaviour
             {
                 timeLeft = timeTotal;
             }
+            int Seconds = (int)timeLeft;
+            chronoText.text = Seconds.ToString();
+
 
             fillValue = timeLeft / timeTotal * 100;
             Debug.Log(fillValue);
