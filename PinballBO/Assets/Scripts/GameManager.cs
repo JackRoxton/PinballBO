@@ -1,29 +1,92 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.AI;
 
-public class GameManager : MonoBehaviour
+public class GameManager
 {
     private static GameManager instance;
+
+    private GameManager()
+    {
+    }
+
     public static GameManager Instance
     {
         get
         {
             if (instance == null)
-                Debug.LogError("GameManager instance not found");
+            {
+                instance = new GameManager();
+            }
 
             return instance;
         }
     }
 
-    public void RestartGame()
+    public GameObject DefeatScreen;
+
+    private void Awake()
     {
-        
+        instance = this;
     }
 
-    public void QuitGame()
+    public enum gameState
     {
-        Debug.Log("Has quit game");
-        Application.Quit();
+        MainMenu,
+        InGame,
+        GameOver,
     }
+
+    #region GameState
+
+    private gameState currentState;
+    public gameState GameState
+
+    {
+        get
+        {
+            return currentState;
+        }
+        set
+        {
+            currentState = value;
+            switch (currentState)
+            {
+                case gameState.MainMenu:
+                    //Cursor.lockState = CursorLockMode.Confined;
+                    Cursor.visible = true;
+                    SceneManager.LoadScene(0);
+                    break;
+
+                case gameState.InGame:
+                        //Cursor.lockState = CursorLockMode.Locked;
+                        //Cursor.visible = false;
+                        Time.timeScale = 1;
+                        break;
+
+                /* case gameState.Pause:
+                    Cursor.lockState = CursorLockMode.Confined;
+                    Cursor.visible = true;
+                    Time.timeScale = 0;
+                    break; 
+
+                case gameState.Win:
+                    Cursor.lockState = CursorLockMode.Confined;
+                    Cursor.visible = true;
+                    Time.timeScale = 0;
+                    break;
+                    */
+
+                case gameState.GameOver:
+                    //Cursor.lockState = CursorLockMode.Confined;
+                    Cursor.visible = true;
+                    Time.timeScale = 0;
+                    break;
+            }
+        }
+    }
+    #endregion
+
 }

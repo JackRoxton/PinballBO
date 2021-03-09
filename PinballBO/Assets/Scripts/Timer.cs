@@ -13,6 +13,7 @@ public class Timer : MonoBehaviour
 
     //Timer
     public float timeTotal = 30f;
+    public GameObject defeatScreen;
     private float timeLeft;
     private float timeFinished;
     private int bestTime;
@@ -21,6 +22,8 @@ public class Timer : MonoBehaviour
     private void Start()
     {
         timeLeft = timeTotal;
+        Time.timeScale = 1;
+        GameManager.Instance.GameState = GameManager.gameState.InGame;
     }
 
     void Update()
@@ -28,12 +31,6 @@ public class Timer : MonoBehaviour
         //Ajouter "si victoire alors", faire en sorte que le best time s'affiche a la win bestTime = (int)timeFinished;
 
         /*else */
-        if (timeLeft < 0)
-        {
-            //Game Over
-        }
-        else
-        {
             if (timeLeft > timeTotal)
             {
                 timeLeft = timeTotal;
@@ -49,6 +46,9 @@ public class Timer : MonoBehaviour
             
 
             FillCircleValue(fillValue);
+        if (timeLeft < 0)
+        {
+            Defeat();
         }
     }
 
@@ -56,6 +56,15 @@ public class Timer : MonoBehaviour
     {
         float fillAmount = (value / 100.0f);
         circleFillImage.fillAmount = fillAmount;
+    }
+
+    private void Defeat()
+    {
+        if (GameManager.Instance.GameState == GameManager.gameState.GameOver)  // if Gamestate = GameOver, it means that this has already been called
+            return;
+
+        defeatScreen.SetActive(true);
+        GameManager.Instance.GameState = GameManager.gameState.GameOver;
     }
 
 }
