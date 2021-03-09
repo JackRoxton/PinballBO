@@ -6,20 +6,17 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-
-
-
     //Buttons
     public void OnClickEnter(string button)
     {
         switch (button)
         {
             case "GoMainMenu":
-                SceneManager.LoadScene(0);
+                GameManager.Instance.GameState = GameManager.gameState.MainMenu;
                 break;
 
             case "Restart":
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 break;
 
             case "NextLevel":
