@@ -474,25 +474,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 397057860}
     m_Modifications:
-    - target: {fileID: 1686238981217694171, guid: 79bb5e4e4fb683440b9ff0f03029234d,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 1686238981217694171, guid: 79bb5e4e4fb683440b9ff0f03029234d,
-        type: 3}
-      propertyPath: m_Type
-      value: 3
+    - target: {fileID: 852072901, guid: 79bb5e4e4fb683440b9ff0f03029234d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.71188253
       objectReference: {fileID: 0}
-    - target: {fileID: 1686238981217694171, guid: 79bb5e4e4fb683440b9ff0f03029234d,
-        type: 3}
-      propertyPath: m_FillAmount
+    - target: {fileID: 852072901, guid: 79bb5e4e4fb683440b9ff0f03029234d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.71188253
+      objectReference: {fileID: 0}
+    - target: {fileID: 852072901, guid: 79bb5e4e4fb683440b9ff0f03029234d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.71188253
+      objectReference: {fileID: 0}
+    - target: {fileID: 852072902, guid: 79bb5e4e4fb683440b9ff0f03029234d, type: 3}
+      propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1686238981217694171, guid: 79bb5e4e4fb683440b9ff0f03029234d,
-        type: 3}
-      propertyPath: m_PreserveAspect
-      value: 0
+    - target: {fileID: 852072902, guid: 79bb5e4e4fb683440b9ff0f03029234d, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 852072902, guid: 79bb5e4e4fb683440b9ff0f03029234d, type: 3}
+      propertyPath: m_Color.b
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1686238981780416200, guid: 79bb5e4e4fb683440b9ff0f03029234d,
         type: 3}
@@ -602,16 +606,6 @@ PrefabInstance:
     - target: {fileID: 1686238981780416203, guid: 79bb5e4e4fb683440b9ff0f03029234d,
         type: 3}
       propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1686238981780416203, guid: 79bb5e4e4fb683440b9ff0f03029234d,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1686238981780416203, guid: 79bb5e4e4fb683440b9ff0f03029234d,
-        type: 3}
-      propertyPath: m_LocalScale.y
       value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
