@@ -14,8 +14,8 @@ public class CameraContol : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
     }
 
     void Update()
@@ -29,7 +29,7 @@ public class CameraContol : MonoBehaviour
         this.transform.position = player.position + CameraGap;
     }
 
-    /*void Advanced() //un WIP d'une caméra qui tourne autour de la bille si le besoin est
+    /*void Advanced() //un WIP qui marche pas encore d'une caméra qui tourne autour de la bille si le besoin est
     {
         angle.x += -Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
         angle.y += Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
