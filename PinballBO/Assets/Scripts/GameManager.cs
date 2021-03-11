@@ -37,6 +37,7 @@ public class GameManager
         MainMenu,
         InGame,
         GameOver,
+        Pause,
     }
 
     #region GameState
@@ -66,13 +67,13 @@ public class GameManager
                         Time.timeScale = 1;
                         break;
 
-                /* case gameState.Pause:
-                    Cursor.lockState = CursorLockMode.Confined;
+                case gameState.Pause:
+                    //Cursor.lockState = CursorLockMode.Confined;
                     Cursor.visible = true;
                     Time.timeScale = 0;
                     break; 
 
-                case gameState.Win:
+                /* case gameState.Win:
                     Cursor.lockState = CursorLockMode.Confined;
                     Cursor.visible = true;
                     Time.timeScale = 0;

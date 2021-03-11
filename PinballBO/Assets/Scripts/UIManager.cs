@@ -6,6 +6,18 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public GameObject pauseScreen;
+
+    //pause
+    public void Update()
+    {
+        if(GameManager.Instance.GameState == GameManager.gameState.InGame && Input.GetKey(KeyCode.Escape))
+        {
+            GameManager.Instance.GameState = GameManager.gameState.Pause;
+            pauseScreen.SetActive(true);
+        }
+    }
+
     //Buttons
     public void OnClickEnter(string button)
     {
@@ -21,6 +33,11 @@ public class UIManager : MonoBehaviour
 
             case "NextLevel":
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                break;
+
+            case "Continue":
+                pauseScreen.SetActive(false);
+                GameManager.Instance.GameState = GameManager.gameState.InGame;
                 break;
 
             default:
