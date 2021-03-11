@@ -502,7 +502,7 @@ GameObject:
   - component: {fileID: 8920487348467567633}
   - component: {fileID: 1970661402404386737}
   m_Layer: 0
-  m_Name: BumperTriangle
+  m_Name: Slingshot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -515,7 +515,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8577815959132942659}
-  m_LocalRotation: {x: 0.072381794, y: -0.25869018, z: -0.019442903, w: 0.9630484}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.302827, y: 0.76299715, z: 3.8817263}
   m_LocalScale: {x: 1.8964, y: 1.9345578, z: 1.8964}
   m_Children:
@@ -527,7 +527,7 @@ Transform:
   - {fileID: 7190711377520599372}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 7.432, y: -30.353, z: -4.3320003}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &8920487348467568622
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -556,7 +556,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5757949bca6729447a6655673562c890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 600
+  force: 800
+  factor: 19
 --- !u!82 &1970661402404386737
 AudioSource:
   m_ObjectHideFlags: 0
@@ -568,7 +569,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e9925bf90899d34408a079760d61eac1, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
