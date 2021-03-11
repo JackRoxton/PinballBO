@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                 break;
 
-            case "Continue":
+            case "Resume":
                 pauseScreen.SetActive(false);
                 GameManager.Instance.GameState = GameManager.gameState.InGame;
                 break;
