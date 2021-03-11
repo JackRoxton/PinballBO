@@ -24,7 +24,7 @@ public class Bill : MonoBehaviour
     void GetInput()
     {
         
-        rb.AddForce(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")));
+        rb.AddForce(Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")));
          
 
         /*if (Input.GetAxis("Horizontal") > 0)
