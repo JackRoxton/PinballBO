@@ -4,28 +4,21 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.AI;
 
-public class GameManager
+public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
-
-    private GameManager()
-    {
-    }
-
     public static GameManager Instance
     {
         get
         {
             if (instance == null)
-            {
-                instance = new GameManager();
-            }
+                Debug.LogError("GameManager instance not found");
 
             return instance;
         }
     }
 
-    public GameObject DefeatScreen;
+    public UIManager uiManager;
 
     private void Awake()
     {
@@ -38,6 +31,7 @@ public class GameManager
         InGame,
         GameOver,
         Pause,
+        Win,
     }
 
     #region GameState
@@ -73,16 +67,18 @@ public class GameManager
                     Time.timeScale = 0;
                     break; 
 
-                /* case gameState.Win:
-                    Cursor.lockState = CursorLockMode.Confined;
+                case gameState.Win:
+                    //Cursor.lockState = CursorLockMode.Confined;
                     Cursor.visible = true;
+                    uiManager.Win();
                     Time.timeScale = 0;
                     break;
-                    */
+                    
 
                 case gameState.GameOver:
                     //Cursor.lockState = CursorLockMode.Confined;
                     Cursor.visible = true;
+                    uiManager.Lose();
                     Time.timeScale = 0;
                     break;
             }

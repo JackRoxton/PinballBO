@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
@@ -13,24 +14,37 @@ public class Timer : MonoBehaviour
 
     //Timer
     public float timeTotal = 30f;
-    public GameObject defeatScreen;
     private float timeLeft;
-    private float timeFinished;
-    private int bestTime;
+    public float timeFinished;
+    public float bestTime;
     private int seconds;
+
+    //Win and lose
+    public GameObject defeatScreen;
+
+    int currentLevel;
 
     private void Start()
     {
         timeLeft = timeTotal;
         Time.timeScale = 1;
         GameManager.Instance.GameState = GameManager.gameState.InGame;
+        currentLevel = SceneManager.GetActiveScene().buildIndex;
+
+        if (currentLevel == 1)
+        {
+            if (PlayerPrefs.HasKey("Level1BestTime"))
+            {
+                bestTime = PlayerPrefs.GetFloat("Level1BestTime"); //faire en sorte qu'on puisse recup le score
+            }
+            else bestTime = 60;
+
+        }
     }
 
     void Update()
     {
         //Ajouter "si victoire alors", faire en sorte que le best time s'affiche a la win bestTime = (int)timeFinished;
-
-        /*else */
             if (timeLeft > timeTotal)
             {
                 timeLeft = timeTotal;
@@ -46,6 +60,7 @@ public class Timer : MonoBehaviour
             
 
             FillCircleValue(fillValue);
+
         if (timeLeft < 0)
         {
             Defeat();
@@ -63,8 +78,20 @@ public class Timer : MonoBehaviour
         if (GameManager.Instance.GameState == GameManager.gameState.GameOver)  // if Gamestate = GameOver, it means that this has already been called
             return;
 
-        defeatScreen.SetActive(true);
         GameManager.Instance.GameState = GameManager.gameState.GameOver;
+    }
+
+    public float SetBestTime()
+    {
+        if (bestTime > timeFinished)
+        {
+            if (currentLevel == 1)
+            {
+                PlayerPrefs.SetFloat("Level1BestTime", timeFinished);
+            }
+        }
+
+        return bestTime;
     }
 
 }
