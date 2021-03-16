@@ -6,6 +6,23 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    private static UIManager instance;
+    public static UIManager Instance
+    {
+        get
+        {
+            if (instance == null)
+                Debug.LogError("UIManager instance not found");
+
+            return instance;
+        }
+    }
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     [Header("Pause UI")]
     public GameObject pauseScreen;
     public Text pauseCurrentTimeText;
@@ -86,5 +103,6 @@ public class UIManager : MonoBehaviour
         defeatScreen.SetActive(true);
         defeatBestTimeText.text = "Best Time = " + System.Math.Round(timer.bestTime, 2).ToString();
     }
+
 
 }
