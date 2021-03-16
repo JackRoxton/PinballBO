@@ -6,16 +6,34 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("Pause UI")]
     public GameObject pauseScreen;
+    public Text pauseCurrentTimeText;
+    public Text pauseBestTimeText;
 
-    //pause
-    public void Update()
+    [Header("Defeat UI")]
+    public GameObject defeatScreen;
+    public Text defeatBestTimeText;
+
+    [Header("Win UI")]
+    public GameObject winScreen;
+    public Text winBestTimeText;
+    public Text winCurrentTimeText;
+    public GameObject NewRecord;
+
+    [Header("Misc")]
+    public Timer timer;
+
+    private void Update()
     {
         if(GameManager.Instance.GameState == GameManager.gameState.InGame && Input.GetKey(KeyCode.Escape))
         {
             GameManager.Instance.GameState = GameManager.gameState.Pause;
+            pauseBestTimeText.text = "Best Time = " + System.Math.Round(timer.bestTime, 2).ToString();
+            pauseCurrentTimeText.text = "Current Time = " + System.Math.Round(timer.timeFinished, 2).ToString();
             pauseScreen.SetActive(true);
         }
+
     }
 
     //Buttons
@@ -45,4 +63,28 @@ public class UIManager : MonoBehaviour
                 break;
         }
     }
+
+    public void Win()
+    {
+        winScreen.SetActive(true);
+        timer.SetBestTime();
+
+        winBestTimeText.text = "Best Time = " + System.Math.Round(timer.bestTime, 2).ToString();
+        winCurrentTimeText.text = "Your Time = " + System.Math.Round(timer.timeFinished, 2).ToString();
+
+
+
+        if (timer.bestTime < timer.timeFinished)
+        {
+            NewRecord.SetActive(false);
+        }
+
+    }
+
+    public void Lose()
+    {
+        defeatScreen.SetActive(true);
+        defeatBestTimeText.text = "Best Time = " + System.Math.Round(timer.bestTime, 2).ToString();
+    }
+
 }
