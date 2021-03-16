@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     }
 
     public int currentLevel;
-    private int coins = 0;
+    public int coins = 0;
 
     private void Awake()
     {

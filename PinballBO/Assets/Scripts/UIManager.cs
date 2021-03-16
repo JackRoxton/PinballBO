@@ -104,5 +104,9 @@ public class UIManager : MonoBehaviour
         defeatBestTimeText.text = "Best Time = " + System.Math.Round(timer.bestTime, 2).ToString();
     }
 
-
+    public void AddCoin()
+    {
+        int piece = GameManager.Instance.coins; //sert à rien, juste un test
+        //Creer une animation de récup de coins dans l'interface
+    }
 }
