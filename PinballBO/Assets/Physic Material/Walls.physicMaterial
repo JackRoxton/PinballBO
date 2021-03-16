@@ -9,6 +9,6 @@ PhysicMaterial:
   m_Name: Walls
   dynamicFriction: 0.4
   staticFriction: 0.4
-  bounciness: 0.6
+  bounciness: 0.4
   frictionCombine: 1
   bounceCombine: 3
