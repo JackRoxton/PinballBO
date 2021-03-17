@@ -46,7 +46,7 @@ public class Flipper : MonoBehaviour
         if(timer <= 0)
         {
             Debug.Log("it is time!");
-            timer += (Random.Range(3,7));
+            timer += (Random.Range(2,5));
             Anim.Play("FlipperMove");
             IsMoving = true;
         }
