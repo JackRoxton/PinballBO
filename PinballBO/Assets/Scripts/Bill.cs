@@ -16,6 +16,8 @@ public class Bill : MonoBehaviour
     private bool charged = false;
     public bool Charged { get => charged; }
 
+    public bool frozen = false; // pour les rails ?
+
     [SerializeField]
     Transform ball = default;
 
@@ -67,7 +69,10 @@ public class Bill : MonoBehaviour
             velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
             velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
 
+        if(!frozen)
+        {
             rb.velocity = velocity;
+        }
         
 
         ClearState();
@@ -104,6 +109,18 @@ public class Bill : MonoBehaviour
     private void OnValidate()
     {
         minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
+    }
+
+    public void Freeze()
+    {
+        if(!frozen)
+        {
+            frozen = true;
+        }
+        else
+        {
+            frozen = false;
+        }
     }
 
     /*void OldGetInput()
