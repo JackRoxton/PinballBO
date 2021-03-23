@@ -52,6 +52,8 @@ public class Bill : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (frozen) return; // Pas de contrôle lors du cheminement d'un rail
+
         velocity = rb.velocity;
         float maxSpeedChange = maxAcceleration * Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.F) && charged == false)

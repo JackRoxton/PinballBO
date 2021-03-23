@@ -1,20 +1,8 @@
 fileFormatVersion: 2
-guid: df9504261e8c4934889a74352ae54a7c
+guid: 5d17967b595b017459524784855e239a
 ModelImporter:
   serializedVersion: 19301
-  internalIDToNameTable:
-  - first:
-      74: 7842557921058389204
-    second: Rail|Cylinder.001Action
-  - first:
-      74: 3403637744475665126
-    second: Rail|Cylinder.001Action.001
-  - first:
-      74: 5247995816270743539
-    second: DemiDonuts|Cylinder.001Action
-  - first:
-      74: -2059412348244403233
-    second: DemiDonuts|Cylinder.001Action.001
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
     materialImportMode: 1
