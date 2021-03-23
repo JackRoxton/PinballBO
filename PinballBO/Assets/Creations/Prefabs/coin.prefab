@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4675087328162843413
+--- !u!1 &6280616409182754675
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,12 +8,12 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4675087328162843409}
-  - component: {fileID: 4675087328162843414}
-  - component: {fileID: 4675087328162843415}
-  - component: {fileID: 4675087328162843412}
-  - component: {fileID: 4675087328162843408}
-  - component: {fileID: 4675087328162843411}
+  - component: {fileID: 6280616409182754679}
+  - component: {fileID: 6280616409182754672}
+  - component: {fileID: 6280616409182754673}
+  - component: {fileID: 6280616409182754674}
+  - component: {fileID: 6280616409182754678}
+  - component: {fileID: 6280616409182754677}
   m_Layer: 0
   m_Name: coin
   m_TagString: Untagged
@@ -21,35 +21,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4675087328162843409
+--- !u!4 &6280616409182754679
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4675087328162843413}
+  m_GameObject: {fileID: 6280616409182754675}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.2041713, y: 0.28, z: -3.84}
+  m_LocalPosition: {x: 0.2041713, y: 1, z: -3.84}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4675087328162843414
+--- !u!33 &6280616409182754672
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4675087328162843413}
+  m_GameObject: {fileID: 6280616409182754675}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &4675087328162843415
+--- !u!23 &6280616409182754673
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4675087328162843413}
+  m_GameObject: {fileID: 6280616409182754675}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c2a5ce598628cfa4e9e21a188bb7b4f5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82,38 +82,40 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &4675087328162843412
+--- !u!135 &6280616409182754674
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4675087328162843413}
+  m_GameObject: {fileID: 6280616409182754675}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4675087328162843408
+--- !u!114 &6280616409182754678
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4675087328162843413}
+  m_GameObject: {fileID: 6280616409182754675}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44368d7a3f5ed3e46bde23b4aab7bd10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &4675087328162843411
+  deathParticle: {fileID: 6487301076099171194, guid: 60c09780e5020914fb4570489e70aaf0,
+    type: 3}
+--- !u!54 &6280616409182754677
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4675087328162843413}
+  m_GameObject: {fileID: 6280616409182754675}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
