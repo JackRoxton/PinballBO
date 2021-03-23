@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Coins : MonoBehaviour
 {
+    public ParticleSystem deathParticle;
+
     void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -11,6 +13,7 @@ public class Coins : MonoBehaviour
             GameManager.Instance.AddCoin();
             UIManager.Instance.AddCoin();
             //Mettre un son pour les pieces
+            Instantiate(deathParticle, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
     }
