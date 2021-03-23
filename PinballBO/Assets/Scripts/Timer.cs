@@ -29,17 +29,12 @@ public class Timer : MonoBehaviour
         timeLeft = timeTotal;
         Time.timeScale = 1;
         GameManager.Instance.GameState = GameManager.gameState.InGame;
-        currentLevel = SceneManager.GetActiveScene().buildIndex;
 
-        if (currentLevel == 1)
+        if (PlayerPrefs.HasKey("BestTimeLevel" + GameManager.Instance.currentLevel))
         {
-            if (PlayerPrefs.HasKey("Level1BestTime"))
-            {
-                bestTime = PlayerPrefs.GetFloat("Level1BestTime"); //faire en sorte qu'on puisse recup le score
-            }
-            else bestTime = 60;
-
+            bestTime = PlayerPrefs.GetFloat("BestTimeLevel" + GameManager.Instance.currentLevel); //faire en sorte qu'on puisse recup le score
         }
+        else bestTime = 60;
     }
 
     void Update()
@@ -87,7 +82,7 @@ public class Timer : MonoBehaviour
         {
             if (currentLevel == 1)
             {
-                PlayerPrefs.SetFloat("Level1BestTime", timeFinished);
+                PlayerPrefs.SetFloat("BestTimeLevel" + GameManager.Instance.currentLevel, timeFinished);
             }
         }
 
