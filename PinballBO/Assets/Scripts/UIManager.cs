@@ -23,6 +23,8 @@ public class UIManager : MonoBehaviour
         instance = this;
     }
 
+    int coins = 0;
+
     [Header("Pause UI")]
     public GameObject pauseScreen;
     public Text pauseCurrentTimeText;
@@ -36,10 +38,10 @@ public class UIManager : MonoBehaviour
     public GameObject winScreen;
     public Text winBestTimeText;
     public Text winCurrentTimeText;
+    public Text winScoreText;
     public GameObject NewRecord;
 
     [Header("Misc")]
-    public GameObject canvas;
     public Timer timer;
     public Text coinsCount;
 
@@ -90,7 +92,7 @@ public class UIManager : MonoBehaviour
 
         winBestTimeText.text = "Best Time = " + System.Math.Round(timer.bestTime, 2).ToString();
         winCurrentTimeText.text = "Your Time = " + System.Math.Round(timer.timeFinished, 2).ToString();
-
+        winScoreText.text = coins + "/100";
 
 
         if (timer.bestTime < timer.timeFinished)
@@ -108,7 +110,7 @@ public class UIManager : MonoBehaviour
 
     public void AddCoin()
     { 
-        int coins = GameManager.Instance.coins;
+        coins = GameManager.Instance.coins;
         if (coins < 10)
         {
             coinsCount.text = "     " + coins.ToString() + ("/100");

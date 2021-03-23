@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
 
                     if (PlayerPrefs.GetInt("BestCoinLevel" + currentLevel) < coins)
                     {
-                        PlayerPrefs.SetInt("BestCoinLevel" + currentLevel, coins); //save best coin record
+                        PlayerPrefs.SetInt("BestCoinLevel" + currentLevel, coins); //saves the best coin record
                     }
 
                     Time.timeScale = 0;
