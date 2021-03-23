@@ -6,6 +6,23 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    private static UIManager instance;
+    public static UIManager Instance
+    {
+        get
+        {
+            if (instance == null)
+                Debug.LogError("UIManager instance not found");
+
+            return instance;
+        }
+    }
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     [Header("Pause UI")]
     public GameObject pauseScreen;
     public Text pauseCurrentTimeText;
@@ -22,7 +39,9 @@ public class UIManager : MonoBehaviour
     public GameObject NewRecord;
 
     [Header("Misc")]
+    public GameObject canvas;
     public Timer timer;
+    public Text coinsCount;
 
     private void Update()
     {
@@ -87,4 +106,20 @@ public class UIManager : MonoBehaviour
         defeatBestTimeText.text = "Best Time = " + System.Math.Round(timer.bestTime, 2).ToString();
     }
 
+    public void AddCoin()
+    { 
+        int coins = GameManager.Instance.coins;
+        if (coins < 10)
+        {
+            coinsCount.text = "     " + coins.ToString() + ("/100");
+        }
+        else if (coins >= 10 && coins < 100)
+        {
+            coinsCount.text = "   " + coins.ToString() + ("/100");
+        }
+        else
+        {
+            coinsCount.text = ("100/100");
+        }
+    }
 }

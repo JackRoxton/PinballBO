@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.AI;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,11 +17,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public UIManager uiManager;
+    public int currentLevel;
+    public int coins = 0;
 
     private void Awake()
     {
         instance = this;
+    }
+
+    private void Start()
+    {
+        currentLevel = SceneManager.GetActiveScene().buildIndex;
     }
 
     public enum gameState
@@ -70,7 +75,18 @@ public class GameManager : MonoBehaviour
                 case gameState.Win:
                     //Cursor.lockState = CursorLockMode.Confined;
                     Cursor.visible = true;
-                    uiManager.Win();
+                    UIManager.Instance.Win();
+
+                    if (!PlayerPrefs.HasKey("BestCoinLevel" + currentLevel)) //Checks if there was a previously saved record and if not, sets it to 0
+                    {
+                        PlayerPrefs.SetInt("BestCoinLevel" + currentLevel, 0);
+                    }
+
+                    if (PlayerPrefs.GetInt("BestCoinLevel" + currentLevel) < coins)
+                    {
+                        PlayerPrefs.SetInt("BestCoinLevel" + currentLevel, coins); //save best coin record
+                    }
+
                     Time.timeScale = 0;
                     break;
                     
@@ -78,12 +94,17 @@ public class GameManager : MonoBehaviour
                 case gameState.GameOver:
                     //Cursor.lockState = CursorLockMode.Confined;
                     Cursor.visible = true;
-                    uiManager.Lose();
+                    UIManager.Instance.Lose();
                     Time.timeScale = 0;
                     break;
             }
         }
     }
     #endregion
+
+    public void AddCoin()
+    {
+        coins++;
+    }
 
 }
