@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Coins : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider collision)
     {
-        if (other.gameObject.tag.Equals("Player"))
+        if (collision.gameObject.tag == "Player")
         {
-            UIManager.Instance.AddCoin();
             GameManager.Instance.AddCoin();
+            UIManager.Instance.AddCoin();
+            //Mettre un son pour les pieces
             Destroy(this.gameObject);
         }
     }
