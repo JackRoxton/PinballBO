@@ -55,25 +55,25 @@ public class GameManager : MonoBehaviour
             switch (currentState)
             {
                 case gameState.MainMenu:
-                    //Cursor.lockState = CursorLockMode.Confined;
+                    Cursor.lockState = CursorLockMode.Confined;
                     Cursor.visible = true;
                     SceneManager.LoadScene(0);
                     break;
 
                 case gameState.InGame:
-                        //Cursor.lockState = CursorLockMode.Locked;
-                        //Cursor.visible = false;
+                        Cursor.lockState = CursorLockMode.Locked;
+                        Cursor.visible = false;
                         Time.timeScale = 1;
                         break;
 
                 case gameState.Pause:
-                    //Cursor.lockState = CursorLockMode.Confined;
+                    Cursor.lockState = CursorLockMode.Confined;
                     Cursor.visible = true;
                     Time.timeScale = 0;
                     break; 
 
                 case gameState.Win:
-                    //Cursor.lockState = CursorLockMode.Confined;
+                    Cursor.lockState = CursorLockMode.Confined;
                     Cursor.visible = true;
                     UIManager.Instance.Win();
 
