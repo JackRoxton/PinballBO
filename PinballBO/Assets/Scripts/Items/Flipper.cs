@@ -4,63 +4,115 @@ using UnityEngine;
 
 public class Flipper : MonoBehaviour
 {
-    int force;
-    [SerializeField] float rate;
-    [SerializeField] float factor;
+    [SerializeField] int force;
+    [SerializeField] [Range(.01f, .5f)] float speed;
+    [SerializeField] float angle;
+    [SerializeField] bool random;
+
+
 
     bool IsMoving = false;
-    float currentVelocity;
-    Vector3 normal;
+    BoxCollider[] triggers = new BoxCollider[2];
+    SphereCollider sphereTrigger;
 
-    private void Awake()
+    private void Start()
     {
-        normal = Quaternion.Euler(transform.eulerAngles) * Vector3.forward;
+        if (random)
+            StartCoroutine(Timer());
+
+        #region Triggers
+
+        // Triggers which push the ball
+        triggers = GetComponentsInChildren<BoxCollider>(); 
+        foreach (BoxCollider trigger in triggers) 
+            trigger.gameObject.SetActive(false);
+
+
+        // Trigger which Detect when the ball is near
+        sphereTrigger = GetComponentInChildren<SphereCollider>(); 
+
+        if (!random)
+            sphereTrigger.enabled = true;
+        else
+            sphereTrigger.enabled = false;
+        
+        #endregion
     }
 
-    private void Update()
+    IEnumerator Timer() // For random behaviour
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(Shoot());
-            IsMoving = true;
-        }
+        yield return new WaitForSeconds(Random.Range(1, 7));
+        yield return Shoot();
+        StartCoroutine(Timer());
     }
-
 
     IEnumerator Shoot()
     {
-        Quaternion target = Quaternion.Euler(0, factor, 0) * transform.rotation;
+        IsMoving = true;
+
+        Quaternion target = Quaternion.Euler(0, angle, 0) * transform.rotation;
         Quaternion initial = transform.rotation;
 
-        while (Quaternion.Angle(transform.rotation, target) > 3)
+        foreach (BoxCollider trigger in triggers)   // Enable triggers to push the ball
+            trigger.gameObject.SetActive(true);
+
+        while (Quaternion.Angle(transform.rotation, target) > 3) // Rotate the flipper
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, target, rate);
+            transform.rotation = Quaternion.Lerp(transform.rotation, target, speed);
             yield return new WaitForEndOfFrame();
         }
-
         IsMoving = false;
-        while (Quaternion.Angle(transform.rotation, initial) > 3)
+
+        foreach (BoxCollider trigger in triggers) // Disable triggers to avoid the ball to be pushed 
+            trigger.gameObject.SetActive(false);
+
+        while (Quaternion.Angle(transform.rotation, initial) > 3) // Rotate the flipper to his initial rotation
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, initial, rate);
+            transform.rotation = Quaternion.Lerp(transform.rotation, initial, speed);
             yield return new WaitForEndOfFrame();
         }
-    }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Bill bill = collision.collider.GetComponent<Bill>();
-        normal = collision.GetContact(0).normal;
-        Debug.Log(-normal);
+        transform.rotation = initial; 
+        
+        if (!random)
+        {
+            yield return new WaitForSeconds(.5f);
+            sphereTrigger.enabled = true;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+
         Bill bill = other.GetComponent<Bill>();
+        
+        if ( bill != null && !random && !IsMoving)
+        {
+            if (Mathf.Sign(Vector3.SignedAngle(-transform.forward,
+                bill.transform.position - transform.position, Vector3.up)) != Mathf.Sign(angle))
+            {
+                Debug.Log(true);
+                    return; // Faut pas taper dans ce cas là
+            }
+            Debug.Log(false);
+            sphereTrigger.enabled = false;
+            StartCoroutine(Shoot());
+        }
+
         if (bill != null && IsMoving)
         {
-            bill.GetComponent<Rigidbody>().velocity.Normalize();
-            bill.GetComponent<Rigidbody>().velocity = Quaternion.Euler(normal) * bill.GetComponent<Rigidbody>().velocity;
+            bill.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            bill.GetComponent<Rigidbody>().AddForce(Quaternion.Euler(0, transform.eulerAngles.y + angle, 0) * (-Vector3.forward * force * speed));
         }
+    }
+
+    private void Update()
+    {
+        Debug.DrawRay(transform.position, -transform.forward * 40, Color.blue);
+        Debug.DrawRay(transform.position, (GameObject.Find("Bill").transform.position - transform.position) * 40, Color.red);
+
+        Debug.Log(Mathf.Sign(Vector3.SignedAngle(-transform.forward,
+                GameObject.Find("Bill").transform.position - transform.position, Vector3.up)) != Mathf.Sign(angle));
     }
 
 }
