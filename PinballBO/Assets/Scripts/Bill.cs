@@ -43,7 +43,7 @@ public class Bill : MonoBehaviour
         adjustment.z =
             playerInput.y * velocity.magnitude - Vector3.Dot(velocity, new Vector3(0, 0, 1));
 
-        desiredVelocity = new Vector3(playerInput.x, 0f, playerInput.y) * maxSpeed;
+        desiredVelocity = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * new Vector3(playerInput.x, 0f, playerInput.y) * maxSpeed;
 
         UpdateBall();
 
@@ -52,6 +52,8 @@ public class Bill : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (frozen) return; // Pas de contrôle lors du cheminement d'un rail
+
         velocity = rb.velocity;
         float maxSpeedChange = maxAcceleration * Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.F) && charged == false)
