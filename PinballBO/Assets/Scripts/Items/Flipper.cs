@@ -4,59 +4,63 @@ using UnityEngine;
 
 public class Flipper : MonoBehaviour
 {
-    [SerializeField]
-    Animator Anim;
+    int force;
+    [SerializeField] float rate;
+    [SerializeField] float factor;
 
     bool IsMoving = false;
+    float currentVelocity;
+    Vector3 normal;
 
-    [SerializeField]
-    int force;
-    float timer = 0;
-
-    void Start()
+    private void Awake()
     {
-        timer += (Random.Range(4, 8));
-        Anim = Anim.GetComponent<Animator>();
+        normal = Quaternion.Euler(transform.eulerAngles) * Vector3.forward;
     }
 
-    void Update()
+    private void Update()
     {
-        RandomBehaviour();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(Shoot());
+            IsMoving = true;
+        }
+    }
+
+
+    IEnumerator Shoot()
+    {
+        Quaternion target = Quaternion.Euler(0, factor, 0) * transform.rotation;
+        Quaternion initial = transform.rotation;
+
+        while (Quaternion.Angle(transform.rotation, target) > 3)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, target, rate);
+            yield return new WaitForEndOfFrame();
+        }
+
+        IsMoving = false;
+        while (Quaternion.Angle(transform.rotation, initial) > 3)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, initial, rate);
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        GameObject bill = collision.gameObject;
-        if (bill.GetComponent<Bill>() != null && IsMoving)
-        {
-            bill.GetComponent<Rigidbody>().AddForce((bill.transform.position - this.transform.position) * force /** (bill.GetComponent<Rigidbody>().velocity.x) * (bill.GetComponent<Rigidbody>().velocity.z)*/);
-        }
+        Bill bill = collision.collider.GetComponent<Bill>();
+        normal = collision.GetContact(0).normal;
+        Debug.Log(-normal);
     }
-    private void OnCollisionStay(Collision collision) //pour éviter les problêmes de collision au contact prolongé
+
+    private void OnTriggerEnter(Collider other)
     {
-        GameObject bill = collision.gameObject;
-        if (bill.GetComponent<Bill>() != null && IsMoving)
+        Bill bill = other.GetComponent<Bill>();
+        if (bill != null && IsMoving)
         {
-            bill.GetComponent<Rigidbody>().AddForce((bill.transform.position - this.transform.position) * force);
+            bill.GetComponent<Rigidbody>().velocity.Normalize();
+            bill.GetComponent<Rigidbody>().velocity = Quaternion.Euler(normal) * bill.GetComponent<Rigidbody>().velocity;
         }
     }
 
-    void RandomBehaviour() // pousse de manière random
-    {
-        if(timer <= 0)
-        {
-            Debug.Log("it is time!");
-            timer += (Random.Range(2,5));
-            Anim.Play("FlipperMove");
-            IsMoving = true;
-        }
-        else
-        {
-            if (Anim.GetCurrentAnimatorStateInfo(0).IsName("NotMoving"))
-            {
-                IsMoving = false;
-            }
-            timer -= Time.deltaTime;
-        }
-    }
 }
