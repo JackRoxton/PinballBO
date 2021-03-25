@@ -91,10 +91,8 @@ public class Flipper : MonoBehaviour
             if (Mathf.Sign(Vector3.SignedAngle(-transform.forward,
                 bill.transform.position - transform.position, Vector3.up)) != Mathf.Sign(angle))
             {
-                Debug.Log(true);
                     return; // Faut pas taper dans ce cas là
             }
-            Debug.Log(false);
             sphereTrigger.enabled = false;
             StartCoroutine(Shoot());
         }
@@ -104,15 +102,6 @@ public class Flipper : MonoBehaviour
             bill.GetComponent<Rigidbody>().velocity = Vector3.zero;
             bill.GetComponent<Rigidbody>().AddForce(Quaternion.Euler(0, transform.eulerAngles.y + angle, 0) * (-Vector3.forward * force * speed));
         }
-    }
-
-    private void Update()
-    {
-        Debug.DrawRay(transform.position, -transform.forward * 40, Color.blue);
-        Debug.DrawRay(transform.position, (GameObject.Find("Bill").transform.position - transform.position) * 40, Color.red);
-
-        Debug.Log(Mathf.Sign(Vector3.SignedAngle(-transform.forward,
-                GameObject.Find("Bill").transform.position - transform.position, Vector3.up)) != Mathf.Sign(angle));
     }
 
 }
