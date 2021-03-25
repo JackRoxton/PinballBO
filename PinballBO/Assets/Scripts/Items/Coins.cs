@@ -6,6 +6,15 @@ public class Coins : MonoBehaviour
 {
     public ParticleSystem deathParticle;
 
+    private void Update()
+    {
+        transform.Rotate(0, 1f, 0, Space.Self);
+        if (gameObject.transform.rotation.y >= 180f)
+        {
+            transform.Rotate(0, 0, 0, Space.Self);
+        }
+    }
+
     void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Player")
