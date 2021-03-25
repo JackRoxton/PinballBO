@@ -19,7 +19,7 @@ public class FakeWin : MonoBehaviour
         //Reset Best Time
         if (Input.GetKey(KeyCode.R)) 
         {
-            PlayerPrefs.SetFloat("Level1BestTime", 60);
+            PlayerPrefs.SetFloat("BestTimeLevel" + GameManager.Instance.currentLevel, 60);
         }
     }
 }

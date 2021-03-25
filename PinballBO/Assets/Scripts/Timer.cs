@@ -22,8 +22,6 @@ public class Timer : MonoBehaviour
     //Win and lose
     public GameObject defeatScreen;
 
-    int currentLevel;
-
     private void Start()
     {
         timeLeft = timeTotal;
@@ -80,7 +78,7 @@ public class Timer : MonoBehaviour
     {
         if (bestTime > timeFinished)
         {
-            if (currentLevel == 1)
+            if (GameManager.Instance.currentLevel == 1)
             {
                 PlayerPrefs.SetFloat("BestTimeLevel" + GameManager.Instance.currentLevel, timeFinished);
             }
