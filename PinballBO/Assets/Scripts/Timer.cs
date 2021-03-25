@@ -30,7 +30,6 @@ public class Timer : MonoBehaviour
 
         if (PlayerPrefs.HasKey("BestTimeLevel" + GameManager.Instance.currentLevel))
         {
-            Debug.Log("cbon");
             bestTime = PlayerPrefs.GetFloat("BestTimeLevel" + GameManager.Instance.currentLevel); //faire en sorte qu'on puisse recup le score
         }
         else bestTime = 60;
