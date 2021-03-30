@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6478536213147159724, guid: 7c82bddc11a05e5488232cd470b34b84, type: 3}
+  - {fileID: 2100000, guid: 656e49c5e9bb3a749b679aa198f75a0f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 7099462000985200771}
   - component: {fileID: 6739100860764455801}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Bounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -220,8 +220,9 @@ GameObject:
   - component: {fileID: 4500647704476235923}
   - component: {fileID: 6739100860920650773}
   - component: {fileID: 6739100860920650772}
+  - component: {fileID: 7394749007064385633}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -318,3 +319,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 2534964839176971238, guid: 7c82bddc11a05e5488232cd470b34b84, type: 3}
+--- !u!114 &7394749007064385633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016182065757225036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 146d389042ef9ad4a9542d70578404ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightOn: {fileID: 2100000, guid: 97a0a3da7b57f1041a6951b0ebed7ec2, type: 2}
+  neon: {fileID: 7099462000985200771}
+  lightState: 0

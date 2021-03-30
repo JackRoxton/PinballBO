@@ -1,32 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Targets : MonoBehaviour
 {
-    private bool lightState = true;
+    [SerializeField] Material lightOn;
+    Material initial;
+    [SerializeField] MeshRenderer neon;
+    [SerializeField] private bool lightState = false;
+    
+
+    private void Awake()
+    {
+        initial = neon.materials[1];    
+    }
 
     public void SetLights(bool state)
     {
-        this.lightState = state;
+        lightState = state;
+        var matArray = neon.materials;
+        matArray[1] = state ? lightOn : initial;
+
+        neon.materials = matArray;
     }
 
     public bool SendLights()
     {
-        return this.lightState;
+        return lightState;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Bill bill = collision.gameObject.GetComponent<Bill>();
-
-        if(bill != null )
+        Bill bill = collision.collider.GetComponent<Bill>();
+        if (bill != null)
         {
-            if(!this.lightState)
-            {
-                this.lightState = true;
-            }
-            
+            SetLights(!lightState);
+            bill.GetComponent<Rigidbody>().velocity = -collision.GetContact(0).normal * 5;
         }
 
     }
