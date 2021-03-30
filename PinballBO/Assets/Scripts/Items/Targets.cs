@@ -20,9 +20,14 @@ public class Targets : MonoBehaviour
     {
         Bill bill = collision.gameObject.GetComponent<Bill>();
 
-        if(bill != null && !this.lightState)
+        if(bill != null )
         {
-            this.lightState = true;
+            if(!this.lightState)
+            {
+                this.lightState = true;
+            }
+            
         }
+
     }
 }

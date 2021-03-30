@@ -13,6 +13,8 @@ public class Porte : MonoBehaviour
     [SerializeField]
     int offTargetsCount = 0;
 
+    bool lightFlag = false;
+
     Vector3 pos;
     void Start()
     {
@@ -40,7 +42,13 @@ public class Porte : MonoBehaviour
                 return false;
             }
         }
-        return true;
+        
+        if(!lightFlag)
+        {
+            return true;
+        }
+        return false;
+        
 
     }
 
@@ -50,6 +58,7 @@ public class Porte : MonoBehaviour
         yield return new WaitForSeconds(2);
         this.transform.localPosition = Vector3.MoveTowards(this.transform.localPosition, pos, 0.05f);
         yield return new WaitForSeconds(2);
+        lightFlag = true;
         CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainCam.gameObject);
     }
 }
