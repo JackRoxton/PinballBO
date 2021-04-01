@@ -10,38 +10,39 @@ public class Bill : MonoBehaviour
     [HideInInspector] public bool frozen = false;
     private float currentRotation = 0;
     float tour;
+    float charge = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         Application.targetFrameRate = 120;
         rb = GetComponent<Rigidbody>();
-        tour = 2 * Mathf.PI * GetComponent<SphereCollider>().radius;
+        tour = Mathf.PI * GetComponent<SphereCollider>().radius;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 direction = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        direction = Vector3.ClampMagnitude(direction, 1);
-        if (rb.velocity.magnitude < speed && !frozen)
+        if (rb.velocity.magnitude < speed && !frozen) // Déplacements
+        {
+            Vector3 direction = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            direction = Vector3.ClampMagnitude(direction, 1);
             rb.velocity += direction * acceleration * Time.deltaTime;
-        
+        }
 
-
-
-        if (rb.velocity.magnitude > .01f)
+        if (rb.velocity.magnitude > .01f) // Rotation
         {
             // Angle to look at
             float targetAngle = Mathf.Atan2(rb.velocity.x, rb.velocity.z) * Mathf.Rad2Deg;
             // Rotate the character
-
             float distance = rb.velocity.magnitude * Time.deltaTime;
-            currentRotation += (distance * 90) / (tour / 2);
+            currentRotation += (distance * 90) / tour;
             transform.rotation = Quaternion.Euler(currentRotation, targetAngle, 0);
-
         }
     }
+
+}
+
 
 
     #region Old Script
@@ -195,4 +196,3 @@ public class Bill : MonoBehaviour
     //    charged = false;
     //}
     #endregion
-}
