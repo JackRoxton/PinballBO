@@ -6,8 +6,12 @@ public class Bill : MonoBehaviour
 {
     [Range(1, 100)] public float acceleration;
     [Range(1, 100)] public float speed;
+    [Range(0, 1)] public float lossSpeedOnSlopes;
+    [Range(0, 1)] public float hidhSpeedControl = .15f;
+ 
     Rigidbody rb;
     [HideInInspector] public bool frozen = false;
+
     private float currentRotation = 0;
     float tour;
     Vector3 slopeNormal = Vector3.up;
@@ -15,7 +19,6 @@ public class Bill : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Application.targetFrameRate = 120;
         rb = GetComponent<Rigidbody>();
         tour = Mathf.PI * GetComponent<SphereCollider>().radius;
     }
@@ -27,10 +30,22 @@ public class Bill : MonoBehaviour
         if (rb.velocity.magnitude < speed && !frozen) // Déplacements
         {
             Vector3 direction = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")); // Direction Inputs
-            direction = Vector3.ProjectOnPlane(direction, slopeNormal); // For slopes
-            Debug.DrawRay(transform.position, direction.normalized * 2, Color.red);
+
+            float slopeAngle = Vector3.Angle(direction, slopeNormal) * Mathf.Deg2Rad; // If slope too steep, avoid move
+            direction = Vector3.ProjectOnPlane(direction, slopeNormal); // Movements on slopes
             direction = Vector3.ClampMagnitude(direction, 1);
-            rb.velocity += direction * acceleration * Time.deltaTime;
+            Debug.DrawRay(transform.position, direction.normalized * 2, Color.red);
+
+            float sinAngle = Mathf.Abs(Mathf.Cos(slopeAngle));
+            float acceleration = this.acceleration * (1 - (sinAngle * lossSpeedOnSlopes)); // Reduce acceleration on slopes
+
+            rb.velocity += direction  * acceleration * Time.deltaTime;
+        }
+        else if (rb.velocity.magnitude > speed)
+        {
+            // Dévier trajectoire à vitesse élevée sans accélerer davantage
+            float trajectoire = Input.GetAxis("Horizontal");
+            rb.velocity = Quaternion.Euler(0, trajectoire * hidhSpeedControl, 0) * rb.velocity;
         }
 
         if (rb.velocity.magnitude > .01f) // Rotation
@@ -46,7 +61,9 @@ public class Bill : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        slopeNormal = collision.GetContact(0).normal;
+        Vector3 normal = collision.GetContact(0).normal;
+        if (normal.y > .7f)
+            slopeNormal = normal;
     }
 }
 
