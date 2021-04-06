@@ -325,6 +325,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceleration: 12
   speed: 12
+  breakForce: 1.004
+  lossSpeedOnSlopes: 1
+  hidhSpeedControl: 0.15
   frozen: 0
 --- !u!1 &6017232712829960499
 GameObject:
