@@ -37,7 +37,7 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        //Ajouter "si victoire alors", faire en sorte que le best time s'affiche a la win bestTime = (int)timeFinished;
+        
             if (timeLeft > timeTotal)
             {
                 timeLeft = timeTotal;
