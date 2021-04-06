@@ -37,7 +37,7 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        //Ajouter "si victoire alors", faire en sorte que le best time s'affiche a la win bestTime = (int)timeFinished;
+        
             if (timeLeft > timeTotal)
             {
                 timeLeft = timeTotal;
@@ -66,12 +66,13 @@ public class Timer : MonoBehaviour
         circleFillImage.fillAmount = fillAmount;
     }
 
-    private void Defeat()
+    private string Defeat()
     {
-        if (GameManager.Instance.GameState == GameManager.gameState.GameOver)  // if Gamestate = GameOver, it means that this has already been called
+        return "Timeup";
+       /* if (GameManager.Instance.GameState == GameManager.gameState.GameOver)  // if Gamestate = GameOver, it means that this has already been called
             return;
 
-        GameManager.Instance.GameState = GameManager.gameState.GameOver;
+        GameManager.Instance.GameState = GameManager.gameState.GameOver; */
     }
 
     public float SetBestTime()
