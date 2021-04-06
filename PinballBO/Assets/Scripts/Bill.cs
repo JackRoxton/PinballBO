@@ -7,6 +7,7 @@ public class Bill : MonoBehaviour
     [Range(1, 100)] public float acceleration;
     [Range(1, 100)] public float speed;
     [Range(0, 1)] public float lossSpeedOnSlopes;
+    [Range(0, 1)] public float hidhSpeedControl = .15f;
  
     Rigidbody rb;
     [HideInInspector] public bool frozen = false;
@@ -18,7 +19,6 @@ public class Bill : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Application.targetFrameRate = 120;
         rb = GetComponent<Rigidbody>();
         tour = Mathf.PI * GetComponent<SphereCollider>().radius;
     }
@@ -44,10 +44,8 @@ public class Bill : MonoBehaviour
         else if (rb.velocity.magnitude > speed)
         {
             // Dévier trajectoire à vitesse élevée sans accélerer davantage
-            //Vector3 direction = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")); // Direction Inputs
-            //direction = Vector3.ProjectOnPlane(direction, slopeNormal); // For slopes
-            //direction = Vector3.ClampMagnitude(direction, 1);
-            //rb.velocity = Quaternion.Euler(direction) * rb.velocity;
+            float trajectoire = Input.GetAxis("Horizontal");
+            rb.velocity = Quaternion.Euler(0, trajectoire * hidhSpeedControl, 0) * rb.velocity;
         }
 
         if (rb.velocity.magnitude > .01f) // Rotation
