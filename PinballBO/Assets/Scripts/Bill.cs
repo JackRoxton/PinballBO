@@ -10,7 +10,7 @@ public class Bill : MonoBehaviour
     [HideInInspector] public bool frozen = false;
     private float currentRotation = 0;
     float tour;
-    float charge = 0;
+    Vector3 slopeNormal = Vector3.up;
 
     // Start is called before the first frame update
     void Start()
@@ -23,9 +23,12 @@ public class Bill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.DrawRay(transform.position, slopeNormal * 2, Color.blue);
         if (rb.velocity.magnitude < speed && !frozen) // Déplacements
         {
-            Vector3 direction = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            Vector3 direction = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")); // Direction Inputs
+            direction = Vector3.ProjectOnPlane(direction, slopeNormal); // For slopes
+            Debug.DrawRay(transform.position, direction.normalized * 2, Color.red);
             direction = Vector3.ClampMagnitude(direction, 1);
             rb.velocity += direction * acceleration * Time.deltaTime;
         }
@@ -41,8 +44,11 @@ public class Bill : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        slopeNormal = collision.GetContact(0).normal;
+    }
 }
-
 
 
     #region Old Script
