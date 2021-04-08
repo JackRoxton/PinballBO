@@ -21,6 +21,7 @@ public class Timer : MonoBehaviour
 
     //Win and lose
     public GameObject defeatScreen;
+    private ChronoChallenge challenge;
 
     private void Start()
     {
@@ -38,7 +39,7 @@ public class Timer : MonoBehaviour
     void Update()
     {
         
-            if (timeLeft > timeTotal)
+            if (timeLeft > timeTotal) //au cas où on reçoive du temps bonus durant un challenge
             {
                 timeLeft = timeTotal;
             }
@@ -66,13 +67,32 @@ public class Timer : MonoBehaviour
         circleFillImage.fillAmount = fillAmount;
     }
 
-    private string Defeat()
+    private void Defeat()
     {
-        return "Timeup";
-       /* if (GameManager.Instance.GameState == GameManager.gameState.GameOver)  // if Gamestate = GameOver, it means that this has already been called
-            return;
+        if (challenge == null)
+        {
+            timeLeft = 10000f;
+            timeTotal = 10000f;
+            Debug.Log("reset time");
+        }
+        else
+        {
+            challenge.OpenDoors(false);
+            challenge = null;
+            Debug.Log("challenge est nul normalement");
+            //afficher un text "challenge failed" ou "time's up"
+        }
+        /* if (GameManager.Instance.GameState == GameManager.gameState.GameOver)  // if Gamestate = GameOver, it means that this has already been called
+             return;
 
-        GameManager.Instance.GameState = GameManager.gameState.GameOver; */
+         GameManager.Instance.GameState = GameManager.gameState.GameOver; */
+    }
+
+    public void SetTime(float time, ChronoChallenge currentChallenge)
+    {
+        timeLeft = time;
+        timeTotal = time;
+        challenge = currentChallenge;
     }
 
     public float SetBestTime()
