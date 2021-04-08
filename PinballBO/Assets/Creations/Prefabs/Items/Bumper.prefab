@@ -250,6 +250,7 @@ GameObject:
   - component: {fileID: 3354603010506387622}
   - component: {fileID: 3354603010506387623}
   - component: {fileID: 3354603010506387624}
+  - component: {fileID: 6538389611012867878}
   m_Layer: 0
   m_Name: Bumper
   m_TagString: Untagged
@@ -429,6 +430,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!136 &6538389611012867878
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3354603010506387626}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2.0230503
+  m_Direction: 1
+  m_Center: {x: 0, y: -2.1977785, z: 0}
 --- !u!1 &3879081959276674961
 GameObject:
   m_ObjectHideFlags: 0
