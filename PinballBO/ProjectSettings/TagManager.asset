@@ -6,6 +6,7 @@ TagManager:
   tags:
   - End
   - Start
+  - Bumper
   layers:
   - Default
   - TransparentFX
