@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 3429964829404882245}
   m_Layer: 0
   m_Name: Bill
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -325,7 +325,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceleration: 12
   speed: 12
-  lossSpeedOnSlopes: 0
+  breakForce: 1.004
+  lossSpeedOnSlopes: 1
   hidhSpeedControl: 0.15
   frozen: 0
 --- !u!1 &6017232712829960499
