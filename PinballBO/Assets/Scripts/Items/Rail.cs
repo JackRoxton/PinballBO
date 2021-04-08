@@ -5,15 +5,17 @@ using Cinemachine;
 
 public class Rail : MonoBehaviour
 {
-    [SerializeField] CinemachineVirtualCamera camera;
-    [SerializeField] Bill bill;
-    Rigidbody rb;
+    [SerializeField] float maxSpeed = 15;
+
+    CinemachineVirtualCamera camera;
+
     private void Awake()
     {
+        camera = GetComponentInChildren<CinemachineVirtualCamera>();
+
+        Bill bill = FindObjectOfType<Bill>();
         camera.LookAt = bill.transform;
         camera.Follow = bill.transform;
-
-        rb = bill.GetComponent<Rigidbody>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,7 +24,7 @@ public class Rail : MonoBehaviour
         if (boule != null)
         {
             CameraManager.Instance.SetCameraActive(camera.gameObject);
-            bill.frozen = true;
+            boule.Freaze(true);
         }
     }
 
@@ -32,17 +34,7 @@ public class Rail : MonoBehaviour
         if (boule != null)
         {
             CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainCam.gameObject);
-            bill.frozen = false;
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        Bill boule = other.GetComponent<Bill>();
-        if (boule != null)
-        {
-            if (rb.velocity.magnitude < 15)
-                rb.velocity = rb.velocity * 1.04f;
+            boule.Freaze(false);
         }
     }
 }

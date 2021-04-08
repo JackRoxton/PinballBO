@@ -5,50 +5,39 @@ using UnityEngine;
 
 public class Bill : MonoBehaviour
 {
+    private Action currentState;
+
     [Header("Speed")]
     [Range(1, 100)] public float acceleration;
     [Range(1, 100)] public float speed;
-    [Range(1, 1.01f)] public float breakForce;
+    [Range(0, .03f)] public float breakForce;
     [Header("Controls")]
     [Range(0, 1)] public float lossSpeedOnSlopes;
     [Range(0, 1)] public float hidhSpeedControl = .15f;
- 
+    [Header("Frozen")]
+    [Range(1, 2)] public float frozenAcceleration;
+    [Range(1, 20)] public float frozenMaxSpeed;
+
     Rigidbody rb;
-    [HideInInspector] public bool frozen = false;
 
     private float currentRotation = 0;
     float tour;
     Vector3 slopeNormal = Vector3.up;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         tour = Mathf.PI * GetComponent<SphereCollider>().radius;
+    }
+    void Start()
+    {
+        currentState = FreeMoving;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 direction = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")); // Direction Inputs
-
-        if (rb.velocity.magnitude < speed && !frozen) // Déplacements
-        {
-
-            float slopeAngle = Vector3.Angle(direction, slopeNormal) * Mathf.Deg2Rad; // If slope too steep, avoid move
-            direction = Vector3.ProjectOnPlane(direction, slopeNormal); // Movements on slopes
-            direction = Vector3.ClampMagnitude(direction, 1);
-
-            float sinAngle = Mathf.Abs(Mathf.Cos(slopeAngle));
-            float acceleration = this.acceleration * (1 - (sinAngle * lossSpeedOnSlopes)); // Reduce acceleration on slopes
-
-            rb.velocity += direction  * acceleration * Time.deltaTime;
-        }
-        else if (rb.velocity.magnitude > speed) // Dévier trajectoire à vitesse élevée sans accélerer davantage
-        {
-            float trajectoire = Input.GetAxis("Horizontal");
-            rb.velocity = Quaternion.Euler(0, trajectoire * hidhSpeedControl, 0) * rb.velocity;
-        }
+        currentState();
 
         if (rb.velocity.magnitude > .01f) // Rotation
         {
@@ -59,6 +48,31 @@ public class Bill : MonoBehaviour
             currentRotation += (distance * 90) / tour;
             transform.rotation = Quaternion.Euler(currentRotation, targetAngle, 0);
         }
+    }
+
+    void FreeMoving()
+    {
+        Vector3 direction = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")); // Direction Inputs
+
+        if (rb.velocity.magnitude < speed) // Déplacements
+        {
+
+            float slopeAngle = Vector3.Angle(direction, slopeNormal) * Mathf.Deg2Rad; // If slope too steep, avoid move
+            direction = Vector3.ProjectOnPlane(direction, slopeNormal); // Movements on slopes
+            direction = Vector3.ClampMagnitude(direction, 1);
+
+            float sinAngle = Mathf.Abs(Mathf.Cos(slopeAngle));
+            float acceleration = this.acceleration * (1 - (sinAngle * lossSpeedOnSlopes)); // Reduce acceleration on slopes
+
+            rb.velocity += direction * acceleration * Time.deltaTime;
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, speed);
+        }
+        else // Dévier trajectoire à vitesse élevée sans accélerer davantage
+        {
+            float trajectoire = Input.GetAxis("Horizontal");
+            rb.velocity = Quaternion.Euler(0, trajectoire * hidhSpeedControl, 0) * rb.velocity;
+        }
+
 
         if (Input.GetButton("Break")) // Break
             Break();
@@ -67,9 +81,33 @@ public class Bill : MonoBehaviour
         Debug.DrawRay(transform.position, direction.normalized * 2, Color.red);
     }
 
-    private void Break()
+    void Frozen()
     {
-        rb.velocity /= breakForce;
+        if (rb.velocity.magnitude > 1)
+        {
+            GetComponent<MeshRenderer>().material.color = Color.white;
+            rb.velocity *= frozenAcceleration;
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, frozenMaxSpeed);
+        }
+        else
+        {
+            FreeMoving();
+            GetComponent<MeshRenderer>().material.color = Color.red;
+        }
+    }
+
+    private void Break() // Frein in French
+    { 
+        rb.velocity /= (breakForce + 1);
+        // Why am I writing coments in English whereas I'm french😵😵😷???
+    }
+
+    public void Freaze(bool frozen)
+    {
+        if (frozen)
+            currentState = Frozen;
+        else
+            currentState = FreeMoving;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -81,154 +119,154 @@ public class Bill : MonoBehaviour
 }
 
 
-    #region Old Script
-    //[SerializeField, Range(0, 100)]
-    //float maxacceleration = 40f;
-    //[SerializeField, Range(0, 100)]
-    //float maxAcceleration = 8f;
+#region Old Script
+//[SerializeField, Range(0, 100)]
+//float maxacceleration = 40f;
+//[SerializeField, Range(0, 100)]
+//float maxAcceleration = 8f;
 
-    //float ballRadius = 0.5f;
-    //float minGroundDotProduct;
-    //float maxGroundAngle = 25f;
+//float ballRadius = 0.5f;
+//float minGroundDotProduct;
+//float maxGroundAngle = 25f;
 
-    //private bool charged = false;
-    //public bool Charged { get => charged; }
+//private bool charged = false;
+//public bool Charged { get => charged; }
 
-    //public bool frozen = false; // pour les rails ?
+//public bool frozen = false; // pour les rails ?
 
-    //[SerializeField]
-    //Transform ball = default;
+//[SerializeField]
+//Transform ball = default;
 
-    //Rigidbody rb;
-    //Vector3 velocity, desiredVelocity, contactNormal, lastContactNormal;
+//Rigidbody rb;
+//Vector3 velocity, desiredVelocity, contactNormal, lastContactNormal;
 
-    //void Awake()
-    //{
-    //    rb = this.GetComponent<Rigidbody>();
-    //    OnValidate();
-    //}
+//void Awake()
+//{
+//    rb = this.GetComponent<Rigidbody>();
+//    OnValidate();
+//}
 
-    //void Update()
-    //{
-    //    Vector2 playerInput;
-    //    playerInput.x = Input.GetAxis("Horizontal");
-    //    playerInput.y = Input.GetAxis("Vertical");
-    //    playerInput = Vector2.ClampMagnitude(playerInput, 1f);
+//void Update()
+//{
+//    Vector2 playerInput;
+//    playerInput.x = Input.GetAxis("Horizontal");
+//    playerInput.y = Input.GetAxis("Vertical");
+//    playerInput = Vector2.ClampMagnitude(playerInput, 1f);
 
-    //    Vector3 adjustment;
-    //    adjustment.x =
-    //        playerInput.x * velocity.magnitude - Vector3.Dot(velocity, new Vector3(1, 0, 0));
-    //    adjustment.z =
-    //        playerInput.y * velocity.magnitude - Vector3.Dot(velocity, new Vector3(0, 0, 1));
+//    Vector3 adjustment;
+//    adjustment.x =
+//        playerInput.x * velocity.magnitude - Vector3.Dot(velocity, new Vector3(1, 0, 0));
+//    adjustment.z =
+//        playerInput.y * velocity.magnitude - Vector3.Dot(velocity, new Vector3(0, 0, 1));
 
-    //    desiredVelocity = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * new Vector3(playerInput.x, 0f, playerInput.y) * maxacceleration;
+//    desiredVelocity = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * new Vector3(playerInput.x, 0f, playerInput.y) * maxacceleration;
 
-    //    UpdateBall();
-
-
-    //}
-
-    //private void FixedUpdate()
-    //{
-    //    if (frozen) return; // Pas de contrôle lors du cheminement d'un rail
-
-    //    velocity = rb.velocity;
-    //    float maxaccelerationChange = maxAcceleration * Time.deltaTime;
-    //    if (Input.GetKeyDown(KeyCode.F) && charged == false)
-    //    {
-    //        StartCoroutine(ChargeAttack());
-    //    }
-
-    //    if (charged == true)
-    //    {
-    //        maxaccelerationChange /= 2f;
-    //        rb.velocity /= 2f;
-    //        desiredVelocity /= 4f;
-    //    }
-
-    //    velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxaccelerationChange);
-    //    velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxaccelerationChange);
-
-    //    if (!frozen)
-    //    {
-    //        rb.velocity = velocity;
-    //    }
+//    UpdateBall();
 
 
-    //    ClearState();
+//}
 
-    //}
+//private void FixedUpdate()
+//{
+//    if (frozen) return; // Pas de contrôle lors du cheminement d'un rail
 
-    //void UpdateBall()
-    //{
-    //    Vector3 movement = rb.velocity * Time.deltaTime;
-    //    float distance = movement.magnitude;
-    //    float angle = distance * (180 / Mathf.PI) / ballRadius;
-    //    Vector3 rotationAxis = Vector3.Cross(lastContactNormal, movement).normalized;
-    //    ball.localRotation = Quaternion.Euler(rotationAxis * angle) * ball.localRotation;
-    //}
+//    velocity = rb.velocity;
+//    float maxaccelerationChange = maxAcceleration * Time.deltaTime;
+//    if (Input.GetKeyDown(KeyCode.F) && charged == false)
+//    {
+//        StartCoroutine(ChargeAttack());
+//    }
 
-    //void ClearState()
-    //{
-    //    lastContactNormal = contactNormal;
-    //    contactNormal = Vector3.zero;
-    //}
+//    if (charged == true)
+//    {
+//        maxaccelerationChange /= 2f;
+//        rb.velocity /= 2f;
+//        desiredVelocity /= 4f;
+//    }
 
-    //void EvaluateCollision(Collision collision)
-    //{
-    //    for (int i = 0; i < collision.contactCount; i++)
-    //    {
-    //        Vector3 normal = collision.GetContact(i).normal;
-    //        if (normal.y >= minGroundDotProduct)
-    //        {
-    //            contactNormal += normal;
-    //        }
-    //    }
-    //}
+//    velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxaccelerationChange);
+//    velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxaccelerationChange);
 
-    //private void OnValidate()
-    //{
-    //    minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
-    //}
+//    if (!frozen)
+//    {
+//        rb.velocity = velocity;
+//    }
 
-    //public void Freeze()
-    //{
-    //    if (!frozen)
-    //    {
-    //        frozen = true;
-    //    }
-    //    else
-    //    {
-    //        frozen = false;
-    //    }
-    //}
 
-    ///*void OldGetInput()
-    //{
-        
-    //    rb.AddForce(Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")));
-    //}*/
+//    ClearState();
 
-    //void OnCollisionEnter(Collision collision)
-    //{
-    //    EvaluateCollision(collision);
-    //}
+//}
 
-    //void OnCollisionStay(Collision collision)
-    //{
-    //    EvaluateCollision(collision);
-    //}
+//void UpdateBall()
+//{
+//    Vector3 movement = rb.velocity * Time.deltaTime;
+//    float distance = movement.magnitude;
+//    float angle = distance * (180 / Mathf.PI) / ballRadius;
+//    Vector3 rotationAxis = Vector3.Cross(lastContactNormal, movement).normalized;
+//    ball.localRotation = Quaternion.Euler(rotationAxis * angle) * ball.localRotation;
+//}
 
-    //IEnumerator ChargeAttack()
-    //{
-    //    Debug.Log("Charging my attack");
-    //    rb.velocity = Vector3.zero;
-    //    charged = true;
-    //    yield return new WaitForSeconds(1);
-    //    Debug.Log("Let's go !");
-    //    rb.velocity += Vector3.forward * 25;
-    //    yield return new WaitForSeconds(2);
-    //    Debug.Log("Charge ready !");
-    //    charged = false;
-    //}
-    #endregion
+//void ClearState()
+//{
+//    lastContactNormal = contactNormal;
+//    contactNormal = Vector3.zero;
+//}
+
+//void EvaluateCollision(Collision collision)
+//{
+//    for (int i = 0; i < collision.contactCount; i++)
+//    {
+//        Vector3 normal = collision.GetContact(i).normal;
+//        if (normal.y >= minGroundDotProduct)
+//        {
+//            contactNormal += normal;
+//        }
+//    }
+//}
+
+//private void OnValidate()
+//{
+//    minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
+//}
+
+//public void Freeze()
+//{
+//    if (!frozen)
+//    {
+//        frozen = true;
+//    }
+//    else
+//    {
+//        frozen = false;
+//    }
+//}
+
+///*void OldGetInput()
+//{
+
+//    rb.AddForce(Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")));
+//}*/
+
+//void OnCollisionEnter(Collision collision)
+//{
+//    EvaluateCollision(collision);
+//}
+
+//void OnCollisionStay(Collision collision)
+//{
+//    EvaluateCollision(collision);
+//}
+
+//IEnumerator ChargeAttack()
+//{
+//    Debug.Log("Charging my attack");
+//    rb.velocity = Vector3.zero;
+//    charged = true;
+//    yield return new WaitForSeconds(1);
+//    Debug.Log("Let's go !");
+//    rb.velocity += Vector3.forward * 25;
+//    yield return new WaitForSeconds(2);
+//    Debug.Log("Charge ready !");
+//    charged = false;
+//}
+#endregion
