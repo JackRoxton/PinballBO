@@ -33,10 +33,14 @@ public class Bumper : MonoBehaviour
         Bill bill = collision.collider.GetComponent<Bill>();
         if (bill != null)
         {
+            Rigidbody billBody = bill.GetComponent<Rigidbody>();
             Vector3 direction = collision.GetContact(0).normal;
+            direction = Vector3.ProjectOnPlane(direction, transform.up);
+
             AudioManager.Instance.PlayClip(source, source.clip);
-            bill.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            bill.GetComponent<Rigidbody>().AddForce(-direction * (force + bill.GetComponent<Rigidbody>().velocity.magnitude * factor));
+
+            billBody.velocity = Vector3.zero;
+            billBody.AddForce(-direction * (force + bill.GetComponent<Rigidbody>().velocity.magnitude * factor));
         }
     }
 
@@ -49,9 +53,10 @@ public class Bumper : MonoBehaviour
             Rigidbody billBody = bill.GetComponent<Rigidbody>();
             Vector3 direction = (bill.transform.position - transform.position).normalized;
             direction = new Vector3(direction.x, 0, direction.z);
+            direction = Vector3.ProjectOnPlane(direction, transform.up);
 
-            Debug.Log("Bump");
             AudioManager.Instance.PlayClip(source, source.clip);
+
             animator.SetTrigger("Bump");
             billBody.velocity = Vector3.zero;
             billBody.AddForce(direction * (force + billBody.velocity.magnitude * factor));
