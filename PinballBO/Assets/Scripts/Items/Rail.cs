@@ -5,8 +5,6 @@ using Cinemachine;
 
 public class Rail : MonoBehaviour
 {
-    [SerializeField] float maxSpeed = 15;
-
     CinemachineVirtualCamera camera;
 
     private void Awake()

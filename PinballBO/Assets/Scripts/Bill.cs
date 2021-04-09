@@ -85,14 +85,12 @@ public class Bill : MonoBehaviour
     {
         if (rb.velocity.magnitude > 1)
         {
-            GetComponent<MeshRenderer>().material.color = Color.white;
             rb.velocity *= frozenAcceleration;
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, frozenMaxSpeed);
         }
         else
         {
             FreeMoving();
-            GetComponent<MeshRenderer>().material.color = Color.red;
         }
     }
 
