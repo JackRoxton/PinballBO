@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Bill : MonoBehaviour
 {
@@ -10,15 +11,16 @@ public class Bill : MonoBehaviour
     [Header("Speed")]
     [Range(1, 100)] public float acceleration;
     [Range(1, 100)] public float speed;
-    [Range(0, .03f)] public float breakForce;
+    [Range(0, .5f)] public float breakForce;
     [Header("Controls")]
     [Range(0, 1)] public float lossSpeedOnSlopes;
     [Range(0, 1)] public float hidhSpeedControl = .15f;
     [Header("Frozen")]
-    [Range(1, 2)] public float frozenAcceleration;
+    [Range(1, 1.25f)] public float frozenAcceleration;
     [Range(1, 20)] public float frozenMaxSpeed;
 
     Rigidbody rb;
+    CinemachineVirtualCamera camera;
 
     private float currentRotation = 0;
     float tour;
@@ -28,13 +30,15 @@ public class Bill : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         tour = Mathf.PI * GetComponent<SphereCollider>().radius;
+
+        camera = GetComponentInChildren<CinemachineVirtualCamera>();
     }
     void Start()
     {
         currentState = FreeMoving;
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         currentState();
@@ -52,10 +56,10 @@ public class Bill : MonoBehaviour
 
     void FreeMoving()
     {
-        Vector3 direction = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")); // Direction Inputs
 
         if (rb.velocity.magnitude < speed) // Déplacements
         {
+            Vector3 direction = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")); // Direction Inputs
 
             float slopeAngle = Vector3.Angle(direction, slopeNormal) * Mathf.Deg2Rad; // If slope too steep, avoid move
             direction = Vector3.ProjectOnPlane(direction, slopeNormal); // Movements on slopes
@@ -66,6 +70,8 @@ public class Bill : MonoBehaviour
 
             rb.velocity += direction * acceleration * Time.deltaTime;
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, speed);
+
+            Debug.DrawRay(transform.position, direction.normalized * 2, Color.red);
         }
         else // Dévier trajectoire à vitesse élevée sans accélerer davantage
         {
@@ -78,10 +84,9 @@ public class Bill : MonoBehaviour
             Break();
 
         Debug.DrawRay(transform.position, slopeNormal * 2, Color.blue);
-        Debug.DrawRay(transform.position, direction.normalized * 2, Color.red);
     }
 
-    void Frozen()
+    void Frozen() // When using a rail
     {
         if (rb.velocity.magnitude > 1)
         {
@@ -93,6 +98,7 @@ public class Bill : MonoBehaviour
             FreeMoving();
         }
     }
+
 
     private void Break() // Frein in French
     { 
