@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
 
     private AudioSource musicSource;
-    private List<AudioSource> effectSources;
+    private List<AudioSource> effectSources = new List<AudioSource>();
 
     private void Awake()
     {
@@ -17,9 +17,7 @@ public class AudioManager : MonoBehaviour
         musicSource = gameObject.AddComponent<AudioSource>();
         Bumper[] bumpers = FindObjectsOfType<Bumper>();
         foreach (Bumper bumper in bumpers)
-        {
             effectSources.Add(bumper.GetComponent<AudioSource>());
-        }
     }
 
 
@@ -29,9 +27,9 @@ public class AudioManager : MonoBehaviour
     }
     public void ChangeEffectVolume(float volume)
     {
-        foreach (AudioSource effect in effectSources)
+        foreach (AudioSource source in effectSources)
         {
-            effect.volume = volume;
+            source.volume = volume;
         }
     }
 
