@@ -2,6 +2,7 @@
 
 public class Targets : MonoBehaviour
 {
+    public int force;
     [SerializeField] Material lightOn;
     Material initial;
     [SerializeField] MeshRenderer neon;
@@ -32,8 +33,10 @@ public class Targets : MonoBehaviour
         Bill bill = collision.collider.GetComponent<Bill>();
         if (bill != null)
         {
+            Rigidbody billBody = bill.GetComponent<Rigidbody>();
             SetLights(!lightState);
-            bill.GetComponent<Rigidbody>().velocity = -collision.GetContact(0).normal * 5;
+            billBody.velocity = Vector3.zero;
+            billBody.AddForce(-collision.GetContact(0).normal * force);
         }
 
     }
