@@ -6,6 +6,7 @@ public class ChronoChallenge : MonoBehaviour
 {
     public GameObject endChallenge;
     public ChronoChallengeEnd EndOfTheChallenge;
+
     public GameObject timerVisual;
     private GameObject Bill;
     public Timer timer;
@@ -29,25 +30,19 @@ public class ChronoChallenge : MonoBehaviour
             Debug.Log("Whats up collider");
             //Son de debut du challenge
 
-            //fermer porte debut -0.04
-            StartCoroutine(Close());
-            EndOfTheChallenge.starting(isFinished);
-            //ouvrir porte fin
-
             timerVisual.SetActive(true);
             timer.SetTime(challengeTime, this);
 
+            StartCoroutine(Close());
             isFinished = false;
-            EndOfTheChallenge.starting(isFinished);
+            EndOfTheChallenge.Starting(isFinished);
         }
     }
 
-    // Update is called once per frame
     public void End(bool win)
     {
         isFinished = true;
         timerVisual.SetActive(false);
-        Debug.Log("tu devrais pas être la ptdr");
         if (win)
         {
             timer.SetTime(10000f, null);
@@ -57,6 +52,7 @@ public class ChronoChallenge : MonoBehaviour
             Bill = GameObject.FindGameObjectWithTag("Player");
             Bill.transform.position = respawnPoint;
         }
+        EndOfTheChallenge.Closed();
         StartCoroutine(Open());
     }
 

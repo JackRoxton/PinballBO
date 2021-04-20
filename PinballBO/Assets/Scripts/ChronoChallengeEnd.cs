@@ -16,10 +16,15 @@ public class ChronoChallengeEnd : MonoBehaviour
         posDown = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y - 4.8f, this.transform.localPosition.z);
     }
 
-    public void starting(bool currentstate)
+    public void Starting(bool currentstate)
     {
         isFinished = currentstate;
         StartCoroutine(Open());
+    }
+
+    public void Closed()
+    {
+        StartCoroutine(Close());
     }
 
     private void OnTriggerEnter(Collider other)

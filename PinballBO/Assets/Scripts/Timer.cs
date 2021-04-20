@@ -73,13 +73,11 @@ public class Timer : MonoBehaviour
         {
             timeLeft = 10000f;
             timeTotal = 10000f;
-            Debug.Log("reset time");
         }
         else
         {
             challenge.End(false);
             challenge = null;
-            Debug.Log("challenge est nul normalement");
             //afficher un text "challenge failed" ou "time's up"
         }
         /* if (GameManager.Instance.GameState == GameManager.gameState.GameOver)  // if Gamestate = GameOver, it means that this has already been called
