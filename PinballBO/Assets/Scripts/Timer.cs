@@ -77,7 +77,7 @@ public class Timer : MonoBehaviour
         }
         else
         {
-            challenge.OpenDoors(false);
+            challenge.End(false);
             challenge = null;
             Debug.Log("challenge est nul normalement");
             //afficher un text "challenge failed" ou "time's up"

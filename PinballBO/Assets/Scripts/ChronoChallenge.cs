@@ -5,38 +5,47 @@ using UnityEngine;
 public class ChronoChallenge : MonoBehaviour
 {
     public GameObject endChallenge;
-    public GameObject timerVisual;
     public ChronoChallengeEnd EndOfTheChallenge;
+    public GameObject timerVisual;
     private GameObject Bill;
     public Timer timer;
     private bool isFinished = true;
 
     public float challengeTime = 60f; //change into the inspector depending on the challenge
     public Vector3 respawnPoint;
+    Vector3 posUp;
+    Vector3 posDown;
+
+    private void Start()
+    {
+        posUp = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y + 4.8f, this.transform.localPosition.z);
+        posDown = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y, this.transform.localPosition.z);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" && isFinished)
+        if (other.gameObject.tag == "Player" && isFinished) //Commencer le challenge
         {
             Debug.Log("Whats up collider");
             //Son de debut du challenge
 
-            //Fermeture Porte debut et ouverture Porte fin
-
-            //Set Respawn ? Ou alors rouvrir les portes
+            //fermer porte debut -0.04
+            StartCoroutine(Close());
+            EndOfTheChallenge.starting(isFinished);
+            //ouvrir porte fin
 
             timerVisual.SetActive(true);
             timer.SetTime(challengeTime, this);
+
             isFinished = false;
-            EndOfTheChallenge.isFinishedTrigger(isFinished);
+            EndOfTheChallenge.starting(isFinished);
         }
     }
 
     // Update is called once per frame
-    public void OpenDoors(bool win)
+    public void End(bool win)
     {
         isFinished = true;
-        EndOfTheChallenge.isFinishedTrigger(isFinished);
         timerVisual.SetActive(false);
         Debug.Log("tu devrais pas être la ptdr");
         if (win)
@@ -48,6 +57,25 @@ public class ChronoChallenge : MonoBehaviour
             Bill = GameObject.FindGameObjectWithTag("Player");
             Bill.transform.position = respawnPoint;
         }
-        //ouvrir la porte debut et faire respawn
+        StartCoroutine(Open());
     }
+
+    IEnumerator Close()
+    {
+        while(this.transform.localPosition.y < posUp.y)
+        {
+            this.transform.localPosition = Vector3.MoveTowards(this.transform.localPosition, posUp, 0.08f);
+            yield return new WaitForSeconds(0.04f);
+        }
+    }
+
+    IEnumerator Open()
+    {
+        while (this.transform.localPosition.y > posDown.y)
+        {
+            this.transform.localPosition = Vector3.MoveTowards(this.transform.localPosition, posDown, 0.08f);
+            yield return new WaitForSeconds(0.04f);
+        }
+    }
+
 }
