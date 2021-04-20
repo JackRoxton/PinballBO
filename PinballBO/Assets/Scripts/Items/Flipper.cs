@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Flipper : MonoBehaviour
+public class Flipper : BumpObject
 {
-    [SerializeField] int force;
     [SerializeField] [Range(.01f, .5f)] float speed;
     [SerializeField] float angle;
     [SerializeField] bool random;
@@ -90,17 +89,16 @@ public class Flipper : MonoBehaviour
         {
             if (Mathf.Sign(Vector3.SignedAngle(-transform.forward,
                 bill.transform.position - transform.position, Vector3.up)) != Mathf.Sign(angle))
-            {
                     return; // Faut pas taper dans ce cas là
-            }
             sphereTrigger.enabled = false;
             StartCoroutine(Shoot());
         }
 
         if (bill != null && IsMoving)
         {
-            bill.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            bill.GetComponent<Rigidbody>().AddForce(Quaternion.Euler(0, transform.eulerAngles.y + angle, 0) * (-Vector3.forward * force * speed));
+            Vector3 direction = Quaternion.Euler(0, transform.eulerAngles.y + angle, 0)     // Direction depends of the revolution of the flipper
+                * (-Vector3.forward * force * speed);
+            Bump(bill, direction);
         }
     }
 

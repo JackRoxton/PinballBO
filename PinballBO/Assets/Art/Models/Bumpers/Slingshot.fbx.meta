@@ -1,11 +1,26 @@
 fileFormatVersion: 2
-guid: f71e3f674d69f414db6486636f8d379d
+guid: ebd1fd07b887ec844993a7ee64d65cfc
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
   - first:
-      74: 4781951162920444690
-    second: Slingshot
+      74: 8096488552237957905
+    second: ShootForward
+  - first:
+      74: -5985262378486599298
+    second: ShootNormalLeft
+  - first:
+      74: -113004895510589747
+    second: ShootNormalRight
+  - first:
+      74: 5756224793537006307
+    second: ShootNormalLeft
+  - first:
+      74: -902663738383052071
+    second: ShootForward
+  - first:
+      74: -1557274104673841486
+    second: ShotNormalLeft
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -35,11 +50,69 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Slingshot
-      takeName: Armature|ArmatureAction
+      name: ShootForward
+      takeName: Armature|ShotForward
       internalID: 0
       firstFrame: 0
       lastFrame: 4
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: ShootNormalLeft
+      takeName: Armature|ShotNormalLeft
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 4
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: ShootNormalRight
+      takeName: Armature|ShotNormalRight
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 8
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

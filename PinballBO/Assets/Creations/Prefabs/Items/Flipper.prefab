@@ -131,9 +131,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7adcceb7d6ef5e74884a82d3c4b55d79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 3000
-  speed: 0.3
-  angle: -60
+  force: 1000
+  factor: 100
+  speed: 0.1
+  angle: 60
   random: 1
 --- !u!54 &8400633438868369996
 Rigidbody:
