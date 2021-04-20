@@ -21,6 +21,12 @@ ModelImporter:
   - first:
       74: -1557274104673841486
     second: ShotNormalLeft
+  - first:
+      74: -113004895510589747
+    second: Armature|ShotNormalRight
+  - first:
+      74: -6702297715750683487
+    second: ShootNormalRight
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -79,8 +85,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: ShootNormalLeft
-      takeName: Armature|ShotNormalLeft
+      name: Armature|ShotNormalRight
+      takeName: Armature|ShotNormalRight
       internalID: 0
       firstFrame: 0
       lastFrame: 4
