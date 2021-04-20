@@ -57,7 +57,6 @@ public class GameManager : MonoBehaviour
                 case gameState.MainMenu:
                     Cursor.lockState = CursorLockMode.Confined;
                     Cursor.visible = true;
-                    SceneManager.LoadScene(0);
                     break;
 
                 case gameState.InGame:

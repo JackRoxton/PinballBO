@@ -64,6 +64,7 @@ public class UIManager : MonoBehaviour
         {
             case "GoMainMenu":
                 GameManager.Instance.GameState = GameManager.gameState.MainMenu;
+                SceneManager.LoadScene(0);
                 break;
 
             case "Restart":
