@@ -85,8 +85,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|ShotNormalRight
-      takeName: Armature|ShotNormalRight
+      name: ShotNormalLeft
+      takeName: Armature|ShotNormalLeft
       internalID: 0
       firstFrame: 0
       lastFrame: 4
@@ -118,7 +118,7 @@ ModelImporter:
       takeName: Armature|ShotNormalRight
       internalID: 0
       firstFrame: 0
-      lastFrame: 8
+      lastFrame: 4
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
