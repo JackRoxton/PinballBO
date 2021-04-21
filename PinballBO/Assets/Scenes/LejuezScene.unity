@@ -867,7 +867,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 437566237}
-  m_LocalRotation: {x: 0.00040075066, y: 0.7882052, z: -0.61541224, w: 0.00051375607}
+  m_LocalRotation: {x: 0.00040078242, y: 0.7882052, z: -0.61541224, w: 0.00051379675}
   m_LocalPosition: {x: 11.686083, y: 15.47, z: -1.8200023}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1802,12 +1802,12 @@ PrefabInstance:
     - target: {fileID: 1915026051115963421, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.00040085058
+      value: 0.0004008823
       objectReference: {fileID: 0}
     - target: {fileID: 1915026051115963421, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.0005138343
+      value: 0.0005138749
       objectReference: {fileID: 0}
     - target: {fileID: 3429964829404882245, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
@@ -1907,12 +1907,12 @@ PrefabInstance:
     - target: {fileID: 3759452541343834950, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.00040138027
+      value: 0.00040141205
       objectReference: {fileID: 0}
     - target: {fileID: 3759452541343834950, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.00051424786
+      value: 0.00051428855
       objectReference: {fileID: 0}
     - target: {fileID: 3816934006942389442, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
@@ -1952,12 +1952,12 @@ PrefabInstance:
     - target: {fileID: 4902816964285812514, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.00037390433
+      value: 0.00037388943
       objectReference: {fileID: 0}
     - target: {fileID: 4902816964285812514, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.00053422037
+      value: 0.000534199
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4af73a91d2cc1a9428341dceb46fb9c0, type: 3}
@@ -2673,6 +2673,11 @@ PrefabInstance:
       propertyPath: timer
       value: 
       objectReference: {fileID: 1999449382}
+    - target: {fileID: 3880075586162735906, guid: 258ca3b672c567543bebf339b23c4fb1,
+        type: 3}
+      propertyPath: challengeTime
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 3880075586480577986, guid: 258ca3b672c567543bebf339b23c4fb1,
         type: 3}
       propertyPath: m_Mesh
