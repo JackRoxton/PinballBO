@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 1218568971040688956}
   - component: {fileID: 2034654029744236058}
   - component: {fileID: 5379500041012498643}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Rail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
