@@ -120,6 +120,23 @@ public class Bill : MonoBehaviour
         if (normal.y > .7f)
             slopeNormal = normal;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Rail rail = other.GetComponent<Rail>();
+        if (rail != null)
+        {
+            rail.BillInRail(this, true);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        Rail rail = other.GetComponent<Rail>();
+        if (rail != null)
+        {
+            rail.BillInRail(this, false);
+        }
+    }
 }
 
 

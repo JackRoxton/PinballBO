@@ -16,23 +16,10 @@ public class Rail : MonoBehaviour
         camera.Follow = bill.transform;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void BillInRail(Bill bill, bool inRail)
     {
-        Bill boule = other.GetComponent<Bill>();
-        if (boule != null)
-        {
-            CameraManager.Instance.SetCameraActive(camera.gameObject);
-            boule.Freaze(true);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        Bill boule = other.GetComponent<Bill>();
-        if (boule != null)
-        {
-            CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainCam.gameObject);
-            boule.Freaze(false);
-        }
+        GameObject cam = inRail ? camera.gameObject : CameraManager.Instance.mainCam.gameObject;
+        CameraManager.Instance.SetCameraActive(cam);
+        bill.Freaze(inRail);
     }
 }
