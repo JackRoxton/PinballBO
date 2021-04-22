@@ -337,11 +337,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf2a0eb60eca72b4d860bba0d503be08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 12
+  acceleration: 20
   speed: 12
   breakForce: 0.03
-  lossSpeedOnSlopes: 1
-  hidhSpeedControl: 0.15
+  lossSpeedOnSlopes: 1.5
+  highSpeedControl: 0.15
   frozenAcceleration: 1.002
   frozenMaxSpeed: 10
 --- !u!1 &6017232712829960499
@@ -553,6 +553,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3816934006942389442}
   - component: {fileID: 5326385971716212461}
+  - component: {fileID: 569985335318852878}
   m_Layer: 0
   m_Name: CM FreeLook1
   m_TagString: Untagged
@@ -676,6 +677,36 @@ MonoBehaviour:
   - {fileID: 5167588091386100385}
   - {fileID: 5456212337799893191}
   - {fileID: 908659488560410759}
+--- !u!114 &569985335318852878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7167061273825378816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CollideAgainst:
+    serializedVersion: 2
+    m_Bits: 1
+  m_IgnoreTag: 
+  m_TransparentLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_MinimumDistanceFromTarget: 0.5
+  m_AvoidObstacles: 1
+  m_DistanceLimit: 0
+  m_MinimumOcclusionTime: 0
+  m_CameraRadius: 0.1
+  m_Strategy: 0
+  m_MaximumEffort: 4
+  m_SmoothingTime: 0
+  m_Damping: 0
+  m_DampingWhenOccluded: 1
+  m_OptimalTargetDistance: 2
 --- !u!1 &8277156334497086894
 GameObject:
   m_ObjectHideFlags: 0

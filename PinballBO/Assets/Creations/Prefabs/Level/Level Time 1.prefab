@@ -10040,7 +10040,7 @@ PrefabInstance:
     - target: {fileID: 5596386316910083969, guid: 173f57c09c19f8d4da715a265edc2a66,
         type: 3}
       propertyPath: challengeTime
-      value: 45
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 5596386316910083971, guid: 173f57c09c19f8d4da715a265edc2a66,
         type: 3}

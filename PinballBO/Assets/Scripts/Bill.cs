@@ -13,8 +13,8 @@ public class Bill : MonoBehaviour
     [Range(1, 100)] public float speed;
     [Range(0, .5f)] public float breakForce;
     [Header("Controls")]
-    [Range(0, 1)] public float lossSpeedOnSlopes;
-    [Range(0, 1)] public float hidhSpeedControl = .15f;
+    [Range(0, 2)] public float lossSpeedOnSlopes;
+    [Range(0, 1)] public float highSpeedControl = .15f;
     [Header("Frozen")]
     [Range(1, 1.25f)] public float frozenAcceleration;
     [Range(1, 20)] public float frozenMaxSpeed;
@@ -39,7 +39,7 @@ public class Bill : MonoBehaviour
     }
 
     
-    void Update()
+    void FixedUpdate()
     {
         currentState();
 
@@ -76,7 +76,7 @@ public class Bill : MonoBehaviour
         else // Dévier trajectoire à vitesse élevée sans accélerer davantage
         {
             float trajectoire = Input.GetAxis("Horizontal");
-            rb.velocity = Quaternion.Euler(0, trajectoire * hidhSpeedControl, 0) * rb.velocity;
+            rb.velocity = Quaternion.Euler(0, trajectoire * highSpeedControl, 0) * rb.velocity;
         }
 
 
