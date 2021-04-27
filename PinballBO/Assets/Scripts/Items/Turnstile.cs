@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spinner : BumpObject
+public class Turnstile : BumpObject
 {
     [SerializeField] private float speed = 1;
 

@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class Slingshot : BumpObject
 {
-    public float y;
-    private void Update()
-    {
-        Debug.DrawRay(transform.position, Quaternion.Euler(0, y, 0) * transform.forward * 40, Color.green);
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         Bill bill = other.GetComponent<Bill>();

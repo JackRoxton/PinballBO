@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 146d389042ef9ad4a9542d70578404ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 1000
+  force: 500
   lightOn: {fileID: 2100000, guid: 97a0a3da7b57f1041a6951b0ebed7ec2, type: 2}
   neon: {fileID: 7099462000985200771}
   lightState: 0
