@@ -299,6 +299,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 800
   factor: 40
+  bumpParticle: {fileID: 4166583257526116529, guid: 3b5fd193cb137474ea197abeba814c92,
+    type: 3}
 --- !u!54 &3354603010506387622
 Rigidbody:
   m_ObjectHideFlags: 0
