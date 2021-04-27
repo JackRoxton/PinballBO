@@ -19,6 +19,10 @@ public class Bill : MonoBehaviour
     [Range(1, 1.25f)] public float frozenAcceleration;
     [Range(1, 20)] public float frozenMaxSpeed;
 
+    [SerializeField] private ParticleSystem brakeParticles;
+    private Vector3 brakeParticlePos;
+    int particleFlag = 0;
+
     Rigidbody rb;
     CinemachineVirtualCamera camera;
 
@@ -101,8 +105,18 @@ public class Bill : MonoBehaviour
 
 
     private void Break() // Frein in French
-    { 
+    {
         rb.velocity /= (breakForce + 1);
+
+        if (particleFlag == 0)
+        {
+            Vector3 brakeParticlePos = new Vector3(this.transform.position.x, this.transform.position.y - 0.5f, this.transform.position.z);
+            Instantiate(brakeParticles, brakeParticlePos, Quaternion.identity);
+            particleFlag = 4;
+        }
+        else
+            particleFlag--;
+
         // Why am I writing coments in English whereas I'm french😵😵😷???
     }
 
