@@ -27,7 +27,7 @@ public class ChronoChallenge : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && isFinished) //Commencer le challenge
         {
-            Debug.Log("Whats up collider");
+            Debug.Log("Debut Challenge Chrono");
             //Son de debut du challenge
 
             timerVisual.SetActive(true);
