@@ -30,6 +30,10 @@ public class Bill : MonoBehaviour
     float tour;
     Vector3 slopeNormal = Vector3.up;
 
+    private bool chargeState = false;
+    [Space]
+    [Range(1,400)]public float chargeStrength;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -86,6 +90,9 @@ public class Bill : MonoBehaviour
 
         if (Input.GetButton("Break")) // Break
             Break();
+
+        if(Input.GetKeyDown(KeyCode.F) && chargeState == false) //Charge (Input.GetButton("Charge"))
+            StartCoroutine(Charge());
 
         Debug.DrawRay(transform.position, slopeNormal * 2, Color.blue);
     }
@@ -149,6 +156,24 @@ public class Bill : MonoBehaviour
         if (rail != null)
         {
             rail.BillInRail(this, false);
+        }
+    }
+
+    IEnumerator Charge() //Bill charges, losing his current velocity and than releases his inner strength to go all out on speed. Can't be used motionless.
+    {
+        if (this.rb.velocity != Vector3.zero)
+        {
+            this.rb.velocity = Vector3.zero;
+            chargeState = true;
+            for (int i = 0; i < 120; i++)
+            {
+                currentRotation += 25;
+                yield return new WaitForEndOfFrame(); //Bill is charging the attack, spinning.
+            }
+            Vector3 direction = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * Vector3.forward;
+            this.rb.velocity += direction * acceleration * Time.deltaTime * chargeStrength; //Bill releases his attack. (ability to damage the boss is to be implemented)
+            yield return new WaitForSeconds(2); //Bill is on a slight cooldown from exhaustion.
+            chargeState = false;
         }
     }
 }
