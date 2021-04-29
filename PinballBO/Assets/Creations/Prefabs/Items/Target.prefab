@@ -332,6 +332,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 500
+  factor: 0
+  point: 1
   lightOn: {fileID: 2100000, guid: 97a0a3da7b57f1041a6951b0ebed7ec2, type: 2}
   neon: {fileID: 7099462000985200771}
   lightState: 0
