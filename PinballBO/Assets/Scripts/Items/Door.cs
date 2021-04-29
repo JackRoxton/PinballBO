@@ -30,7 +30,7 @@ public class Door : MonoBehaviour
     private List<SpinnerChallenge> spinners = new List<SpinnerChallenge>();
     
     private int challengesCount = 2, challengesDone = 0;
-
+    private GameObject bill;
 
     //cocher use targets **ou** use spinners pour des portes classiques, uniquement bossDoor pour la porte du boss.
     //si bossDoor est coché, il faut aussi remplir la liste de spinners.
@@ -116,25 +116,43 @@ public class Door : MonoBehaviour
 
     IEnumerator Open()
     {
-            if (cinematic)
-                CameraManager.Instance.SetCameraActive(camera.gameObject);
-            yield return new WaitForSeconds(2);
-            this.transform.localPosition = Vector3.MoveTowards(this.transform.localPosition, pos, 2f);
-            yield return new WaitForSeconds(2);
-            Flag = true;
-            if (cinematic)
-                CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainCam.gameObject);
+        bill = GameObject.Find("Bill");
+        Rigidbody rb = bill.GetComponent<Rigidbody>();
+
+        if (cinematic)
+        {
+            CameraManager.Instance.SetCameraActive(camera.gameObject);
+            rb.isKinematic = true;
+        }
+        yield return new WaitForSeconds(2);
+        this.transform.localPosition = Vector3.MoveTowards(this.transform.localPosition, pos, 2f);
+        yield return new WaitForSeconds(2);
+        Flag = true;
+        if (cinematic)
+        {
+            CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainCam.gameObject);
+            rb.isKinematic = false;
+        }
     }
     IEnumerator OpenBoss()
     {
-            if (cinematic)
-                CameraManager.Instance.SetCameraActive(camera.gameObject);
-            yield return new WaitForSeconds(2);
-            //turn on the lights of a "lock"
-            if (challengesDone == challengesCount)
-                this.transform.localPosition = Vector3.MoveTowards(this.transform.localPosition, pos, 0.05f);
-            yield return new WaitForSeconds(2);
-            if (cinematic)
-                CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainCam.gameObject);
+        bill = GameObject.Find("Bill");
+        Rigidbody rb = bill.GetComponent<Rigidbody>();
+
+        if (cinematic)
+        {
+            CameraManager.Instance.SetCameraActive(camera.gameObject);
+            rb.isKinematic = true;
+        }
+        yield return new WaitForSeconds(2);
+        //turn on the lights of a "lock"
+        if (challengesDone == challengesCount)
+            this.transform.localPosition = Vector3.MoveTowards(this.transform.localPosition, pos, 0.05f);
+        yield return new WaitForSeconds(2);
+        if (cinematic)
+        {
+            CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainCam.gameObject);
+            rb.isKinematic = false;
+        }
     }
 }
