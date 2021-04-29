@@ -2,6 +2,7 @@
 
 public class Targets : MonoBehaviour
 {
+    private FlipperChallenge challenge;
     public int force;
     [SerializeField] Material lightOn;
     Material initial;
@@ -37,7 +38,20 @@ public class Targets : MonoBehaviour
             SetLights(!lightState);
             billBody.velocity = Vector3.zero;
             billBody.AddForce(-collision.GetContact(0).normal * force);
+            if (challenge != null)
+                IncreaseMultiplicater();
         }
 
+    }
+
+    void IncreaseMultiplicater()
+    {
+        float amount = lightState ? .1f : -.1f;
+        challenge.ChangeMultiplier(amount);
+    }
+
+    public void SetChallenge(FlipperChallenge challenge)
+    {
+        this.challenge = challenge;
     }
 }

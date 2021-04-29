@@ -246,11 +246,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2721899337549359632}
-  - component: {fileID: 3354603010506387625}
   - component: {fileID: 3354603010506387622}
-  - component: {fileID: 3354603010506387623}
-  - component: {fileID: 3354603010506387624}
   - component: {fileID: 6538389611012867878}
+  - component: {fileID: 3354603010506387624}
+  - component: {fileID: 3354603010506387623}
+  - component: {fileID: 3354603010506387625}
   m_Layer: 0
   m_Name: Bumper
   m_TagString: Untagged
@@ -285,22 +285,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3354603010506387625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3354603010506387626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5757949bca6729447a6655673562c890, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  force: 800
-  factor: 40
-  bumpParticle: {fileID: 4166583257526116529, guid: 3b5fd193cb137474ea197abeba814c92,
-    type: 3}
 --- !u!54 &3354603010506387622
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -317,6 +301,39 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!136 &6538389611012867878
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3354603010506387626}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2.0230503
+  m_Direction: 1
+  m_Center: {x: 0, y: -2.1977785, z: 0}
+--- !u!95 &3354603010506387624
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3354603010506387626}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8e4e123cf3c52694e8d615d0104b28d6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!82 &3354603010506387623
 AudioSource:
   m_ObjectHideFlags: 0
@@ -413,39 +430,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!95 &3354603010506387624
-Animator:
-  serializedVersion: 3
+--- !u!114 &3354603010506387625
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3354603010506387626}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8e4e123cf3c52694e8d615d0104b28d6, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!136 &6538389611012867878
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3354603010506387626}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2.0230503
-  m_Direction: 1
-  m_Center: {x: 0, y: -2.1977785, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5757949bca6729447a6655673562c890, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 800
+  factor: 40
+  point: 50
+  bumpParticle: {fileID: 4166583257526116529, guid: 3b5fd193cb137474ea197abeba814c92,
+    type: 3}
 --- !u!1 &3879081959276674961
 GameObject:
   m_ObjectHideFlags: 0

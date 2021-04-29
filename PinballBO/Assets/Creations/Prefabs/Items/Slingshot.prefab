@@ -72,7 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 800
   factor: 60
-  y: 0
+  point: 200
 --- !u!54 &8261901176574322493
 Rigidbody:
   m_ObjectHideFlags: 0
