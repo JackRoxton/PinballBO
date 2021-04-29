@@ -34,10 +34,13 @@ public class Targets : MonoBehaviour
         Bill bill = collision.collider.GetComponent<Bill>();
         if (bill != null)
         {
+            if (!lightState)
+                SetLights(true);
+
             Rigidbody billBody = bill.GetComponent<Rigidbody>();
-            SetLights(!lightState);
             billBody.velocity = Vector3.zero;
             billBody.AddForce(-collision.GetContact(0).normal * force);
+
             if (challenge != null)
                 IncreaseMultiplicater();
         }
@@ -46,8 +49,7 @@ public class Targets : MonoBehaviour
 
     void IncreaseMultiplicater()
     {
-        float amount = lightState ? .1f : -.1f;
-        challenge.ChangeMultiplier(amount);
+        challenge.ChangeMultiplier(.1f);
     }
 
     public void SetChallenge(FlipperChallenge challenge)

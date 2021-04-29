@@ -9,7 +9,8 @@ public class Slingshot : BumpObject
         Bill bill = other.GetComponent<Bill>();
         if (bill != null)
         {
-            float angle = Vector3.SignedAngle(transform.forward, bill.transform.position - transform.position, transform.up);
+            BumpAway(bill); return;
+            float angle = Vector3.SignedAngle(transform.forward, bill.transform.position - transform.position, transform.up) * transform.localScale.x;
 
             //Shoot Right
             if (angle > -38 && angle < 33)

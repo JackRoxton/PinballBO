@@ -8,8 +8,8 @@ public class BumpObject : MonoBehaviour
     [SerializeField] protected int factor;
     [SerializeField] protected int point;
 
-    // [Header("Materials")]
-    protected MeshRenderer[] meshRenderers;
+    [Header("Materials")]
+    [SerializeField] protected MeshRenderer[] meshRenderers;
 
     protected Animator animator;
     protected AudioSource source;
@@ -47,12 +47,15 @@ public class BumpObject : MonoBehaviour
         //billBody.velocity = Vector3.zero;
         float force = this.force + billBody.velocity.magnitude * factor;
         billBody.AddForce(direction * force);
+
+        if (challenge != null)
+            AddPoints();
     }
 
     protected virtual void AddPoints()
     {
         challenge.ChangeScore(point);
-        // Intensité des neons ↘↘
+        ChangeNeonIntensity();
     }
 
     protected virtual void ChangeNeonsColor()
@@ -67,6 +70,11 @@ public class BumpObject : MonoBehaviour
                 Random.Range(0f, 1f));
             renderer.materials = newMats;
         }
+    }
+
+    protected void ChangeNeonIntensity()
+    {
+
     }
 
     public void SetChallenge(FlipperChallenge challenge)

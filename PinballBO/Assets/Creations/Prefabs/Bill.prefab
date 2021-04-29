@@ -329,9 +329,10 @@ MonoBehaviour:
   breakForce: 0.03
   lossSpeedOnSlopes: 1.5
   highSpeedControl: 0.15
-  frozenAcceleration: 1.002
-  frozenMaxSpeed: 10
+  onRailAcceleration: 1.05
+  onRailMaxSpeed: 14
   brakeParticles: {fileID: 0}
+  chargeStrength: 0
 --- !u!1 &6017232712829960499
 GameObject:
   m_ObjectHideFlags: 0

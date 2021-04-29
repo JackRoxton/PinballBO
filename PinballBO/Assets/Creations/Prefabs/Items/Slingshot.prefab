@@ -73,6 +73,9 @@ MonoBehaviour:
   force: 800
   factor: 60
   point: 200
+  angleForward: -121
+  angleLeft: 90
+  angleRight: 13
 --- !u!54 &8261901176574322493
 Rigidbody:
   m_ObjectHideFlags: 0

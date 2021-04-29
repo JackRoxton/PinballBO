@@ -16,8 +16,8 @@ public class Bill : MonoBehaviour
     [Range(0, 2)] public float lossSpeedOnSlopes;
     [Range(0, 1)] public float highSpeedControl = .15f;
     [Header("Frozen")]
-    [Range(1, 1.25f)] public float frozenAcceleration;
-    [Range(1, 20)] public float frozenMaxSpeed;
+    [Range(1, 1.25f)] public float onRailAcceleration;
+    [Range(1, 20)] public float onRailMaxSpeed;
 
     [SerializeField] private ParticleSystem brakeParticles;
     private Vector3 brakeParticlePos;
@@ -83,7 +83,8 @@ public class Bill : MonoBehaviour
         }
         else // Dévier trajectoire à vitesse élevée sans accélerer davantage
         {
-            float trajectoire = Input.GetAxis("Horizontal");
+            float trajectoire = Vector3.Angle(rb.velocity, Camera.main.transform.eulerAngles) <= 90 && Vector3.Angle(rb.velocity, Camera.main.transform.eulerAngles) >= 90 ?
+                Input.GetAxis("Horizontal") : -Input.GetAxis("Horizontal");
             rb.velocity = Quaternion.Euler(0, trajectoire * highSpeedControl, 0) * rb.velocity;
         }
 
@@ -97,12 +98,12 @@ public class Bill : MonoBehaviour
         Debug.DrawRay(transform.position, slopeNormal * 2, Color.blue);
     }
 
-    void Frozen() // When using a rail
+    void OnRail() // When using a rail
     {
-        if (rb.velocity.magnitude > 1)
+        if (rb.velocity.magnitude > .1f)
         {
-            rb.velocity *= frozenAcceleration;
-            rb.velocity = Vector3.ClampMagnitude(rb.velocity, frozenMaxSpeed);
+            rb.velocity *= onRailAcceleration;
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, onRailMaxSpeed);
         }
         else
         {
@@ -110,6 +111,16 @@ public class Bill : MonoBehaviour
         }
     }
 
+
+    public void EnterRail(bool onRail)
+    {
+        if (onRail)
+        {
+            currentState = OnRail;
+        }
+        else
+            currentState = FreeMoving;
+    }
 
     private void Break() // Frein in French
     {
@@ -125,14 +136,6 @@ public class Bill : MonoBehaviour
             particleFlag--;
 
         // Why am I writing coments in English whereas I'm french😵😵😷???
-    }
-
-    public void Freaze(bool frozen)
-    {
-        if (frozen)
-            currentState = Frozen;
-        else
-            currentState = FreeMoving;
     }
 
     private void OnCollisionEnter(Collision collision)
