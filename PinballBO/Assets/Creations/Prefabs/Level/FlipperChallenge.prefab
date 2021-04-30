@@ -364,7 +364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   point: 10
-  ratePoints: 0.2
+  ratePoints: 150
 --- !u!1 &7186780623276333531
 GameObject:
   m_ObjectHideFlags: 0
@@ -1105,7 +1105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   point: 10
-  ratePoints: 0.2
+  ratePoints: 100
 --- !u!1 &9133255033525774206
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,8 @@ using Cinemachine;
 public class Rail : MonoBehaviour
 {
     [SerializeField] private int point;
-    [SerializeField] private float ratePoints;
+    public float ratePoints;
+    private float distanceOnRail = 0;
 
     private FlipperChallenge challenge;
     CinemachineVirtualCamera camera;
@@ -25,14 +26,7 @@ public class Rail : MonoBehaviour
         GameObject cam = inRail ? camera.gameObject : CameraManager.Instance.mainCam.gameObject;
         CameraManager.Instance.SetCameraActive(cam);
         bill.EnterRail(inRail);
-
-        if (challenge == null) return;
-        if (inRail)
-            StartCoroutine(BillOnRail());
-        else
-        {
-            StopAllCoroutines(); // Faudrait ne pas arrêter toutes les coroutine plus tard
-        }
+        distanceOnRail = 0;
 
         // PostProcessing - effet acceleration
 
@@ -44,11 +38,13 @@ public class Rail : MonoBehaviour
     }
 
 
-    IEnumerator BillOnRail()
+    public void BillOnRail(float speed)
     {
-        while (true)
+        if (challenge == null) return;
+        distanceOnRail += speed;
+        if (distanceOnRail >= ratePoints)
         {
-            yield return new WaitForSeconds(ratePoints);
+            distanceOnRail -= ratePoints;
             challenge.ChangeScore(point);
         }
     }
