@@ -37,6 +37,7 @@ public class Door : MonoBehaviour
 
 
     bool Flag = false;
+    bool open = false;
 
     Vector3 pos;
     void Start()
@@ -54,7 +55,8 @@ public class Door : MonoBehaviour
 
     void Update()
     {
-        if (testStates())
+
+        if (testStates() && !open)
         {
             if (!bossDoor)
             StartCoroutine(Open());
@@ -126,6 +128,7 @@ public class Door : MonoBehaviour
         }
         yield return new WaitForSeconds(2);
         this.transform.localPosition = Vector3.MoveTowards(this.transform.localPosition, pos, 2f);
+        open = true;
         yield return new WaitForSeconds(2);
         Flag = true;
         if (cinematic)
@@ -147,8 +150,12 @@ public class Door : MonoBehaviour
         yield return new WaitForSeconds(2);
         //turn on the lights of a "lock"
         if (challengesDone == challengesCount)
+        {
             this.transform.localPosition = Vector3.MoveTowards(this.transform.localPosition, pos, 0.05f);
+            open = true;
+        }
         yield return new WaitForSeconds(2);
+
         if (cinematic)
         {
             CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainCam.gameObject);
