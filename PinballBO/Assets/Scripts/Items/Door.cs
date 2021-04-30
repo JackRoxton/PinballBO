@@ -35,8 +35,6 @@ public class Door : MonoBehaviour
     //cocher use targets **ou** use spinners pour des portes classiques, uniquement bossDoor pour la porte du boss.
     //si bossDoor est coché, il faut aussi remplir la liste de spinners.
 
-
-    bool Flag = false;
     bool open = false;
 
     Vector3 pos;
@@ -62,7 +60,6 @@ public class Door : MonoBehaviour
             StartCoroutine(Open());
             if (bossDoor)
             StartCoroutine(OpenBoss());
-            
         }
     }
 
@@ -78,11 +75,6 @@ public class Door : MonoBehaviour
                     return false;
                 }
             }
-
-            if (!Flag)
-            {
-                return true;
-            }
         }
         else if (useSpinners)
         {
@@ -92,11 +84,6 @@ public class Door : MonoBehaviour
                 {
                     return false;
                 }
-            }
-
-            if (!Flag)
-            {
-                return true;
             }
         }
         else if(bossDoor)
@@ -130,7 +117,6 @@ public class Door : MonoBehaviour
         this.transform.localPosition = Vector3.MoveTowards(this.transform.localPosition, pos, 2f);
         open = true;
         yield return new WaitForSeconds(2);
-        Flag = true;
         if (cinematic)
         {
             CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainCam.gameObject);
