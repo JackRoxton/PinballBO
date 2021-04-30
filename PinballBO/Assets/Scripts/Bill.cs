@@ -153,6 +153,14 @@ public class Bill : MonoBehaviour
             rail.BillInRail(this, true);
         }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        Rail rail = other.GetComponent<Rail>();
+        if (rail != null)
+            rail.BillOnRail(rb.velocity.magnitude);
+    }
+
     private void OnTriggerExit(Collider other)
     {
         Rail rail = other.GetComponent<Rail>();
@@ -161,6 +169,8 @@ public class Bill : MonoBehaviour
             rail.BillInRail(this, false);
         }
     }
+
+    
 
     IEnumerator Charge() //Bill charges, losing his current velocity and than releases his inner strength to go all out on speed. Can't be used motionless.
     {
