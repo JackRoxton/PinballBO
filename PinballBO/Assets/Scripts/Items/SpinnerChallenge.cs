@@ -7,7 +7,7 @@ public class SpinnerChallenge : MonoBehaviour
     //l'apparence de ce spinner pourra être changé
 
     [SerializeField]
-    private bool stateSpun = false, Flag = false;
+    private bool stateSpun = false;
 
     private void OnCollisionEnter(Collision collision)
     {
