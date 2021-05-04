@@ -7,16 +7,31 @@ using UnityEngine.UI;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
-    [SerializeField] private AudioClip music;
+
+    [SerializeField]
+    private AudioSource source;
+    [SerializeField]
+    private AudioSource musicSource;
+    [SerializeField]
+    private AudioSource ambianceSource;
+
+    private List<AudioSource> effectSources = new List<AudioSource>();
 
     public float musicVolume = 1;
     public float effectVolume = 1;
-    private AudioSource musicSource;
-    private AudioSource ambianceSource;
-    private List<AudioSource> effectSources = new List<AudioSource>();
-
     public Slider musicSlider;
     public Slider effectSlider;
+
+    public string[] Sounds = new string[]
+{
+        "Coin",
+        "Bump",
+};
+
+    [SerializeField]
+    private List<AudioClip> audioArray;
+
+    [SerializeField] private AudioClip music;
 
     void Start()
     {
@@ -26,16 +41,14 @@ public class AudioManager : MonoBehaviour
         if (Instance != null) Destroy(gameObject);
         Instance = this;
     
-        ambianceSource = gameObject.GetComponent<AudioSource>();
         ambianceSource.volume = 10;
         ambianceSource.time = 78;
         ambianceSource.loop = true;
-        musicSource = gameObject.AddComponent<AudioSource>();
         musicSource.loop = true;
         musicSource.volume = musicVolume;
 
         if (music != null)
-            PlayClip(musicSource, music);
+            PlayMusic(musicSource, music);
 
         Bumper[] bumpers = FindObjectsOfType<Bumper>();
         foreach (Bumper bumper in bumpers)
@@ -73,10 +86,17 @@ public class AudioManager : MonoBehaviour
 
 
     #region Clip
-    public void PlayClip(AudioSource source, AudioClip clip)
+
+    public AudioClip GetAudioCLip(string name)
     {
-        source.clip = clip;
-        source.Play();
+        for (int i = 0; i < Sounds.Length; i++)
+        {
+            if (Sounds[i] == name)
+            {
+                return audioArray[i];
+            }
+        }
+        return null;
     }
 
     public void StopClip(AudioSource source)
@@ -88,5 +108,21 @@ public class AudioManager : MonoBehaviour
     {
         source.Pause();
     }
+    public void PlayMusic(AudioSource source, AudioClip clip)
+    {
+        source.clip = clip;
+        source.Play();
+    }
+    public void Play(string name)
+    {
+        for (int i = 0; i < Sounds.Length; i++)
+        {
+            if (Sounds[i] == name)
+            {
+                source.PlayOneShot(audioArray[i], effectVolume);
+            }
+        }
+    }
+
     #endregion
 }

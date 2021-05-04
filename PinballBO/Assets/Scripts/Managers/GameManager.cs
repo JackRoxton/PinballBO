@@ -121,6 +121,7 @@ public class GameManager : MonoBehaviour
     public void AddCoin()
     {
         coins++;
+
     }
 
     public void StoreMusicVolume(float volume)

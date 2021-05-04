@@ -21,6 +21,7 @@ public class Coins : MonoBehaviour
         {
             GameManager.Instance.AddCoin();
             UIManager.Instance.AddCoin();
+            AudioManager.Instance.Play("Coin");
             //Mettre un son pour les pieces
             Instantiate(deathParticle, transform.position, Quaternion.identity);
             Destroy(this.gameObject);

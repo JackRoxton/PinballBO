@@ -14,7 +14,7 @@ public class BumpObject : MonoBehaviour
     [SerializeField] protected MeshRenderer[] meshRenderers;
 
     protected Animator animator;
-    protected AudioSource source;
+    private AudioSource source;
 
     private void Awake()
     {
@@ -36,8 +36,7 @@ public class BumpObject : MonoBehaviour
         float force = this.force + billBody.velocity.magnitude * factor;
         billBody.AddForce(direction * force);
 
-        if (clip != null)
-            AudioManager.Instance.PlayClip(source, clip);
+        source.PlayOneShot(AudioManager.Instance.GetAudioCLip("Bump"));
 
         StartCoroutine(PostProcessBump());
 
@@ -55,8 +54,7 @@ public class BumpObject : MonoBehaviour
         float force = this.force + billBody.velocity.magnitude * factor;
         billBody.AddForce(direction * force);
 
-        if (clip != null)
-            AudioManager.Instance.PlayClip(source, clip);
+        source.PlayOneShot(AudioManager.Instance.GetAudioCLip("Bump"));
 
         StartCoroutine(PostProcessBump());
 
