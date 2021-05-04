@@ -9,20 +9,45 @@ public class Slingshot : BumpObject
         Bill bill = other.GetComponent<Bill>();
         if (bill != null)
         {
-            //BumpAway(bill); return;
-            float angle = Vector3.SignedAngle(transform.forward, bill.transform.position - transform.position, transform.up) * transform.localScale.x;
-
-            //Shoot Right
-            if (angle > -38 && angle < 33)
-                Bump(bill, Quaternion.Euler(0, 13, 0) * transform.forward, "ShootRight");
-
-            // Shoot Left
-            else if (angle > 33 && angle <= 163)
-                Bump(bill, Quaternion.Euler(0, 90, 0) * transform.forward, "ShootLeft");
-
-            // Shoot Forward
+            if (transform.localScale.x > 0)
+                NormalShoot(bill);
             else
-                Bump(bill, Quaternion.Euler(0, -121, 0) * transform.forward, "ShootForward");
+                InverseShoot(bill);
         }
+    }
+
+    private void NormalShoot(Bill bill) // if scale = 1
+    {
+        float angle = Vector3.SignedAngle(transform.forward, bill.transform.position - transform.position, transform.up) * transform.localScale.x;
+
+        //Shoot Right
+        if (angle > -38 && angle < 33)
+            Bump(bill, Quaternion.Euler(0, 15, 0) * transform.forward, "ShootRight");
+
+        // Shoot Left
+        else if (angle > 33 && angle <= 163)
+            Bump(bill, Quaternion.Euler(0, 90, 0) * transform.forward, "ShootLeft");
+
+        // Shoot Forward
+        else
+            Bump(bill, Quaternion.Euler(0, -121, 0) * transform.forward, "ShootForward");
+    }
+
+    private void InverseShoot(Bill bill) // if scale = -1
+    {
+        float angle = -Vector3.SignedAngle(transform.forward, bill.transform.position - transform.position, transform.up) * transform.localScale.x;
+        Debug.Log(angle);
+        //Shoot Right
+        if (angle > -52 && angle <= 46)
+            Bump(bill, Quaternion.Euler(0, -15, 0) * transform.forward, "ShootRight");
+
+        // Shoot Left
+        else if (angle < -52 && angle >= -167)
+            Bump(bill, Quaternion.Euler(0, -90, 0) * transform.forward, "ShootLeft");
+
+        // Shoot Forward
+        else
+            Bump(bill, Quaternion.Euler(0, 121, 0) * transform.forward, "ShootForward");
+
     }
 }

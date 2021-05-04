@@ -75,6 +75,7 @@ public class Door : MonoBehaviour
                     return false;
                 }
             }
+            return true;
         }
         else if (useSpinners)
         {
@@ -85,6 +86,7 @@ public class Door : MonoBehaviour
                     return false;
                 }
             }
+            return true;
         }
         else if(bossDoor)
         {
