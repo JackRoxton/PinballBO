@@ -18,7 +18,7 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 12
+    value: 8
   threshold:
     overrideState: 1
     value: 1
@@ -30,7 +30,7 @@ MonoBehaviour:
     value: 65472
   diffusion:
     overrideState: 1
-    value: 4.83
+    value: 5
   anamorphicRatio:
     overrideState: 1
     value: 0
@@ -41,7 +41,7 @@ MonoBehaviour:
     overrideState: 1
     value: 0
   dirtTexture:
-    overrideState: 1
+    overrideState: 0
     value: {fileID: 2800000, guid: 89e5f79c28b4aa546999e8ac3f7bb74c, type: 3}
     defaultState: 1
   dirtIntensity:
@@ -108,15 +108,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94fcd11afffcb142908bfcb1e261fba, type: 3}
   m_Name: MotionBlur
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
   shutterAngle:
-    overrideState: 0
+    overrideState: 1
     value: 270
   sampleCount:
-    overrideState: 0
+    overrideState: 1
     value: 10
 --- !u!114 &11400000
 MonoBehaviour:

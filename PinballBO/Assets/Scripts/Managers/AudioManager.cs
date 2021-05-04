@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
@@ -8,12 +9,20 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
     [SerializeField] private AudioClip music;
 
+    public float musicVolume = 1;
+    public float effectVolume = 1;
     private AudioSource musicSource;
     private AudioSource ambianceSource;
     private List<AudioSource> effectSources = new List<AudioSource>();
 
-    private void Awake()
+    public Slider musicSlider;
+    public Slider effectSlider;
+
+    void Start()
     {
+        effectVolume = GameManager.Instance.effectVolume;
+        musicVolume = GameManager.Instance.musicVolume;
+
         if (Instance != null) Destroy(gameObject);
         Instance = this;
     
@@ -23,6 +32,7 @@ public class AudioManager : MonoBehaviour
         ambianceSource.loop = true;
         musicSource = gameObject.AddComponent<AudioSource>();
         musicSource.loop = true;
+        musicSource.volume = musicVolume;
 
         if (music != null)
             PlayClip(musicSource, music);
@@ -34,19 +44,26 @@ public class AudioManager : MonoBehaviour
             effectSources.Add(source);
 
             source.playOnAwake = false;
-            source.volume = 1;
+            source.volume = effectVolume;
             source.pitch = Random.Range(.7f, 1.2f);
         }
+
+        //update the sliders for each scene
+        musicSlider.value = musicVolume;
+        effectSlider.value = effectVolume;
+
     }
 
 
     #region ChangeVolume
     public void ChangeMusicVolume(float volume)
     {
+        GameManager.Instance.StoreMusicVolume(volume);
         musicSource.volume = volume;
     }
     public void ChangeEffectVolume(float volume)
     {
+        GameManager.Instance.StoreEffectVolume(volume);
         foreach (AudioSource source in effectSources)
         {
             source.volume = volume;

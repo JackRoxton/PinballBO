@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
+
     public static GameManager Instance
     {
         get
@@ -19,13 +20,29 @@ public class GameManager : MonoBehaviour
 
     public int currentLevel;
     public int coins = 0;
-
-    private void Awake()
+    [System.NonSerialized] public float musicVolume = 1;
+    [System.NonSerialized] public float effectVolume = 1;
+    void Awake()
     {
-        instance = this;
+        DontDestroyOnLoad(this);
+
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void Start()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        currentLevel = SceneManager.GetActiveScene().buildIndex;
+    }
+
+    private void OnSceneLoaded(Scene aScene, LoadSceneMode aMode)
     {
         currentLevel = SceneManager.GetActiveScene().buildIndex;
     }
@@ -106,4 +123,12 @@ public class GameManager : MonoBehaviour
         coins++;
     }
 
+    public void StoreMusicVolume(float volume)
+    {
+        musicVolume = volume;
+    }
+    public void StoreEffectVolume(float volume)
+    {
+        effectVolume = volume;
+    }
 }
