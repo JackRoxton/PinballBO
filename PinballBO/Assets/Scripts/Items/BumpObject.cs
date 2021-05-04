@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class BumpObject : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class BumpObject : MonoBehaviour
     [SerializeField] protected int force;
     [SerializeField] protected int factor;
     [SerializeField] protected int point;
+    [SerializeField] protected AudioClip clip;
 
     [Header("Materials")]
     [SerializeField] protected MeshRenderer[] meshRenderers;
@@ -34,6 +36,11 @@ public class BumpObject : MonoBehaviour
         float force = this.force + billBody.velocity.magnitude * factor;
         billBody.AddForce(direction * force);
 
+        if (clip != null)
+            AudioManager.Instance.PlayClip(source, clip);
+
+        StartCoroutine(PostProcessBump());
+
         if (challenge != null)
             AddPoints();
     }
@@ -47,6 +54,11 @@ public class BumpObject : MonoBehaviour
         //billBody.velocity = Vector3.zero;
         float force = this.force + billBody.velocity.magnitude * factor;
         billBody.AddForce(direction * force);
+
+        if (clip != null)
+            AudioManager.Instance.PlayClip(source, clip);
+
+        StartCoroutine(PostProcessBump());
 
         if (challenge != null)
             AddPoints();
@@ -77,9 +89,19 @@ public class BumpObject : MonoBehaviour
 
     }
 
+
+
     public void SetChallenge(FlipperChallenge challenge)
     {
         this.challenge = challenge;
+    }
+
+
+    protected virtual IEnumerator PostProcessBump()
+    {
+        Debug.Log("Coroutine");
+        yield return PostProcessingManager.Instance.BloomIntensity(20, 1);
+        yield return PostProcessingManager.Instance.BloomIntensity(5, 1);
     }
 
 }
