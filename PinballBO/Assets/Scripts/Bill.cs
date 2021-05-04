@@ -83,8 +83,7 @@ public class Bill : MonoBehaviour
         }
         else // Dévier trajectoire à vitesse élevée sans accélerer davantage
         {
-            float trajectoire = Vector3.Angle(rb.velocity, Camera.main.transform.eulerAngles) <= 90 && Vector3.Angle(rb.velocity, Camera.main.transform.eulerAngles) >= 90 ?
-                Input.GetAxis("Horizontal") : -Input.GetAxis("Horizontal");
+            float trajectoire = Input.GetAxis("Horizontal");
             rb.velocity = Quaternion.Euler(0, trajectoire * highSpeedControl, 0) * rb.velocity;
         }
 
@@ -134,8 +133,6 @@ public class Bill : MonoBehaviour
         }
         else
             particleFlag--;
-
-        // Why am I writing coments in English whereas I'm french😵😵😷???
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -159,7 +156,7 @@ public class Bill : MonoBehaviour
         Rail rail = other.GetComponent<Rail>();
         if (rail != null)
             rail.BillOnRail(rb.velocity.magnitude);
-    }
+    } 
 
     private void OnTriggerExit(Collider other)
     {
