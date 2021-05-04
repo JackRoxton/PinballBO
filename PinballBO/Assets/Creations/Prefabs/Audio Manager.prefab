@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6371dd3d372da54eb72b5e62217f4b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 6765268611706766070}
+  effectSource: {fileID: 6765268611706766070}
   musicSource: {fileID: 560905895498932464}
   ambianceSource: {fileID: 5589468031038695204}
   musicVolume: 1

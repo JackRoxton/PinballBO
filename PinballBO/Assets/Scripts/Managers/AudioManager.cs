@@ -9,7 +9,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
 
     [SerializeField]
-    private AudioSource source;
+    private AudioSource effectSource;
     [SerializeField]
     private AudioSource musicSource;
     [SerializeField]
@@ -46,6 +46,7 @@ public class AudioManager : MonoBehaviour
         ambianceSource.loop = true;
         musicSource.loop = true;
         musicSource.volume = musicVolume;
+        effectSource.volume = effectVolume;
 
         if (music != null)
             PlayMusic(musicSource, music);
@@ -81,6 +82,7 @@ public class AudioManager : MonoBehaviour
         {
             source.volume = volume;
         }
+        effectSource.volume = volume;
     }
     #endregion
 
@@ -119,7 +121,7 @@ public class AudioManager : MonoBehaviour
         {
             if (Sounds[i] == name)
             {
-                source.PlayOneShot(audioArray[i], effectVolume);
+                effectSource.PlayOneShot(audioArray[i], effectVolume);
             }
         }
     }
