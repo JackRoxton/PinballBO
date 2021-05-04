@@ -99,7 +99,6 @@ public class BumpObject : MonoBehaviour
 
     protected virtual IEnumerator PostProcessBump()
     {
-        Debug.Log("Coroutine");
         yield return PostProcessingManager.Instance.BloomIntensity(20, 1);
         yield return PostProcessingManager.Instance.BloomIntensity(5, 1);
     }
