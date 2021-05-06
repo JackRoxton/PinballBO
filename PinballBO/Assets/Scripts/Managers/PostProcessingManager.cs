@@ -6,8 +6,7 @@ using UnityEngine.Rendering.PostProcessing;
 public class PostProcessingManager : MonoBehaviour
 {
     public static PostProcessingManager Instance;
-
-    PostProcessVolume m_Volume;
+    PostProcessVolume volume;
     Bloom bloom;
 
     void Awake()
@@ -18,7 +17,7 @@ public class PostProcessingManager : MonoBehaviour
         bloom.enabled.Override(true);
         bloom.intensity.Override(5);
 
-        m_Volume = PostProcessManager.instance.QuickVolume(gameObject.layer, 100f, bloom);
+        volume = PostProcessManager.instance.QuickVolume(gameObject.layer, 1000f, bloom);
 
     }
 
@@ -30,6 +29,7 @@ public class PostProcessingManager : MonoBehaviour
             {
                 bloom.intensity.Override(bloom.intensity.value + amount);
                 yield return new WaitForEndOfFrame();
+                Debug.Log(bloom.intensity.value);
             }
         }
         else
@@ -38,6 +38,7 @@ public class PostProcessingManager : MonoBehaviour
             {
                 bloom.intensity.Override(bloom.intensity.value - amount);
                 yield return new WaitForEndOfFrame();
+                Debug.Log(bloom.intensity.value);
             }
         }
     }

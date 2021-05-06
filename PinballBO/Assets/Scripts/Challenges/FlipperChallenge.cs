@@ -13,6 +13,7 @@ public class FlipperChallenge : MonoBehaviour
     {
         Instance = this;
 
+        #region Initialization
         BumpObject[] bumpers = GetComponentsInChildren<BumpObject>();
         foreach (BumpObject bump in bumpers)
             bump.SetChallenge(this);
@@ -24,6 +25,7 @@ public class FlipperChallenge : MonoBehaviour
         Rail[] rails = GetComponentsInChildren<Rail>();
         foreach (Rail rail in rails)
             rail.SetChallenge(this);
+        #endregion
 
         Begin();
     }
@@ -35,12 +37,20 @@ public class FlipperChallenge : MonoBehaviour
         goal = 1000;
     }
 
-    public void ChangeScore(int amount)
+
+    public void ChangeScore(Rail rail, int amount)
+    {
+        ChangeScore(amount);
+        // UIManager.Instance.Score()
+    }
+
+    public void ChangeScore(int amount, BumpObject bumper = null)
     {
         // if GameManager.GameState == Victory return;
         score += (int)(amount * multiplier);
         Debug.Log(score + " / " + goal);
         // Feedback Sonore
+
 
         if (score >= goal)
             Victory();

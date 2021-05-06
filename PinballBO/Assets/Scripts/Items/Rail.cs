@@ -45,7 +45,8 @@ public class Rail : MonoBehaviour
         if (distanceOnRail >= ratePoints)
         {
             distanceOnRail -= ratePoints;
-            challenge.ChangeScore(point);
+            challenge.ChangeScore(null, point);
         }
     }
+
 }

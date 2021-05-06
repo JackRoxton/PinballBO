@@ -24,7 +24,6 @@ public class UIManager : MonoBehaviour
     }
 
     int coins = 0;
-
     [Header("Pause UI")]
     public GameObject pauseScreen;
     public Text pauseCurrentTimeText;
@@ -44,6 +43,13 @@ public class UIManager : MonoBehaviour
     [Header("Misc")]
     public Timer timer;
     public Text coinsCount;
+
+    [Header("Flipper Challenge")]
+    public GameObject FlipperChallengeCanvas;
+    public GameObject scorePrefab;
+
+    
+
 
     private void Update()
     {
@@ -109,6 +115,8 @@ public class UIManager : MonoBehaviour
         defeatBestTimeText.text = "Best Time = " + System.Math.Round(timer.bestTime, 2).ToString();
     }
 
+
+
     public void AddCoin()
     { 
         coins = GameManager.Instance.coins;
@@ -125,4 +133,6 @@ public class UIManager : MonoBehaviour
             coinsCount.text = ("100/100");
         }
     }
+
+
 }
