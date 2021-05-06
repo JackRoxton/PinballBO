@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Booster : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField,Range(0,100)]
     private float boosterForce;
 
     private void OnTriggerStay(Collider other)
