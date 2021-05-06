@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 324e03200d339a745813ccfb5b8ec707
+guid: ef550e688b5edbd4295094d0e1213b28
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Spinner
+    second: {fileID: 2100000, guid: da82f7f7265c612449925cdd2ee8d816, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
