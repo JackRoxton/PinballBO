@@ -41,7 +41,6 @@ public class FlipperChallenge : MonoBehaviour
     public void ChangeScore(Rail rail, int amount)
     {
         ChangeScore(amount);
-        // UIManager.Instance.Score()
     }
 
     public void ChangeScore(int amount, BumpObject bumper = null)
@@ -51,6 +50,8 @@ public class FlipperChallenge : MonoBehaviour
         Debug.Log(score + " / " + goal);
         // Feedback Sonore
 
+        if (bumper != null)
+            UIManager.Instance.DisplayScore(amount, bumper);
 
         if (score >= goal)
             Victory();

@@ -48,12 +48,12 @@ public class UIManager : MonoBehaviour
     public GameObject FlipperChallengeCanvas;
     public GameObject scorePrefab;
 
-    
+
 
 
     private void Update()
     {
-        if(GameManager.Instance.GameState == GameManager.gameState.InGame && Input.GetKey(KeyCode.Escape))
+        if (GameManager.Instance.GameState == GameManager.gameState.InGame && Input.GetKey(KeyCode.Escape))
         {
             GameManager.Instance.GameState = GameManager.gameState.Pause;
             pauseBestTimeText.text = "Best Time = " + System.Math.Round(timer.bestTime, 2).ToString();
@@ -118,7 +118,7 @@ public class UIManager : MonoBehaviour
 
 
     public void AddCoin()
-    { 
+    {
         coins = GameManager.Instance.coins;
         if (coins < 10)
         {
@@ -134,5 +134,13 @@ public class UIManager : MonoBehaviour
         }
     }
 
+
+    // Score FlipperChallenge
+    public void DisplayScore(int amount, BumpObject bumper)
+    {
+        GameObject go = Instantiate(scorePrefab, FlipperChallengeCanvas.transform);
+        //Vector3 pos = Camera.main.WorldToScreenPoint(bumper.transform.position);
+        Destroy(go, .7f);
+    }
 
 }
