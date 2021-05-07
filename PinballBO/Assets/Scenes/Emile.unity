@@ -642,7 +642,7 @@ PrefabInstance:
     - target: {fileID: 1686238981780416200, guid: 79bb5e4e4fb683440b9ff0f03029234d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1686238981780416203, guid: 79bb5e4e4fb683440b9ff0f03029234d,
         type: 3}
@@ -958,7 +958,7 @@ PrefabInstance:
     - target: {fileID: 1915026051115963421, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.11382699
+      value: -0.11382698
       objectReference: {fileID: 0}
     - target: {fileID: 1915026051115963421, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
@@ -968,7 +968,7 @@ PrefabInstance:
     - target: {fileID: 1915026051115963421, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.11187637
+      value: 0.11187639
       objectReference: {fileID: 0}
     - target: {fileID: 1915026051115963421, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
@@ -1109,7 +1109,7 @@ PrefabInstance:
     - target: {fileID: 3759452541343834950, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.113826856
+      value: -0.11382686
       objectReference: {fileID: 0}
     - target: {fileID: 3759452541343834950, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
@@ -1119,7 +1119,7 @@ PrefabInstance:
     - target: {fileID: 3759452541343834950, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.11187674
+      value: 0.11187672
       objectReference: {fileID: 0}
     - target: {fileID: 3759452541343834950, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
@@ -1159,37 +1159,37 @@ PrefabInstance:
     - target: {fileID: 4902816964285812514, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.22662637
+      value: 0.31789505
       objectReference: {fileID: 0}
     - target: {fileID: 4902816964285812514, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.24423884
+      value: -0.09970291
       objectReference: {fileID: 0}
     - target: {fileID: 4902816964285812514, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.7888018
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4902816964285812514, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.221037
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4902816964285812514, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.4133186
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4902816964285812514, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.5218364
+      value: 0.06372021
       objectReference: {fileID: 0}
     - target: {fileID: 4902816964285812514, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.78528637
+      value: 0.9407135
       objectReference: {fileID: 0}
     - target: {fileID: 5326385971716212461, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
@@ -2014,7 +2014,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1406115891}
   m_Father: {fileID: 914907387}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5949,6 +5950,84 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1367064705}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1406115890
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1406115891}
+  - component: {fileID: 1406115893}
+  - component: {fileID: 1406115892}
+  m_Layer: 5
+  m_Name: FlipperChallenge Score
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1406115891
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406115890}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 650844262}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -312.47827, y: -51.23535}
+  m_SizeDelta: {x: 624.9562, y: 256.1761}
+  m_Pivot: {x: 0.5, y: 0.8}
+--- !u!114 &1406115892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406115890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.703192, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 88
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 88
+    m_Alignment: 2
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 0 / 1000
+--- !u!222 &1406115893
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406115890}
+  m_CullTransparentMesh: 0
 --- !u!1001 &1419714169
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6865,6 +6944,7 @@ MonoBehaviour:
   timer: {fileID: 245732517}
   coinsCount: {fileID: 229402112}
   FlipperChallengeCanvas: {fileID: 650844261}
+  FlipperChallengeScore: {fileID: 1406115892}
   scorePrefab: {fileID: 7446198942007744645, guid: c7d5ea4e4f5307045ab6a7cb4f9c7caa,
     type: 3}
 --- !u!114 &1551827281

@@ -5,11 +5,11 @@ using UnityEngine;
 public class FlipperChallenge : MonoBehaviour
 {
     public static FlipperChallenge Instance;
-    private int score = 0;
-    private int goal;
+    public int score { get; private set; }
+    public int goal { get; private set; }
     private float multiplier = 1;
 
-    private void Awake()
+    private void Start()
     {
         Instance = this;
 
@@ -35,6 +35,8 @@ public class FlipperChallenge : MonoBehaviour
         score = 0;
         multiplier = 1;
         goal = 1000;
+
+        UIManager.Instance.InitializeFlipperChallengeUI(goal);
     }
 
 

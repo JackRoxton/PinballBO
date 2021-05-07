@@ -267,7 +267,7 @@ Transform:
   m_GameObject: {fileID: 3354603010506387626}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.773045, y: 0.5, z: 9}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 2678181888912052222}
   - {fileID: 2566162423767461897}
@@ -445,7 +445,6 @@ MonoBehaviour:
   force: 800
   factor: 40
   point: 50
-  clip: {fileID: 8300000, guid: e9925bf90899d34408a079760d61eac1, type: 3}
   meshRenderers: []
   bumpParticle: {fileID: 4166583257526116529, guid: 3b5fd193cb137474ea197abeba814c92,
     type: 3}

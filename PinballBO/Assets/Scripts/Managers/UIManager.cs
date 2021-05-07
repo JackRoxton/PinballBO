@@ -46,6 +46,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Flipper Challenge")]
     public GameObject FlipperChallengeCanvas;
+    public Text FlipperChallengeScore;
     public GameObject scorePrefab;
 
 
@@ -136,11 +137,58 @@ public class UIManager : MonoBehaviour
 
 
     // Score FlipperChallenge
+    public void InitializeFlipperChallengeUI(float goal)
+    {
+        FlipperChallengeCanvas.SetActive(true);
+        FlipperChallengeScore.text = "0 / " + goal.ToString();
+    }
+
     public void DisplayScore(int amount, BumpObject bumper)
     {
         GameObject go = Instantiate(scorePrefab, FlipperChallengeCanvas.transform);
-        //Vector3 pos = Camera.main.WorldToScreenPoint(bumper.transform.position);
-        Destroy(go, .7f);
+        StartCoroutine(AddScoreUI(go.GetComponent<RectTransform>(), bumper));
     }
 
+    IEnumerator AddScoreUI(RectTransform rect, BumpObject target)
+    {
+        float offset = 0;
+
+        Vector3 pos = Camera.main.WorldToScreenPoint(target.transform.position) + Vector3.up * offset;
+        for (float t = 0; t < .7f; t += Time.deltaTime)
+        {
+            Vector3 newPos = pos + Vector3.up * offset;
+            rect.position = newPos;
+            offset += 100 * Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        for (float t = 0; t < .3f; t += Time.deltaTime)
+        {
+            Vector3 newPos = Vector3.Lerp(rect.position, FlipperChallengeScore.rectTransform.position, t * 100 * Time.deltaTime);
+            rect.position = newPos;
+            yield return new WaitForEndOfFrame();
+        }
+        FlipperChallengeScore.text = FlipperChallenge.Instance.score.ToString() + " / " + FlipperChallenge.Instance.goal.ToString();
+        Destroy(rect.gameObject);
+
+    }
+
+
+    //class ScoreUI : MonoBehaviour
+    //{
+    //    GameObject go;
+    //    int score;
+    //    BumpObject target;
+    //    float offset;
+    //    private void Awake()
+    //    {
+    //        offset = 0;
+    //        Destroy(go, .7f);
+    //    }
+
+    //    private void Update()
+    //    {
+    //        Vector3 pos = Camera.main.WorldToScreenPoint(target.transform.position) + Vector3.up * offset;
+    //        offset += 10 * Time.deltaTime;
+    //    }
+    //}
 }
