@@ -8,6 +8,7 @@ public class FlipperChallenge : MonoBehaviour
     public int score { get; private set; }
     public int goal { get; private set; }
     private float multiplier = 1;
+    private bool playing = false;
 
     private void Start()
     {
@@ -32,15 +33,22 @@ public class FlipperChallenge : MonoBehaviour
 
     public void Begin()
     {
+        playing = true;
+
         score = 0;
         multiplier = 1;
-        goal = 1000;
+        goal = 1000000;
 
         UIManager.Instance.InitializeFlipperChallengeUI(goal);
     }
 
+    public void StopChallenge()
+    {
+        playing = false;
+    } 
 
-    public void ChangeScore(Rail rail, int amount)
+
+    public void ChangeScore(int amount, Rail rail)
     {
         ChangeScore(amount);
     }
@@ -49,11 +57,10 @@ public class FlipperChallenge : MonoBehaviour
     {
         // if GameManager.GameState == Victory return;
         score += (int)(amount * multiplier);
-        Debug.Log(score + " / " + goal);
         // Feedback Sonore
 
         if (bumper != null)
-            UIManager.Instance.DisplayScore(amount, bumper);
+            UIManager.Instance.DisplayScore((int)(amount * multiplier), bumper);
 
         if (score >= goal)
             Victory();

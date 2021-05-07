@@ -48,7 +48,7 @@ public class UIManager : MonoBehaviour
     public GameObject FlipperChallengeCanvas;
     public Text FlipperChallengeScore;
     public GameObject scorePrefab;
-
+    public AnimationCurve curve;
 
 
 
@@ -140,16 +140,18 @@ public class UIManager : MonoBehaviour
     public void InitializeFlipperChallengeUI(float goal)
     {
         FlipperChallengeCanvas.SetActive(true);
-        FlipperChallengeScore.text = "0 / " + goal.ToString();
+        FlipperChallengeScore.GetComponent<Text>().text = "0"; // Affiche le score
+        FlipperChallengeScore.transform.parent.GetComponent<Text>().text = "      / " + goal.ToString(); // Affiche le score
     }
 
     public void DisplayScore(int amount, BumpObject bumper)
     {
         GameObject go = Instantiate(scorePrefab, FlipperChallengeCanvas.transform);
-        StartCoroutine(AddScoreUI(go.GetComponent<RectTransform>(), bumper));
+        go.GetComponent<Text>().text = amount.ToString();
+        StartCoroutine(AddScoreUI(go.GetComponent<RectTransform>(), bumper, amount));
     }
 
-    IEnumerator AddScoreUI(RectTransform rect, BumpObject target)
+    IEnumerator AddScoreUI(RectTransform rect, BumpObject target, int amount)
     {
         float offset = 0;
 
@@ -161,14 +163,22 @@ public class UIManager : MonoBehaviour
             offset += 100 * Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        for (float t = 0; t < .3f; t += Time.deltaTime)
+        for (float t = 0; t < .25f; t += Time.deltaTime)
         {
             Vector3 newPos = Vector3.Lerp(rect.position, FlipperChallengeScore.rectTransform.position, t * 100 * Time.deltaTime);
             rect.position = newPos;
             yield return new WaitForEndOfFrame();
         }
-        FlipperChallengeScore.text = FlipperChallenge.Instance.score.ToString() + " / " + FlipperChallenge.Instance.goal.ToString();
+        FlipperChallengeScore.text = (FlipperChallenge.Instance.score + amount).ToString();
         Destroy(rect.gameObject);
+
+        for (float t = 0; t < 1.1f; t += Time.deltaTime)
+        {
+            FlipperChallengeScore.fontSize = (int)curve.Evaluate(t);
+            yield return new WaitForEndOfFrame();
+        }
+
+
 
     }
 
