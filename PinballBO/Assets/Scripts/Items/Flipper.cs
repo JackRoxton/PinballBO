@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Flipper : BumpObject
 {
-    [SerializeField] [Range(.01f, .5f)] float speed;
+    [SerializeField] float speed;
     [SerializeField] float angle;
     [SerializeField] bool random;
 
@@ -57,7 +57,7 @@ public class Flipper : BumpObject
 
         while (Quaternion.Angle(transform.rotation, target) > 3) // Rotate the flipper
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, target, speed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, target, speed * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
         IsMoving = false;
@@ -67,7 +67,7 @@ public class Flipper : BumpObject
 
         while (Quaternion.Angle(transform.rotation, initial) > 3) // Rotate the flipper to his initial rotation
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, initial, speed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, initial, speed * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
 

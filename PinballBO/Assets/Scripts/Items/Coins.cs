@@ -6,7 +6,7 @@ public class Coins : MonoBehaviour
 {
     public ParticleSystem deathParticle;
 
-    private void Update()
+    private void FixedUpdate()
     {
         transform.Rotate(0, 1f, 0, Space.Self);
         if (gameObject.transform.rotation.y >= 180f)
