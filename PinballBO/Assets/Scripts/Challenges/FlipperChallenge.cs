@@ -48,7 +48,7 @@ public class FlipperChallenge : MonoBehaviour
     } 
 
 
-    public void ChangeScore(int amount, Rail rail)
+    public void ChangeScore(Rail rail, int amount)
     {
         ChangeScore(amount);
     }
