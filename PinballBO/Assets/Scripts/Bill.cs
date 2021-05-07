@@ -177,7 +177,7 @@ public class Bill : MonoBehaviour
             chargeState = true;
             for (int i = 0; i < 120; i++)
             {
-                currentRotation += 25;
+                currentRotation += 1000 * Time.deltaTime;
                 yield return new WaitForEndOfFrame(); //Bill is charging the attack, spinning.
             }
             Vector3 direction = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * Vector3.forward;
