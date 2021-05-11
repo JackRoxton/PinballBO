@@ -1,24 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Launcher : MonoBehaviour
 {
     [SerializeField] private int force;
     Animator animator;
     bool isLaunching = false;
+    [SerializeField] private CinemachineVirtualCamera cameraBeforeShoot;
+    [SerializeField] private CinemachineVirtualCamera cameraAfterShoot;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        cameraBeforeShoot.LookAt = GameObject.Find("Bill").transform;
     }
 
     IEnumerator Launch(Bill bill)
     {
         isLaunching = true;
+        CameraManager.Instance.SetCameraActive(cameraBeforeShoot.gameObject);
+        yield return new WaitForSeconds(2);
         animator.SetTrigger("Launch");
         yield return new WaitForSeconds(1);
         yield return new WaitForSeconds(.2f);
+        if (cameraAfterShoot != null)
+            CameraManager.Instance.SetCameraActive(cameraAfterShoot.gameObject);
+        else
+            CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainCam.gameObject);
         bill.GetComponent<Rigidbody>().velocity = transform.right * force;
         yield return new WaitForSeconds(.5f);
         isLaunching = false;
