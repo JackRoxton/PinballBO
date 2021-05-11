@@ -37,24 +37,29 @@ public class FlipperChallenge : MonoBehaviour
 
         score = 0;
         multiplier = 1;
-        goal = 1000000;
+        goal = 1000;
 
-        UIManager.Instance.InitializeFlipperChallengeUI(goal);
+        GameManager.Instance.SetCurrentChallenge(GameManager.Challenge.Flipper);
     }
 
     public void StopChallenge()
     {
         playing = false;
+        GameManager.Instance.SetCurrentChallenge(GameManager.Challenge.Free);
     } 
 
 
     public void ChangeScore(Rail rail, int amount)
     {
+        if (!playing) return;
+
         ChangeScore(amount);
     }
 
     public void ChangeScore(int amount, BumpObject bumper = null)
     {
+        if (!playing) return;
+
         // if GameManager.GameState == Victory return;
         score += (int)(amount * multiplier);
         // Feedback Sonore
@@ -73,7 +78,7 @@ public class FlipperChallenge : MonoBehaviour
 
     private void Victory()
     {
-        // UIManager.Victory();
-        Debug.Log("Victory");
+        GameManager.Instance.GameState = GameManager.gameState.Win;
+        UIManager.Instance.FlipperChallengeWin();
     }
 }

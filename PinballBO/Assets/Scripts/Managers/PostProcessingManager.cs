@@ -29,7 +29,6 @@ public class PostProcessingManager : MonoBehaviour
             {
                 bloom.intensity.Override(bloom.intensity.value + amount);
                 yield return new WaitForEndOfFrame();
-                Debug.Log(bloom.intensity.value);
             }
         }
         else
@@ -38,7 +37,6 @@ public class PostProcessingManager : MonoBehaviour
             {
                 bloom.intensity.Override(bloom.intensity.value - amount);
                 yield return new WaitForEndOfFrame();
-                Debug.Log(bloom.intensity.value);
             }
         }
     }

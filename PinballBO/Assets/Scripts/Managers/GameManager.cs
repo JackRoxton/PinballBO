@@ -22,6 +22,16 @@ public class GameManager : MonoBehaviour
     public int coins = 0;
     [System.NonSerialized] public float musicVolume = 1;
     [System.NonSerialized] public float effectVolume = 1;
+
+    private Challenge currentChallenge;
+    public enum Challenge
+    {
+        Flipper,
+        Timer,
+        Parkour,
+        Free,
+    }
+
     void Awake()
     {
         DontDestroyOnLoad(this);
@@ -56,6 +66,7 @@ public class GameManager : MonoBehaviour
         Win,
     }
 
+
     #region GameState
 
     private gameState currentState;
@@ -77,21 +88,37 @@ public class GameManager : MonoBehaviour
                     break;
 
                 case gameState.InGame:
-                        Cursor.lockState = CursorLockMode.Locked;
-                        Cursor.visible = false;
-                        Time.timeScale = 1;
-                        break;
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                    Time.timeScale = 1;
+                    break;
 
                 case gameState.Pause:
                     Cursor.lockState = CursorLockMode.Confined;
                     Cursor.visible = true;
                     Time.timeScale = 0;
-                    break; 
+                    break;
 
                 case gameState.Win:
                     Cursor.lockState = CursorLockMode.Confined;
                     Cursor.visible = true;
-                    UIManager.Instance.Win();
+
+                    if (currentChallenge == Challenge.Timer)
+                    {
+                        UIManager.Instance.TimerChallengeWin();
+
+                    }
+                    else if (currentChallenge == Challenge.Flipper)
+                    {
+                        UIManager.Instance.FlipperChallengeWin();
+
+                    }
+                    //else if (currentChallenge == Challenge.Parkour)
+                    //{
+                        //UIManager.Instance.TimerParkourWin();
+                        
+                    //}
+
 
                     if (!PlayerPrefs.HasKey("BestCoinLevel" + currentLevel)) //Checks if there was a previously saved record and if not, sets it to 0
                     {
@@ -105,7 +132,7 @@ public class GameManager : MonoBehaviour
 
                     Time.timeScale = 0;
                     break;
-                    
+
 
                 case gameState.GameOver:
                     //Cursor.lockState = CursorLockMode.Confined;
@@ -118,10 +145,38 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+
+    #region Challenge
+    public Challenge GetCurrentChallenge()
+    {
+        return currentChallenge;
+    }
+    public void SetCurrentChallenge(Challenge challenge)
+    {
+        currentChallenge = challenge;
+
+        switch (currentChallenge)
+        {
+            case Challenge.Flipper:
+                UIManager.Instance.InitializeFlipperChallengeUI(FlipperChallenge.Instance.goal);
+
+                break;
+            case Challenge.Timer:
+                
+                break;
+            case Challenge.Parkour:
+                
+                break;
+        }
+    }
+    #endregion
+
+
     public void AddCoin()
     {
         coins++;
 
+        // Feedback Sonore
     }
 
     public void StoreMusicVolume(float volume)

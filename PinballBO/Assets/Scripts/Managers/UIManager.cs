@@ -18,10 +18,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-        instance = this;
-    }
 
     int coins = 0;
     [Header("Pause UI")]
@@ -35,8 +31,8 @@ public class UIManager : MonoBehaviour
 
     [Header("Win UI")]
     public GameObject winScreen;
-    public Text winBestTimeText;
-    public Text winCurrentTimeText;
+    public Text winBestScoreText;
+    public Text winCurrentScoreText;
     public Text winScoreText;
     public GameObject NewRecord;
 
@@ -48,9 +44,16 @@ public class UIManager : MonoBehaviour
     public GameObject FlipperChallengeCanvas;
     public Text FlipperChallengeScore;
     public GameObject scorePrefab;
-    public AnimationCurve curve;
+    public AnimationCurve scoreScaleAnimationCurve;
+    private int initialScoreScale;
 
 
+    private void Awake()
+    {
+        instance = this;
+
+        initialScoreScale = FlipperChallengeScore.fontSize;
+    }
 
     private void Update()
     {
@@ -76,6 +79,7 @@ public class UIManager : MonoBehaviour
 
             case "Restart":
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                GameManager.Instance.GameState = GameManager.gameState.InGame;
                 break;
 
             case "NextLevel":
@@ -93,13 +97,13 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void Win()
+    public void TimerChallengeWin()
     {
         winScreen.SetActive(true);
         timer.SetBestTime();
 
-        winBestTimeText.text = "Best Time = " + System.Math.Round(timer.bestTime, 2).ToString();
-        winCurrentTimeText.text = "Your Time = " + System.Math.Round(timer.timeFinished, 2).ToString();
+        winBestScoreText.text = "Best Time = " + System.Math.Round(timer.bestTime, 2).ToString();
+        winCurrentScoreText.text = "Your Time = " + System.Math.Round(timer.timeFinished, 2).ToString();
         winScoreText.text = coins + "/100";
 
 
@@ -108,6 +112,14 @@ public class UIManager : MonoBehaviour
             NewRecord.SetActive(false);
         }
 
+    }
+
+    public void FlipperChallengeWin()
+    {
+        winScreen.SetActive(true);
+
+        winBestScoreText.text = "Best Score = " + FlipperChallenge.Instance.score.ToString();
+        winCurrentScoreText.text = "Score = " + FlipperChallenge.Instance.score.ToString();
     }
 
     public void Lose()
@@ -174,31 +186,11 @@ public class UIManager : MonoBehaviour
 
         for (float t = 0; t < 1.1f; t += Time.deltaTime)
         {
-            FlipperChallengeScore.fontSize = (int)curve.Evaluate(t);
+            FlipperChallengeScore.fontSize = (int)(scoreScaleAnimationCurve.Evaluate(t) * initialScoreScale);
             yield return new WaitForEndOfFrame();
         }
 
 
 
     }
-
-
-    //class ScoreUI : MonoBehaviour
-    //{
-    //    GameObject go;
-    //    int score;
-    //    BumpObject target;
-    //    float offset;
-    //    private void Awake()
-    //    {
-    //        offset = 0;
-    //        Destroy(go, .7f);
-    //    }
-
-    //    private void Update()
-    //    {
-    //        Vector3 pos = Camera.main.WorldToScreenPoint(target.transform.position) + Vector3.up * offset;
-    //        offset += 10 * Time.deltaTime;
-    //    }
-    //}
 }
