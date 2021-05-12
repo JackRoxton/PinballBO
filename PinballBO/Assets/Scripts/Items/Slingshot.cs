@@ -36,7 +36,7 @@ public class Slingshot : BumpObject
     private void InverseShoot(Bill bill) // if scale = -1
     {
         float angle = -Vector3.SignedAngle(transform.forward, bill.transform.position - transform.position, transform.up) * transform.localScale.x;
-        Debug.Log(angle);
+
         //Shoot Right
         if (angle > -52 && angle <= 46)
             Bump(bill, Quaternion.Euler(0, -15, 0) * transform.forward, "ShootRight");

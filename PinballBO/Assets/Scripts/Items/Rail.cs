@@ -5,6 +5,11 @@ using Cinemachine;
 
 public class Rail : MonoBehaviour
 {
+    [Header("Bill's behaviour on this rail")]
+    [Range(1, 20)] public float speed;
+    [Range(1, 1.25f)] public float acceleration;
+
+    [Header("Points")]
     [SerializeField] private int point;
     public float ratePoints;
     private float distanceOnRail = 0;
@@ -26,6 +31,8 @@ public class Rail : MonoBehaviour
         GameObject cam = inRail ? camera.gameObject : CameraManager.Instance.mainCam.gameObject;
         CameraManager.Instance.SetCameraActive(cam);
         bill.EnterRail(inRail);
+        bill.onRailMaxSpeed = speed;
+        bill.onRailAcceleration = acceleration;
         distanceOnRail = 0;
 
         // PostProcessing - effet acceleration

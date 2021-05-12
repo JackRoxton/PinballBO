@@ -15,7 +15,7 @@ public class Bill : MonoBehaviour
     [Header("Controls")]
     [Range(0, 2)] public float lossSpeedOnSlopes;
     [Range(0, 1)] public float highSpeedControl = .15f;
-    [Header("Frozen")]
+    [Header("On Rails")]
     [Range(1, 1.25f)] public float onRailAcceleration;
     [Range(1, 20)] public float onRailMaxSpeed;
 
