@@ -22,8 +22,8 @@ public class UIManager : MonoBehaviour
     int coins = 0;
     [Header("Pause UI")]
     public GameObject pauseScreen;
-    public Text pauseCurrentTimeText;
-    public Text pauseBestTimeText;
+    public Text pauseCurrentScoreText;
+    public Text pauseBestScoreText;
 
     [Header("Defeat UI")]
     public GameObject defeatScreen;
@@ -59,9 +59,25 @@ public class UIManager : MonoBehaviour
     {
         if (GameManager.Instance.GameState == GameManager.gameState.InGame && Input.GetKey(KeyCode.Escape))
         {
+            Debug.Log("Pause");
             GameManager.Instance.GameState = GameManager.gameState.Pause;
-            pauseBestTimeText.text = "Best Time = " + System.Math.Round(timer.bestTime, 2).ToString();
-            pauseCurrentTimeText.text = "Current Time = " + System.Math.Round(timer.timeFinished, 2).ToString();
+            switch (GameManager.Instance.GetCurrentChallenge())
+            {
+                case GameManager.Challenge.Timer:
+                    pauseBestScoreText.text = "Best Time = " + System.Math.Round(timer.bestTime, 2).ToString();
+                    pauseCurrentScoreText.text = "Current Time = " + System.Math.Round(timer.timeFinished, 2).ToString();
+                    break;
+                case GameManager.Challenge.Flipper:
+                    pauseBestScoreText.text = "Best Score : " + FlipperChallenge.Instance.bestScore.ToString();
+                    pauseCurrentScoreText.text = "Score : " + FlipperChallenge.Instance.score.ToString();
+                    break;
+                default:
+                    pauseBestScoreText.text = "";
+                    pauseCurrentScoreText.text = "";
+                    break;
+
+            }
+
             pauseScreen.SetActive(true);
         }
 
@@ -115,13 +131,6 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public void Lose()
-    {
-        defeatScreen.SetActive(true);
-        defeatBestTimeText.text = "Best Time = " + System.Math.Round(timer.bestTime, 2).ToString();
-    }
-
-
 
     public void AddCoin()
     {
@@ -140,8 +149,14 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void Lose()
+    {
+        defeatScreen.SetActive(true);
+        defeatBestTimeText.text = "Best Time = " + System.Math.Round(timer.bestTime, 2).ToString();
+    }
 
-    // Score FlipperChallenge
+
+    #region FlipperChalllenge
     public void FlipperChallengeWin()
     {
         
@@ -151,6 +166,8 @@ public class UIManager : MonoBehaviour
         FlipperChallengeCanvas.SetActive(true);
         FlipperChallengeScore.GetComponent<Text>().text = "0"; // Affiche le score
         FlipperChallengeScore.transform.parent.GetComponent<Text>().text = "      / " + goal.ToString(); // Affiche le score
+        timer.gameObject.SetActive(true);
+        timer.SetScore(10, FlipperChallenge.Instance);
     }
 
     public void DisplayScore(int amount, GameObject item)
@@ -190,4 +207,5 @@ public class UIManager : MonoBehaviour
 
 
     }
+    #endregion
 }
