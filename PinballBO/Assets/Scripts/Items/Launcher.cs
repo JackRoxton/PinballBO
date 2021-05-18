@@ -10,6 +10,7 @@ public class Launcher : MonoBehaviour
     bool isLaunching = false;
     [SerializeField] private CinemachineVirtualCamera cameraBeforeShoot;
     [SerializeField] private CinemachineVirtualCamera cameraAfterShoot;
+    IEnumerator coroutine;
 
     private void Awake()
     {
@@ -43,8 +44,28 @@ public class Launcher : MonoBehaviour
             Bill bill = other.GetComponent<Bill>();
             if (bill != null)
             {
-                StartCoroutine(Launch(bill));
+                Debug.Log("StartCoroutine");
+                coroutine = Launch(bill);
+                StartCoroutine(coroutine);
             }
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        
+        {
+            Bill bill = other.GetComponent<Bill>();
+            if (bill != null)
+            {
+                Debug.Log("StopCoroutine");
+                StopCoroutine(coroutine);
+                coroutine = null;
+                isLaunching = false;
+                CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainCam.gameObject);
+            }
+        }        
+    }
+
+    
 }
