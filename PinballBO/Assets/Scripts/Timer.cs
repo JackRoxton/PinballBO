@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 
 public class Timer : MonoBehaviour
 {
+    private Action currentState;
+
     //Filling
     [Range(0, 100)]
     public float fillValue = 50;
@@ -18,10 +21,12 @@ public class Timer : MonoBehaviour
     public float timeFinished;
     public float bestTime;
     private int seconds;
+    public int multiplier { get; private set; }
 
     //Win and lose
     public GameObject defeatScreen;
-    private ChronoChallenge challenge;
+    private ChronoChallenge chronoChallenge;
+    private FlipperChallenge flipperChallenge;
 
     private void Start()
     {
@@ -29,14 +34,20 @@ public class Timer : MonoBehaviour
         Time.timeScale = 1;
         GameManager.Instance.GameState = GameManager.gameState.InGame;
 
-        if (PlayerPrefs.HasKey("BestTimeLevel" + GameManager.Instance.currentLevel))
+        if (PlayerPrefs.HasKey("BestTimeLevel" + GameManager.Instance.currentLevel) && GameManager.Instance.GetCurrentChallenge() == GameManager.Challenge.Timer)
         {
             bestTime = PlayerPrefs.GetFloat("BestTimeLevel" + GameManager.Instance.currentLevel); //faire en sorte qu'on puisse recup le score
         }
         else bestTime = 60;
     }
 
-    void Update()
+    private void Update()
+    {
+        currentState();
+    }
+
+
+    void TimeChallenge()
     {
         
             if (timeLeft > timeTotal) //au cas où on reçoive du temps bonus durant un challenge
@@ -61,36 +72,67 @@ public class Timer : MonoBehaviour
         }
     }
 
+    void FlipperChallenge()
+    {
+        if (timeLeft > timeTotal) //au cas où on reçoive du temps bonus durant un challenge
+        {
+            multiplier++;
+            timeLeft -= timeTotal;
+            chronoText.text = "x " + multiplier.ToString();
+        }
+
+        fillValue = timeLeft / timeTotal * 100;
+
+        timeLeft -= Time.deltaTime;
+        
+        if (timeLeft < 0)
+        {
+            if (multiplier == 1)
+            {
+                timeLeft = 0;
+                return;
+            }
+            timeLeft += timeTotal;
+            multiplier--;
+            chronoText.text = "x " + multiplier.ToString();
+        }
+
+        FillCircleValue(fillValue);
+
+
+    }
+
+
     void FillCircleValue(float value)
     {
         float fillAmount = (value / 100.0f);
         circleFillImage.fillAmount = fillAmount;
     }
 
-    private void Defeat()
-    {
-        if (challenge == null)
-        {
-            timeLeft = 10000f;
-            timeTotal = 10000f;
-        }
-        else
-        {
-            challenge.End(false);
-            challenge = null;
-            //afficher un text "challenge failed" ou "time's up"
-        }
-        /* if (GameManager.Instance.GameState == GameManager.gameState.GameOver)  // if Gamestate = GameOver, it means that this has already been called
-             return;
-
-         GameManager.Instance.GameState = GameManager.gameState.GameOver; */
-    }
 
     public void SetTime(float time, ChronoChallenge currentChallenge)
     {
+        currentState = TimeChallenge;
+
         timeLeft = time;
         timeTotal = time;
-        challenge = currentChallenge;
+        chronoChallenge = currentChallenge;
+    }
+
+    public void SetScore(float time, FlipperChallenge currentChallenge)
+    {
+        currentState = FlipperChallenge;
+        multiplier = 1;
+
+        timeLeft = time;
+        timeTotal = time;
+        flipperChallenge = currentChallenge;
+        chronoText.text = "x 1";
+    }
+    
+    public void AddTime(float amount)
+    {
+        timeLeft += amount;
     }
 
     public float SetBestTime()
@@ -104,6 +146,27 @@ public class Timer : MonoBehaviour
         }
 
         return bestTime;
+    }
+
+
+
+    private void Defeat()
+    {
+        if (chronoChallenge == null)
+        {
+            timeLeft = 10000f;
+            timeTotal = 10000f;
+        }
+        else
+        {
+            chronoChallenge.End(false);
+            chronoChallenge = null;
+            //afficher un text "challenge failed" ou "time's up"
+        }
+        /* if (GameManager.Instance.GameState == GameManager.gameState.GameOver)  // if Gamestate = GameOver, it means that this has already been called
+             return;
+
+         GameManager.Instance.GameState = GameManager.gameState.GameOver; */
     }
 
 }
