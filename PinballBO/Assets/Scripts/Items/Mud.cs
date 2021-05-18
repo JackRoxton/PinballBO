@@ -6,6 +6,7 @@ public class Mud : MonoBehaviour
 {
     [SerializeField,Range(0,25)]
     private float dragStrength;
+    private float deathTimer = 5;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -23,5 +24,12 @@ public class Mud : MonoBehaviour
         {
             bill.gameObject.GetComponent<Rigidbody>().drag -= dragStrength;
         }
+    }
+
+    private void Update()
+    {
+        deathTimer -= Time.deltaTime;
+        if (deathTimer <= 0)
+            Destroy(this);
     }
 }
