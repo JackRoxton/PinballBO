@@ -8,7 +8,7 @@ public class FlipperChallenge : MonoBehaviour
     public int score { get; private set; }
     public int bestScore { get; private set; }
     public int goal { get; private set; }
-    private float multiplier = 1;
+    private float targetCount = 1;
     private bool playing = false;
 
     private void Start()
@@ -37,7 +37,7 @@ public class FlipperChallenge : MonoBehaviour
         playing = true;
 
         score = 0;
-        multiplier = 1;
+        targetCount = 1;
         goal = 100000;
 
         GameManager.Instance.SetCurrentChallenge(GameManager.Challenge.Flipper);
@@ -54,26 +54,33 @@ public class FlipperChallenge : MonoBehaviour
         if (!playing || 
             GameManager.Instance.GameState == GameManager.gameState.Win) return;
 
-        score += (int)(amount * multiplier);
+        // Increase Score
+        int amountScore = (int)(amount * Multiplier());
+        score += amountScore;
+        UIManager.Instance.DisplayScore(amountScore, item);  // Feedback : Score qui bouge jusqu'à l'interface
+
+        // Rajoute du temps au timer
         if (item.layer != 11)
-            UIManager.Instance.timer.AddTime(2.5f);
+            UIManager.Instance.timer.AddTime(.7f);
         else
-        {
             UIManager.Instance.timer.AddTime(Time.deltaTime);
-        }
 
         // Feedback Sonore
 
 
-        UIManager.Instance.DisplayScore((int)(amount * multiplier), item);
 
         if (score >= goal)
             Victory();
     }
 
-    public void ChangeMultiplier(float amount)
+    public void TargetTouch()
     {
-        multiplier += amount;
+        targetCount += .1f;
+    }
+
+    private float Multiplier()
+    {
+        return targetCount * UIManager.Instance.timer.multiplier;
     }
 
     private void Victory()
@@ -101,7 +108,7 @@ public class FlipperChallenge : MonoBehaviour
 
     /*  Régles Timer
     Bump Avant Timer    --> Timer++
-    Timer++             --> ScoreMultiplier +1
-    Timer--             --> ScoreMultiplier -1
+    Timer++             --> ScoretargetCount +1
+    Timer--             --> ScoretargetCount -1
      */
 }

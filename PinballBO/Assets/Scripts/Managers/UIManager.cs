@@ -167,7 +167,7 @@ public class UIManager : MonoBehaviour
         FlipperChallengeScore.GetComponent<Text>().text = "0"; // Affiche le score
         FlipperChallengeScore.transform.parent.GetComponent<Text>().text = "      / " + goal.ToString(); // Affiche le score
         timer.gameObject.SetActive(true);
-        timer.SetScore(10, FlipperChallenge.Instance);
+        timer.SetScore(6, FlipperChallenge.Instance);
     }
 
     public void DisplayScore(int amount, GameObject item)

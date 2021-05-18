@@ -21,6 +21,8 @@ public class Turnstile : BumpObject
         {
             Vector3 direction = -collision.GetContact(0).normal;
             bill.GetComponent<Rigidbody>().velocity = direction * speed * force;
+            if (GameManager.Instance.GetCurrentChallenge() == GameManager.Challenge.Flipper)
+                UIManager.Instance.timer.AddTime(.7f);
         }
     }
 }

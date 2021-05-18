@@ -43,13 +43,16 @@ public class Targets : MonoBehaviour
 
             if (challenge != null)
                 IncreaseMultiplicater();
+            
+            if (GameManager.Instance.GetCurrentChallenge() == GameManager.Challenge.Flipper)
+                UIManager.Instance.timer.AddTime(.7f);
         }
 
     }
 
     void IncreaseMultiplicater()
     {
-        challenge.ChangeMultiplier(.1f);
+        challenge.TargetTouch();
     }
 
     public void SetChallenge(FlipperChallenge challenge)
