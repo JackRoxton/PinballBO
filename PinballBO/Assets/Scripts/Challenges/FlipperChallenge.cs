@@ -48,24 +48,16 @@ public class FlipperChallenge : MonoBehaviour
         GameManager.Instance.SetCurrentChallenge(GameManager.Challenge.Free);
     } 
 
-
-    public void ChangeScore(Rail rail, int amount)
+    public void ChangeScore(int amount, GameObject item)
     {
-        if (!playing) return;
+        if (!playing || 
+            GameManager.Instance.GameState == GameManager.gameState.Win) return;
 
-        ChangeScore(amount);
-    }
-
-    public void ChangeScore(int amount, BumpObject bumper = null)
-    {
-        if (!playing) return;
-
-        // if GameManager.GameState == Victory return;
         score += (int)(amount * multiplier);
         // Feedback Sonore
 
-        if (bumper != null)
-            UIManager.Instance.DisplayScore((int)(amount * multiplier), bumper);
+    
+        UIManager.Instance.DisplayScore((int)(amount * multiplier), item);
 
         if (score >= goal)
             Victory();

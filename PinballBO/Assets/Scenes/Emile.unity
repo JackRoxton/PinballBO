@@ -6370,22 +6370,22 @@ PrefabInstance:
     - target: {fileID: 1915026051115963421, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.10001202
+      value: -0.10001192
       objectReference: {fileID: 0}
     - target: {fileID: 1915026051115963421, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.42592663
+      value: -0.4259267
       objectReference: {fileID: 0}
     - target: {fileID: 1915026051115963421, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.1243807
+      value: 0.12438092
       objectReference: {fileID: 0}
     - target: {fileID: 1915026051115963421, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.89056915
+      value: -0.8905692
       objectReference: {fileID: 0}
     - target: {fileID: 1915026051115963421, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
@@ -6571,12 +6571,12 @@ PrefabInstance:
     - target: {fileID: 4902816964285812514, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.42536736
+      value: 0.4253674
       objectReference: {fileID: 0}
     - target: {fileID: 4902816964285812514, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.10644988
+      value: -0.106449895
       objectReference: {fileID: 0}
     - target: {fileID: 4902816964285812514, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
@@ -6586,17 +6586,17 @@ PrefabInstance:
     - target: {fileID: 4902816964285812514, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.00000047683716
       objectReference: {fileID: 0}
     - target: {fileID: 4902816964285812514, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.00000023841858
       objectReference: {fileID: 0}
     - target: {fileID: 4902816964285812514, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.051665746
+      value: 0.051665742
       objectReference: {fileID: 0}
     - target: {fileID: 4902816964285812514, guid: 4af73a91d2cc1a9428341dceb46fb9c0,
         type: 3}
@@ -19181,12 +19181,30 @@ Transform:
   m_Father: {fileID: 1321896798}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 2.7940001, y: 73.935005, z: 9.606001}
+--- !u!1 &1038650005 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 69938e9b818250a4996a637fc44ce0ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 1795890419}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1038650006 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 69938e9b818250a4996a637fc44ce0ea,
     type: 3}
   m_PrefabInstance: {fileID: 1795890419}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1038650007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038650005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2005e1fb46ac05948be9594c345784ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1040758422
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23881,10 +23899,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 390126d1e978c4c448b392a032b7a54c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 13.3
-  acceleration: 1.0677
-  point: 0
-  ratePoints: 0
+  speed: 15
+  acceleration: 1.002
+  point: 5
+  ratePoints: 150
 --- !u!114 &1303146851 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4927206766773055399, guid: 1fe04742f7e933a48ba322fec87103c2,
@@ -34799,10 +34817,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 390126d1e978c4c448b392a032b7a54c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 13.3
-  acceleration: 1.0677
-  point: 0
-  ratePoints: 0
+  speed: 13
+  acceleration: 1.05
+  point: 10
+  ratePoints: 200
 --- !u!1001 &1849622899
 PrefabInstance:
   m_ObjectHideFlags: 0

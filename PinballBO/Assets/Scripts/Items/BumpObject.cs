@@ -50,7 +50,7 @@ public class BumpObject : MonoBehaviour
 
     protected virtual void AddPoints()
     {
-        challenge.ChangeScore(point, this);
+        challenge.ChangeScore(point, this.gameObject);
         // ChangeNeonIntensity();
     }
 

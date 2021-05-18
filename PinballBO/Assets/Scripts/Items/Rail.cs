@@ -16,6 +16,7 @@ public class Rail : MonoBehaviour
 
     private FlipperChallenge challenge;
     CinemachineVirtualCamera camera;
+    private GameObject bill;
 
     private void Awake()
     {
@@ -35,6 +36,8 @@ public class Rail : MonoBehaviour
         bill.onRailAcceleration = acceleration;
         distanceOnRail = 0;
 
+        if (this.bill == null) this.bill = bill.gameObject;
+
         // PostProcessing - effet acceleration
 
     }
@@ -52,7 +55,7 @@ public class Rail : MonoBehaviour
         if (distanceOnRail >= ratePoints)
         {
             distanceOnRail -= ratePoints;
-            challenge.ChangeScore(null, point);
+            challenge.ChangeScore(point, bill);
         }
     }
 

@@ -114,13 +114,6 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void FlipperChallengeWin()
-    {
-        winScreen.SetActive(true);
-
-        winBestScoreText.text = "Best Score = " + FlipperChallenge.Instance.score.ToString();
-        winCurrentScoreText.text = "Score = " + FlipperChallenge.Instance.score.ToString();
-    }
 
     public void Lose()
     {
@@ -149,6 +142,10 @@ public class UIManager : MonoBehaviour
 
 
     // Score FlipperChallenge
+    public void FlipperChallengeWin()
+    {
+        
+    }
     public void InitializeFlipperChallengeUI(float goal)
     {
         FlipperChallengeCanvas.SetActive(true);
@@ -156,14 +153,14 @@ public class UIManager : MonoBehaviour
         FlipperChallengeScore.transform.parent.GetComponent<Text>().text = "      / " + goal.ToString(); // Affiche le score
     }
 
-    public void DisplayScore(int amount, BumpObject bumper)
+    public void DisplayScore(int amount, GameObject item)
     {
         GameObject go = Instantiate(scorePrefab, FlipperChallengeCanvas.transform);
         go.GetComponent<Text>().text = amount.ToString();
-        StartCoroutine(AddScoreUI(go.GetComponent<RectTransform>(), bumper, amount));
+        StartCoroutine(AddScoreUI(go.GetComponent<RectTransform>(), item, amount));
     }
 
-    IEnumerator AddScoreUI(RectTransform rect, BumpObject target, int amount)
+    IEnumerator AddScoreUI(RectTransform rect, GameObject target, int amount)
     {
         float offset = 0;
 
