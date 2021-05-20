@@ -22,8 +22,8 @@ public class UIManager : MonoBehaviour
     int coins = 0;
     [Header("Pause UI")]
     public GameObject pauseScreen;
-    public Text pauseCurrentTimeText;
-    public Text pauseBestTimeText;
+    public Text pauseCurrentScoreText;
+    public Text pauseBestScoreText;
 
     [Header("Defeat UI")]
     public GameObject defeatScreen;
@@ -61,9 +61,22 @@ public class UIManager : MonoBehaviour
         {
             Debug.Log("Pause");
             GameManager.Instance.GameState = GameManager.gameState.Pause;
-            pauseBestTimeText.text = "Best Time = " + System.Math.Round(timer.bestTime, 2).ToString();
-            pauseCurrentTimeText.text = "Current Time = " + System.Math.Round(Time.timeSinceLevelLoad, 2).ToString();
+            switch (GameManager.Instance.GetCurrentChallenge())
+            {
+                case GameManager.Challenge.Timer:
+                    pauseBestScoreText.text = "Best Time = " + System.Math.Round(timer.bestTime, 2).ToString();
+                    pauseCurrentScoreText.text = "Current Time = " + System.Math.Round(timer.timeFinished, 2).ToString();
+                    break;
+                case GameManager.Challenge.Flipper:
+                    pauseBestScoreText.text = "Best Score : " + FlipperChallenge.Instance.bestScore.ToString();
+                    pauseCurrentScoreText.text = "Score : " + FlipperChallenge.Instance.score.ToString();
+                    break;
+                default:
+                    pauseBestScoreText.text = "";
+                    pauseCurrentScoreText.text = "";
+                    break;
 
+            }
 
             pauseScreen.SetActive(true);
         }
@@ -100,13 +113,13 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void Win()
+    public void TimerChallengeWin()
     {
         winScreen.SetActive(true);
         timer.SetBestTime();
 
         winBestScoreText.text = "Best Time = " + System.Math.Round(timer.bestTime, 2).ToString();
-        winCurrentScoreText.text = "Your Time = " + System.Math.Round(Time.timeSinceLevelLoad, 2).ToString();
+        winCurrentScoreText.text = "Your Time = " + System.Math.Round(timer.timeFinished, 2).ToString();
         winScoreText.text = coins + "/100";
 
 
