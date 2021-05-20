@@ -57,7 +57,8 @@ public class FlipperChallenge : MonoBehaviour
         // Increase Score
         int amountScore = (int)(amount * Multiplier());
         score += amountScore;
-        UIManager.Instance.DisplayScore(amountScore, item);  // Feedback : Score qui bouge jusqu'à l'interface
+        if (amount > 0)
+            UIManager.Instance.DisplayScore(amountScore, item);  // Feedback : Score qui bouge jusqu'à l'interface
 
         // Rajoute du temps au timer
         if (item.layer != 11)
@@ -104,11 +105,10 @@ public class FlipperChallenge : MonoBehaviour
     }
 
 
-
-
-    /*  Régles Timer
-    Bump Avant Timer    --> Timer++
-    Timer++             --> ScoretargetCount +1
-    Timer--             --> ScoretargetCount -1
-     */
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Bill>() != null)
+            if(!playing)
+                Begin();
+    }
 }

@@ -20,17 +20,24 @@ public class Rail : MonoBehaviour
 
     private void Awake()
     {
-        camera = GetComponentInChildren<CinemachineVirtualCamera>();
+        CinemachineVirtualCamera cameraInChildren = GetComponentInChildren<CinemachineVirtualCamera>();
 
-        Bill bill = FindObjectOfType<Bill>();
-        camera.LookAt = bill.transform;
-        camera.Follow = bill.transform;
+        if (camera != null)
+        {
+            camera = cameraInChildren;
+            Bill bill = FindObjectOfType<Bill>();
+            camera.LookAt = bill.transform;
+            camera.Follow = bill.transform;
+        }
     }
 
     public void BillInRail(Bill bill, bool inRail)
     {
-        GameObject cam = inRail ? camera.gameObject : CameraManager.Instance.mainCam.gameObject;
-        CameraManager.Instance.SetCameraActive(cam);
+        if (camera != null)
+        {
+            GameObject cam = inRail ? camera.gameObject : CameraManager.Instance.mainCam.gameObject;
+            CameraManager.Instance.SetCameraActive(cam);
+        }
         bill.EnterRail(inRail);
         distanceOnRail = 0;
         if (!inRail) return;
