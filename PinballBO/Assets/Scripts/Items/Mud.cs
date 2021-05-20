@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Mud : MonoBehaviour
 {
-    [SerializeField,Range(0,25)]
+    [SerializeField,Range(-10,20)]
     private float dragStrength;
     private float deathTimer = 5;
 
@@ -30,6 +30,6 @@ public class Mud : MonoBehaviour
     {
         deathTimer -= Time.deltaTime;
         if (deathTimer <= 0)
-            Destroy(this);
+            Destroy(this.gameObject);
     }
 }
