@@ -7,7 +7,6 @@ public class FlipperChallenge : MonoBehaviour
     public static FlipperChallenge Instance;
     [SerializeField] private ParticleSystem yeah;
     public int score { get; private set; }
-    public int bestScore { get; private set; }
     public int goal { get; private set; }
     public int scoreToReach;
     private float targetCount = 1;
@@ -41,8 +40,13 @@ public class FlipperChallenge : MonoBehaviour
         playing = true;
 
         score = 0;
+<<<<<<< HEAD
         targetCount = 1;
         goal = scoreToReach;
+=======
+        multiplier = 1;
+        goal = 1000;
+>>>>>>> parent of 71c1930 (Multiplicateur Timer pour FlipperChallenge)
 
         GameManager.Instance.SetCurrentChallenge(GameManager.Challenge.Flipper);
     }
@@ -58,6 +62,7 @@ public class FlipperChallenge : MonoBehaviour
         if (!playing || 
             GameManager.Instance.GameState == GameManager.gameState.Win) return;
 
+<<<<<<< HEAD
         // Increase Score
         int amountScore = (int)(amount * Multiplier());
         score += amountScore;
@@ -73,6 +78,13 @@ public class FlipperChallenge : MonoBehaviour
         // Feedback Sonore
 
 
+=======
+        score += (int)(amount * multiplier);
+        // Feedback Sonore
+
+    
+        UIManager.Instance.DisplayScore((int)(amount * multiplier), item);
+>>>>>>> parent of 71c1930 (Multiplicateur Timer pour FlipperChallenge)
 
         if (score >= goal)
             Victory();
@@ -90,6 +102,7 @@ public class FlipperChallenge : MonoBehaviour
 
     private void Victory()
     {
+<<<<<<< HEAD
         if (score > bestScore) bestScore = score;
         UIManager.Instance.FlipperChallengeWin();
         yeah.gameObject.SetActive(true);
@@ -119,4 +132,9 @@ public class FlipperChallenge : MonoBehaviour
             if(!playing)
                 Begin();
     }
+=======
+        GameManager.Instance.GameState = GameManager.gameState.Win;
+        UIManager.Instance.FlipperChallengeWin();
+    }
+>>>>>>> parent of 71c1930 (Multiplicateur Timer pour FlipperChallenge)
 }

@@ -153,10 +153,8 @@ public class GameManager : MonoBehaviour
     }
     public void SetCurrentChallenge(Challenge challenge)
     {
-        if (currentState != gameState.InGame)
-            currentState = gameState.InGame;
-
         currentChallenge = challenge;
+
         switch (currentChallenge)
         {
             case Challenge.Flipper:

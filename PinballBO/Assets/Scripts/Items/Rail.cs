@@ -39,10 +39,9 @@ public class Rail : MonoBehaviour
             CameraManager.Instance.SetCameraActive(cam);
         }
         bill.EnterRail(inRail);
-        distanceOnRail = 0;
-        if (!inRail) return;
         bill.onRailMaxSpeed = speed;
         bill.onRailAcceleration = acceleration;
+        distanceOnRail = 0;
 
         if (this.bill == null) this.bill = bill.gameObject;
 
