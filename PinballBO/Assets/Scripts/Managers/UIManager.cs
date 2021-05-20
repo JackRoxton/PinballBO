@@ -159,7 +159,8 @@ public class UIManager : MonoBehaviour
     #region FlipperChalllenge
     public void FlipperChallengeWin()
     {
-        
+        FlipperChallengeCanvas.SetActive(false);
+        timer.gameObject.SetActive(false);
     }
     public void InitializeFlipperChallengeUI(float goal)
     {

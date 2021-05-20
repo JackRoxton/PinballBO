@@ -5,15 +5,19 @@ using UnityEngine;
 public class FlipperChallenge : MonoBehaviour
 {
     public static FlipperChallenge Instance;
+    [SerializeField] private ParticleSystem yeah;
     public int score { get; private set; }
     public int bestScore { get; private set; }
     public int goal { get; private set; }
+    public int scoreToReach;
     private float targetCount = 1;
     private bool playing = false;
 
     private void Start()
     {
         Instance = this;
+
+        yeah.gameObject.SetActive(false);
 
         #region Initialization
         BumpObject[] bumpers = GetComponentsInChildren<BumpObject>();
@@ -38,7 +42,7 @@ public class FlipperChallenge : MonoBehaviour
 
         score = 0;
         targetCount = 1;
-        goal = 100000;
+        goal = scoreToReach;
 
         GameManager.Instance.SetCurrentChallenge(GameManager.Challenge.Flipper);
     }
@@ -86,10 +90,13 @@ public class FlipperChallenge : MonoBehaviour
 
     private void Victory()
     {
-        GameManager.Instance.GameState = GameManager.gameState.Win;
         if (score > bestScore) bestScore = score;
         UIManager.Instance.FlipperChallengeWin();
+        yeah.gameObject.SetActive(true);
+        
 
+
+        // items do not earn points anymore
         BumpObject[] bumpers = GetComponentsInChildren<BumpObject>();
         foreach (BumpObject bump in bumpers)
             bump.SetChallenge(null);
@@ -102,6 +109,7 @@ public class FlipperChallenge : MonoBehaviour
         foreach (Rail rail in rails)
             rail.SetChallenge(null);
 
+        playing = false;
     }
 
 
