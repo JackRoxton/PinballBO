@@ -13,7 +13,7 @@ public class FakeWin : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             GameManager.Instance.GameState = GameManager.gameState.Win;
-            uimanager.TimerChallengeWin();
+            uimanager.Win();
         }
 
         //Reset Best Time

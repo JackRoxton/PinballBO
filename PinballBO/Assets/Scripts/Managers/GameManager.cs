@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
 
                     if (currentChallenge == Challenge.Timer)
                     {
-                        UIManager.Instance.TimerChallengeWin();
+                        UIManager.Instance.Win();
 
                     }
                     else if (currentChallenge == Challenge.Flipper)

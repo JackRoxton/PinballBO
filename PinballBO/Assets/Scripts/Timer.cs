@@ -43,13 +43,16 @@ public class Timer : MonoBehaviour
 
     private void Update()
     {
+        if (currentState == null)
+        {
+            currentState = GlobalTime;
+        }
         currentState();
     }
 
 
-    void TimeChallenge()
+    void GlobalTime()
     {
-        
             if (timeLeft > timeTotal) //au cas où on reçoive du temps bonus durant un challenge
             {
                 timeLeft = timeTotal;
@@ -61,8 +64,6 @@ public class Timer : MonoBehaviour
             fillValue = timeLeft / timeTotal * 100;
 
             timeLeft -= Time.deltaTime;
-            timeFinished += Time.deltaTime;
-            
 
             FillCircleValue(fillValue);
 
@@ -112,7 +113,7 @@ public class Timer : MonoBehaviour
 
     public void SetTime(float time, ChronoChallenge currentChallenge)
     {
-        currentState = TimeChallenge;
+        currentState = GlobalTime;
 
         timeLeft = time;
         timeTotal = time;
@@ -137,11 +138,11 @@ public class Timer : MonoBehaviour
 
     public float SetBestTime()
     {
-        if (bestTime > timeFinished)
+        if (bestTime > Time.timeSinceLevelLoad)
         {
             if (GameManager.Instance.currentLevel == 1)
             {
-                PlayerPrefs.SetFloat("BestTimeLevel" + GameManager.Instance.currentLevel, timeFinished);
+                PlayerPrefs.SetFloat("BestTimeLevel" + GameManager.Instance.currentLevel, Time.timeSinceLevelLoad);
             }
         }
 
