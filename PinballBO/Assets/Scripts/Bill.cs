@@ -11,7 +11,7 @@ public class Bill : MonoBehaviour
     [Header("Speed")]
     [Range(1, 100)] public float acceleration;
     [Range(1, 100)] public float speed;
-    [Range(0, .5f)] public float breakForce;
+    [Range(.001f, 1)] public float breakForce;
     public float chargeForce = 1;
     [Header("Controls")]
     [Range(0, 2)] public float lossSpeedOnSlopes;
@@ -22,7 +22,7 @@ public class Bill : MonoBehaviour
 
     [SerializeField] private ParticleSystem brakeParticles;
     private Vector3 brakeParticlePos;
-    int particleFlag = 0;
+    float particleFlag = 0;
 
     Rigidbody rb;
     CinemachineVirtualCamera camera;
@@ -172,20 +172,17 @@ public class Bill : MonoBehaviour
 
     private void Break() // Frein in French
     {
-        Vector3 breakVector = rb.velocity * -(breakForce * Time.deltaTime);
-        if (breakVector.magnitude > rb.velocity.magnitude)
-            rb.velocity = Vector3.zero;
-        else
-            rb.velocity = rb.velocity * -breakForce;
+        Vector3 breakVelocity = rb.velocity + (-rb.velocity * breakForce);
+        rb.velocity = breakVelocity.magnitude > .4f ? breakVelocity : Vector3.zero;
 
-        if (particleFlag == 0)
+        if (particleFlag <= 0)
         {
             Vector3 brakeParticlePos = new Vector3(this.transform.position.x, this.transform.position.y - 0.5f, this.transform.position.z);
             Instantiate(brakeParticles, brakeParticlePos, Quaternion.identity);
             particleFlag = 4;
         }
         else
-            particleFlag--;
+            particleFlag -= rb.velocity.magnitude * .5f;
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -10,8 +10,7 @@ public class BumpObject : MonoBehaviour
     [SerializeField] protected int point;
 
     [Header("Materials")]
-    [SerializeField] protected MeshRenderer[] meshRenderers;
-    [SerializeField] protected Color color;
+    [SerializeField] protected MeshRenderer[] Neons;
 
     protected Animator animator;
     private AudioSource source;
@@ -20,11 +19,6 @@ public class BumpObject : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         source = GetComponent<AudioSource>();
-
-        if (color == Color.black)
-            color = meshRenderers[0].material.color;
-        else
-            ChangeNeonsColor(color);
     }
 
     #region Bumping
@@ -69,16 +63,6 @@ public class BumpObject : MonoBehaviour
     }
     #endregion
 
-    #region Neons
-    protected virtual void ChangeNeonsColor(Color color)
-    {
-        foreach (MeshRenderer renderer in meshRenderers)
-        {
-            foreach (Material mat in renderer.materials)
-                mat.color = color;
-        }
-    }
-    #endregion
 
     // Feedbacks
     protected virtual IEnumerator PostProcessBump()
@@ -87,4 +71,70 @@ public class BumpObject : MonoBehaviour
         yield return PostProcessingManager.Instance.BloomIntensity(5, 1);
     }
 
+    #region Color
+    void SetColor(Color color)
+    {
+        foreach (MeshRenderer renderer in Neons)
+        {
+            var newMats = renderer.materials;
+            foreach (Material mat in newMats)
+            {                
+                mat.SetColor("_EmissionColor", color);
+            }
+            renderer.materials = newMats;
+        }
+    }
+
+    void RandomColor()
+    {
+
+        foreach (MeshRenderer renderer in Neons)
+        {
+            var newMats = renderer.materials;
+            foreach (Material mat in newMats)
+            {
+                Color newColor = new Color(
+                    Random.Range(0.5f, 1),
+                    Random.Range(0.5f, 1),
+                    Random.Range(0.5f, 1));
+                mat.SetColor("_EmissionColor", newColor);
+            }
+            renderer.materials = newMats;
+        }
+    }
+
+    void SmoothRandomColor()
+    {
+        foreach (MeshRenderer renderer in Neons)
+        {
+            var newMats = renderer.materials;
+            foreach (Material mat in newMats)
+            {
+                Color newColor = new Color();
+                newColor.r = .5f + Mathf.Cos(Time.timeSinceLevelLoad * 1) * .5f;
+                newColor.g = .5f + Mathf.Cos(Time.timeSinceLevelLoad * 2) * .5f;
+                newColor.b = .5f + Mathf.Cos(Time.timeSinceLevelLoad * 3) * .5f;
+
+                mat.SetColor("_EmissionColor", newColor);
+            }
+            renderer.materials = newMats;
+        }
+    }
+
+
+    void Rainbow()
+    {
+        foreach (MeshRenderer renderer in Neons)
+        {
+            var newMats = renderer.materials;
+            foreach (Material mat in newMats)
+            {
+                Color newColor = Color.HSVToRGB(.5f + Mathf.Cos(Time.timeSinceLevelLoad * .6f) * .5f, 1, 1);
+
+                mat.SetColor("_EmissionColor", newColor);
+            }
+            renderer.materials = newMats;
+        }
+    }
+    #endregion
 }
