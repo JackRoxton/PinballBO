@@ -280,7 +280,6 @@ MonoBehaviour:
   chronoText: {fileID: 1284631409}
   timeTotal: 6
   timeFinished: 0
-  bestTime: 0
   defeatScreen: {fileID: 0}
 --- !u!1 &6714006660410924234
 GameObject:
