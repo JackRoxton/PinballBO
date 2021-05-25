@@ -88,19 +88,22 @@ public class BumpObject : MonoBehaviour
         }
 
 
-        RandomColor();
-        yield return new WaitForSeconds(.3f);
+        for(float t = 0; t < 1; t += .1f)
+        {
+            RandomColor();
+            yield return new WaitForSeconds(.1f);
+        }
         for (int i = 0; i < initials.Length; i++)
             SetColor(Neons[i].material, initials[i]);
     }
 
     #region Color
-    void SetColor(Material mat, Color color)
+    protected void SetColor(Material mat, Color color)
     {
         mat.SetColor("_EmissionColor", color);
     }
 
-    void RandomColor()
+    protected void RandomColor()
     {
 
         foreach (MeshRenderer renderer in Neons)
@@ -118,7 +121,7 @@ public class BumpObject : MonoBehaviour
         }
     }
 
-    void SmoothRandomColor()
+    protected void SmoothRandomColor()
     {
         foreach (MeshRenderer renderer in Neons)
         {
@@ -137,7 +140,7 @@ public class BumpObject : MonoBehaviour
     }
 
 
-    void Rainbow()
+    protected void Rainbow()
     {
         foreach (MeshRenderer renderer in Neons)
         {

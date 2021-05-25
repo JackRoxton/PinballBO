@@ -7,6 +7,7 @@ public class Bumper : BumpObject
     [SerializeField] private ParticleSystem bumpParticle;
     private Vector3 particlePos;
 
+
     // Classic Bumper
     private void OnTriggerEnter(Collider other)
     {
