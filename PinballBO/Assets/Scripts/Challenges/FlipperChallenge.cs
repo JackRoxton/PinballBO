@@ -6,6 +6,9 @@ public class FlipperChallenge : MonoBehaviour
 {
     public static FlipperChallenge Instance;
     [SerializeField] private ParticleSystem yeah;
+    public GameObject door;
+    public Cinemachine.CinemachineVirtualCamera doorCamera;
+
     public int score { get; private set; }
     public int bestScore { get; private set; }
     public int goal { get; private set; }
@@ -93,8 +96,8 @@ public class FlipperChallenge : MonoBehaviour
         if (score > bestScore) bestScore = score;
         UIManager.Instance.FlipperChallengeWin();
         yeah.gameObject.SetActive(true);
-        
 
+        StartCoroutine(OpenDoor());
 
         // items do not earn points anymore
         BumpObject[] bumpers = GetComponentsInChildren<BumpObject>();
@@ -118,5 +121,19 @@ public class FlipperChallenge : MonoBehaviour
         if (other.GetComponent<Bill>() != null)
             if(!playing)
                 Begin();
+    }
+
+    IEnumerator OpenDoor()
+    {
+        Vector3 targetPos = door.transform.position + Vector3.up * 2.5f;
+        CameraManager.Instance.SetCameraActive(doorCamera.gameObject);
+        yield return new WaitForSeconds(.5f);
+        for (float d = 0; d < 2.5f; d += Time.deltaTime)
+        {
+            door.transform.position = Vector3.MoveTowards(door.transform.position, targetPos, Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }        
+        yield return new WaitForSeconds(2);
+        CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainCam.gameObject);
     }
 }
