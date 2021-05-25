@@ -25,7 +25,7 @@ MonoBehaviour:
         m_PostInfinity: 0
         m_RotationOrder: 0
   - m_From: CM FreeLook1
-    m_To: CM vcam1
+    m_To: DoorCam
     m_Blend:
       m_Style: 0
       m_Time: 2
