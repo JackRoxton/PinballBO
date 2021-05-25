@@ -11,6 +11,7 @@ public class BumpObject : MonoBehaviour
 
     [Header("Materials")]
     [SerializeField] protected MeshRenderer[] Neons;
+    [SerializeField] protected Color[] Colors;
 
     protected Animator animator;
     private AudioSource source;
@@ -19,6 +20,11 @@ public class BumpObject : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         source = GetComponent<AudioSource>();
+
+        for (int i = 0; i < Neons.Length; i++)
+        {
+            SetColor(Neons[i].material, Colors[i]);
+        }
     }
 
     #region Bumping
@@ -41,9 +47,11 @@ public class BumpObject : MonoBehaviour
         float force = this.force + billBody.velocity.magnitude * factor;
         billBody.AddForce(direction * force);
 
-        source.PlayOneShot(AudioManager.Instance.GetAudioCLip("Bump"));
-
+        //Feedbacks
         StartCoroutine(PostProcessBump());
+        StartCoroutine(BumpBlinking());
+        
+        source.PlayOneShot(AudioManager.Instance.GetAudioCLip("Bump"));
 
         if (challenge != null)
             AddPoints();
@@ -71,18 +79,25 @@ public class BumpObject : MonoBehaviour
         yield return PostProcessingManager.Instance.BloomIntensity(5, 1);
     }
 
-    #region Color
-    void SetColor(Color color)
+    protected virtual IEnumerator BumpBlinking()
     {
-        foreach (MeshRenderer renderer in Neons)
+        Color[] initials = new Color[Neons.Length];
+        for (int i = 0; i < Neons.Length; i++)
         {
-            var newMats = renderer.materials;
-            foreach (Material mat in newMats)
-            {                
-                mat.SetColor("_EmissionColor", color);
-            }
-            renderer.materials = newMats;
+            initials[i] = Neons[i].material.GetColor("_EmissionColor");
         }
+
+
+        RandomColor();
+        yield return new WaitForSeconds(.3f);
+        for (int i = 0; i < initials.Length; i++)
+            SetColor(Neons[i].material, initials[i]);
+    }
+
+    #region Color
+    void SetColor(Material mat, Color color)
+    {
+        mat.SetColor("_EmissionColor", color);
     }
 
     void RandomColor()

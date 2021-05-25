@@ -403,6 +403,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 14
   factor: 20
+  point: 0
+  Neons:
+  - {fileID: 6220135834835482555}
+  - {fileID: 436105753377240239}
+  Colors:
+  - {r: 0.5357999, g: 0, b: 0.893, a: 1}
+  - {r: 1, g: 0.66670126, b: 0, a: 1}
   speed: 0.8
 --- !u!1 &6671146498111326985
 GameObject:

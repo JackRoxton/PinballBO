@@ -199,7 +199,6 @@ public class Bill : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        Debug.Log(collision.collider.material.name);
         if (collision.collider.material.name == "Floor (Instance)")
             source.Stop();
     }

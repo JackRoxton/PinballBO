@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 97a0a3da7b57f1041a6951b0ebed7ec2, type: 2}
+  - {fileID: 2100000, guid: 8f937486eb33a2540afd87fb88c535f4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -538,10 +538,13 @@ MonoBehaviour:
   force: 800
   factor: 40
   point: 50
-  meshRenderers:
+  Neons:
   - {fileID: 4058896587242554000}
   - {fileID: 7632490811563160226}
-  color: {r: 0, g: 0, b: 0, a: 0}
+  Colors:
+  - {r: 1, g: 0.6901961, b: 0, a: 1}
+  - {r: 1, g: 0.6901961, b: 0, a: 1}
+  neonBehaviour: 2
   bumpParticle: {fileID: 4166583257526116529, guid: 3b5fd193cb137474ea197abeba814c92,
     type: 3}
 --- !u!1 &3879081959276674961
@@ -839,7 +842,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 97a0a3da7b57f1041a6951b0ebed7ec2, type: 2}
+  - {fileID: 2100000, guid: 8f937486eb33a2540afd87fb88c535f4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
