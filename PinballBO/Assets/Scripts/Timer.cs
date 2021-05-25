@@ -19,7 +19,6 @@ public class Timer : MonoBehaviour
     public float timeTotal = 30f;
     private float timeLeft;
     public float timeFinished;
-    public float bestTime;
     private int seconds;
     public int multiplier { get; private set; }
 
@@ -33,12 +32,6 @@ public class Timer : MonoBehaviour
         timeLeft = timeTotal;
         Time.timeScale = 1;
         GameManager.Instance.GameState = GameManager.gameState.InGame;
-
-        if (PlayerPrefs.HasKey("BestTimeLevel" + GameManager.Instance.currentLevel) && GameManager.Instance.GetCurrentChallenge() == GameManager.Challenge.Timer)
-        {
-            bestTime = PlayerPrefs.GetFloat("BestTimeLevel" + GameManager.Instance.currentLevel); //faire en sorte qu'on puisse recup le score
-        }
-        else bestTime = 60;
     }
 
     private void Update()
@@ -135,21 +128,6 @@ public class Timer : MonoBehaviour
     {
         timeLeft += amount;
     }
-
-    public float SetBestTime()
-    {
-        if (bestTime > Time.timeSinceLevelLoad)
-        {
-            if (GameManager.Instance.currentLevel == 1)
-            {
-                PlayerPrefs.SetFloat("BestTimeLevel" + GameManager.Instance.currentLevel, Time.timeSinceLevelLoad);
-            }
-        }
-
-        return bestTime;
-    }
-
-
 
     private void Defeat()
     {

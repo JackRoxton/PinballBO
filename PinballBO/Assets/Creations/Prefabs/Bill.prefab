@@ -420,13 +420,13 @@ MonoBehaviour:
   acceleration: 20
   speed: 12
   breakForce: 0.05
+  chargeForce: 0.6
   lossSpeedOnSlopes: 1.5
   highSpeedControl: 0.8
   onRailAcceleration: 1.05
   onRailMaxSpeed: 14
   brakeParticles: {fileID: 3144660823519731202, guid: aad81c7bc4ffeab458dc6d77184a35f3,
     type: 3}
-  chargeStrength: 100
 --- !u!1 &6017232712829960499
 GameObject:
   m_ObjectHideFlags: 0

@@ -39,6 +39,7 @@ public class UIManager : MonoBehaviour
     [Header("Misc")]
     public Timer timer;
     public Text coinsCount;
+    private float bestTime;
 
     [Header("Flipper Challenge")]
     public GameObject FlipperChallengeCanvas;
@@ -55,13 +56,22 @@ public class UIManager : MonoBehaviour
         initialScoreScale = FlipperChallengeScore.fontSize;
     }
 
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey("BestTimeLevel" + GameManager.Instance.currentLevel))
+        {
+            bestTime = PlayerPrefs.GetFloat("BestTimeLevel" + GameManager.Instance.currentLevel); //faire en sorte qu'on puisse recup le score
+        }
+        else bestTime = 60;
+    }
+
     private void Update()
     {
         if (GameManager.Instance.GameState == GameManager.gameState.InGame && Input.GetKey(KeyCode.Escape))
         {
             Debug.Log("Pause");
             GameManager.Instance.GameState = GameManager.gameState.Pause;
-            pauseBestTimeText.text = "Best Time = " + System.Math.Round(timer.bestTime, 2).ToString();
+            pauseBestTimeText.text = "Best Time = " + System.Math.Round(bestTime, 2).ToString();
             pauseCurrentTimeText.text = "Current Time = " + System.Math.Round(Time.timeSinceLevelLoad, 2).ToString();
 
 
@@ -103,20 +113,31 @@ public class UIManager : MonoBehaviour
     public void Win()
     {
         winScreen.SetActive(true);
-        timer.SetBestTime();
+        SetBestTime();
 
-        winBestScoreText.text = "Best Time = " + System.Math.Round(timer.bestTime, 2).ToString();
+        winBestScoreText.text = "Best Time = " + System.Math.Round(bestTime, 2).ToString();
         winCurrentScoreText.text = "Your Time = " + System.Math.Round(Time.timeSinceLevelLoad, 2).ToString();
         winScoreText.text = coins + "/100";
 
 
-        if (timer.bestTime < timer.timeFinished)
+        if (bestTime > Time.timeSinceLevelLoad)
         {
-            NewRecord.SetActive(false);
+            NewRecord.SetActive(true);
         }
 
     }
 
+    private void SetBestTime()
+    {
+        if (bestTime > Time.timeSinceLevelLoad)
+        {
+            if (GameManager.Instance.currentLevel == 1)
+            {
+                PlayerPrefs.SetFloat("BestTimeLevel" + GameManager.Instance.currentLevel, Time.timeSinceLevelLoad);
+                bestTime = Time.timeSinceLevelLoad;
+            }
+        }
+    }
 
 
     public void AddCoin()
@@ -139,8 +160,9 @@ public class UIManager : MonoBehaviour
     public void Lose()
     {
         defeatScreen.SetActive(true);
-        defeatBestTimeText.text = "Best Time = " + System.Math.Round(timer.bestTime, 2).ToString();
+        defeatBestTimeText.text = "Best Time = " + System.Math.Round(bestTime, 2).ToString();
     }
+
 
 
     #region FlipperChalllenge
