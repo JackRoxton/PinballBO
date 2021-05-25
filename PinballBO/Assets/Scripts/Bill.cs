@@ -25,6 +25,7 @@ public class Bill : MonoBehaviour
     float particleFlag = 0;
 
     Rigidbody rb;
+    AudioSource source;
     CinemachineVirtualCamera camera;
 
     private float currentRotation = 0;
@@ -37,6 +38,7 @@ public class Bill : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        source = GetComponent<AudioSource>();
         tour = Mathf.PI * GetComponent<SphereCollider>().radius;
 
         camera = GetComponentInChildren<CinemachineVirtualCamera>();
@@ -190,6 +192,16 @@ public class Bill : MonoBehaviour
         Vector3 normal = collision.GetContact(0).normal;
         if (normal.y > .7f)
             slopeNormal = normal;
+        if (collision.collider.material.name == "Floor (Instance)")
+            if (!source.isPlaying)
+                source.Play();
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        Debug.Log(collision.collider.material.name);
+        if (collision.collider.material.name == "Floor (Instance)")
+            source.Stop();
     }
 
     private void RotationOverDistance()
@@ -202,6 +214,9 @@ public class Bill : MonoBehaviour
             float distance = rb.velocity.magnitude * Time.deltaTime;
             currentRotation += (distance * 90) / tour;
             transform.rotation = Quaternion.Euler(currentRotation, targetAngle, 0);
+            // Rolling Sound
+            source.volume = rb.velocity.magnitude / 10;
+            source.pitch = rb.velocity.magnitude / 10;
         }
     }
 
