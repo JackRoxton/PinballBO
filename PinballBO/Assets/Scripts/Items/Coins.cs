@@ -19,10 +19,10 @@ public class Coins : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            AudioManager.Instance.Play("Coin");
             GameManager.Instance.AddCoin();
             UIManager.Instance.AddCoin();
-            AudioManager.Instance.Play("Coin");
-            //Mettre un son pour les pieces
+
             Instantiate(deathParticle, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
