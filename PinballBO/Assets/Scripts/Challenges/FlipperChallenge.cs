@@ -22,7 +22,10 @@ public class FlipperChallenge : MonoBehaviour
 
         yeah.gameObject.SetActive(false);
 
-        #region Initialization
+    }
+
+    public void Begin()
+    {
         BumpObject[] bumpers = GetComponentsInChildren<BumpObject>();
         foreach (BumpObject bump in bumpers)
             bump.SetChallenge(this);
@@ -34,13 +37,7 @@ public class FlipperChallenge : MonoBehaviour
         Rail[] rails = GetComponentsInChildren<Rail>();
         foreach (Rail rail in rails)
             rail.SetChallenge(this);
-        #endregion
 
-        Begin();
-    }
-
-    public void Begin()
-    {
         playing = true;
 
         score = 0;

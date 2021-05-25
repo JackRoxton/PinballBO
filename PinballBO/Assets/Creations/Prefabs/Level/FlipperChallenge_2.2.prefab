@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3616345928252957665}
   - component: {fileID: 7124862452199156982}
   m_Layer: 0
-  m_Name: Plane.001
+  m_Name: EnterHole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19371,7 +19371,7 @@ GameObject:
   - component: {fileID: 8280199449075058890}
   - component: {fileID: 7163976208256883443}
   - component: {fileID: 846356159160795796}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20322,7 +20322,7 @@ GameObject:
   - component: {fileID: 3275018743269092740}
   - component: {fileID: 8989467089496789353}
   - component: {fileID: 8119416276547137224}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
