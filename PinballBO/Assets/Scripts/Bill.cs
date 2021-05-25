@@ -12,6 +12,7 @@ public class Bill : MonoBehaviour
     [Range(1, 100)] public float acceleration;
     [Range(1, 100)] public float speed;
     [Range(0, .5f)] public float breakForce;
+    public float chargeForce = 1;
     [Header("Controls")]
     [Range(0, 2)] public float lossSpeedOnSlopes;
     [Range(0, 1)] public float highSpeedControl = .15f;
@@ -83,7 +84,7 @@ public class Bill : MonoBehaviour
         if (Input.GetButton("Break")) // Break
             Break();
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKey(KeyCode.F)) // Charge
         {
             currentState = ChargingState;
             chargeRotation = currentRotation;
@@ -95,16 +96,6 @@ public class Bill : MonoBehaviour
 
     void ChargingState()
     {
-        if (Input.GetKeyUp(KeyCode.F))
-        {
-            Vector3 direction = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * Vector3.forward;
-            direction = Vector3.ProjectOnPlane(direction, slopeNormal); // Movements on slopes
-            direction = Vector3.ClampMagnitude(direction, 1);
-            rb.velocity = direction * chargeAcceleration;
-
-            currentState = FreeMoving;
-            return;
-        }
 
         chargeAcceleration = chargeAcceleration < 50 ? chargeAcceleration + 1 : 50;
         chargeRotation += chargeAcceleration;
@@ -113,6 +104,16 @@ public class Bill : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
             Break();
 
+        if (!Input.GetKey(KeyCode.F))
+        {
+            Vector3 direction = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * Vector3.forward;
+            direction = Vector3.ProjectOnPlane(direction, slopeNormal); // Movements on slopes
+            direction = Vector3.ClampMagnitude(direction, 1);
+            rb.velocity = direction * chargeAcceleration * chargeForce;
+
+            currentState = FreeMoving;
+            return;
+        }
     }
 
     #region Rail

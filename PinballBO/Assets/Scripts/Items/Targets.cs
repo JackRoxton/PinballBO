@@ -37,9 +37,9 @@ public class Targets : MonoBehaviour
             if (!lightState)
                 SetLights(true);
 
-            Rigidbody billBody = bill.GetComponent<Rigidbody>();
-            billBody.velocity = Vector3.zero;
-            billBody.AddForce(-collision.GetContact(0).normal * force);
+            //Rigidbody billBody = bill.GetComponent<Rigidbody>();
+            //billBody.velocity = Vector3.zero;
+            //billBody.AddForce(-collision.GetContact(0).normal * force);
 
             if (challenge != null)
                 IncreaseMultiplicater();

@@ -11,6 +11,7 @@ public class BumpObject : MonoBehaviour
 
     [Header("Materials")]
     [SerializeField] protected MeshRenderer[] meshRenderers;
+    [SerializeField] protected Color color;
 
     protected Animator animator;
     private AudioSource source;
@@ -19,8 +20,14 @@ public class BumpObject : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         source = GetComponent<AudioSource>();
+
+        if (color == Color.black)
+            color = meshRenderers[0].material.color;
+        else
+            ChangeNeonsColor(color);
     }
 
+    #region Bumping
     protected void BumpAway(Bill bill, string animatorString = "")  // Bump Bill in the direction from the bumper to Bill's position
     {
         Vector3 direction = bill.transform.position - transform.position;
@@ -47,34 +54,33 @@ public class BumpObject : MonoBehaviour
         if (challenge != null)
             AddPoints();
     }
+    #endregion
 
+    #region Challenge
     protected virtual void AddPoints()
     {
         challenge.ChangeScore(point, this.gameObject);
         // ChangeNeonIntensity();
     }
 
-    protected virtual void ChangeNeonsColor()
-    {
-        foreach (MeshRenderer renderer in meshRenderers)
-        {
-            var newMats = renderer.materials;
-            foreach (Material mat in newMats)
-                mat.color = Color.HSVToRGB(
-                Random.Range(0f, 1f),
-                Random.Range(0f, 1f),
-                Random.Range(0f, 1f));
-            renderer.materials = newMats;
-        }
-    }
-
-
     public void SetChallenge(FlipperChallenge challenge)
     {
         this.challenge = challenge;
     }
+    #endregion
 
+    #region Neons
+    protected virtual void ChangeNeonsColor(Color color)
+    {
+        foreach (MeshRenderer renderer in meshRenderers)
+        {
+            foreach (Material mat in renderer.materials)
+                mat.color = color;
+        }
+    }
+    #endregion
 
+    // Feedbacks
     protected virtual IEnumerator PostProcessBump()
     {
         yield return PostProcessingManager.Instance.BloomIntensity(20, 1);

@@ -135,7 +135,10 @@ MonoBehaviour:
   force: 1000
   factor: 100
   point: 0
-  meshRenderers: []
+  meshRenderers:
+  - {fileID: 6971655909549993929}
+  - {fileID: 6994711342068904364}
+  color: {r: 0, g: 0, b: 0, a: 0}
   speed: 0.1
   angle: 60
   random: 1
@@ -263,7 +266,7 @@ GameObject:
   - component: {fileID: 8164580565234207079}
   - component: {fileID: 3430764421114245087}
   m_Layer: 0
-  m_Name: Torus.002
+  m_Name: "N\xE9on_3"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -430,7 +433,7 @@ GameObject:
   - component: {fileID: 5281519725738795347}
   - component: {fileID: 6971655909549993929}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: "N\xE9on_1"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -696,7 +699,7 @@ GameObject:
   - component: {fileID: 4194071634439964935}
   - component: {fileID: 6994711342068904364}
   m_Layer: 0
-  m_Name: Cylinder.001
+  m_Name: "N\xE9on_2"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -710,7 +713,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8436537829140936741}
   m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.059999965, z: -6.5121613}
+  m_LocalPosition: {x: 0, y: 0.059999965, z: -6.5121613}
   m_LocalScale: {x: 100, y: 80, z: 100}
   m_Children: []
   m_Father: {fileID: 340425134464974589}

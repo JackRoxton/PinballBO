@@ -17,7 +17,7 @@ public class PostProcessingManager : MonoBehaviour
         bloom.enabled.Override(true);
         bloom.intensity.Override(5);
 
-        volume = PostProcessManager.instance.QuickVolume(gameObject.layer, 1000f, bloom);
+        volume = PostProcessManager.instance.QuickVolume(gameObject.layer, 1000000f, bloom);
 
     }
 
