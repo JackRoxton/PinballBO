@@ -29,7 +29,7 @@ public class Door : MonoBehaviour
     [SerializeField]
     private List<SpinnerChallenge> spinners = new List<SpinnerChallenge>();
     
-    private int challengesCount = 2, challengesDone = 0;
+    private int challengesCount = 3, challengesDone = 0;
     private GameObject bill;
 
     //cocher use targets **ou** use spinners pour des portes classiques, uniquement bossDoor pour la porte du boss.

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class SpinnerChallenge : MonoBehaviour
 {
-    //l'apparence de ce spinner pourra être changé
+    public GameObject LoupioteDoor;
+    public GameObject Loupiote;
+    public Material Light;
 
     [SerializeField]
     private bool stateSpun = false;
@@ -15,6 +17,8 @@ public class SpinnerChallenge : MonoBehaviour
         if (bill != null)
         {
             stateSpun = true;
+            Loupiote.GetComponent<MeshRenderer>().material = Light;
+            LoupioteDoor.GetComponent<MeshRenderer>().material = Light;
         }
     }
 

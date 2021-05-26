@@ -9,7 +9,7 @@ public class FakeWin : MonoBehaviour
     public UIManager uimanager;
     private void Update()
     {
-        //Win
+        /*//Win
         if (Input.GetKey(KeyCode.W))
         {
             GameManager.Instance.GameState = GameManager.gameState.Win;
@@ -20,6 +20,12 @@ public class FakeWin : MonoBehaviour
         if (Input.GetKey(KeyCode.R)) 
         {
             PlayerPrefs.SetFloat("BestTimeLevel" + GameManager.Instance.currentLevel, 60);
-        }
+        }*/
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        GameManager.Instance.GameState = GameManager.gameState.Win;
+        uimanager.Win();
     }
 }
