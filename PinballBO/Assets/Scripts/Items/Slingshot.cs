@@ -15,7 +15,6 @@ public class Slingshot : BumpObject
         if (bill != null)
         {
             Vector3 direction = -collision.GetContact(0).normal;
-            Debug.Log(collision.GetContact(0).thisCollider.name);
             Bump(bill, direction, collision.GetContact(0).thisCollider.name);
         }
     }

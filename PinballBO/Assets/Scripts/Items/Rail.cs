@@ -22,7 +22,7 @@ public class Rail : MonoBehaviour
     {
         CinemachineVirtualCamera cameraInChildren = GetComponentInChildren<CinemachineVirtualCamera>();
 
-        if (camera != null)
+        if (cameraInChildren != null)
         {
             camera = cameraInChildren;
             Bill bill = FindObjectOfType<Bill>();
