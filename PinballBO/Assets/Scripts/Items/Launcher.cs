@@ -44,7 +44,6 @@ public class Launcher : MonoBehaviour
             Bill bill = other.GetComponent<Bill>();
             if (bill != null)
             {
-                Debug.Log("StartCoroutine");
                 coroutine = Launch(bill);
                 StartCoroutine(coroutine);
             }
@@ -58,7 +57,6 @@ public class Launcher : MonoBehaviour
             Bill bill = other.GetComponent<Bill>();
             if (bill != null)
             {
-                Debug.Log("StopCoroutine");
                 StopCoroutine(coroutine);
                 coroutine = null;
                 isLaunching = false;

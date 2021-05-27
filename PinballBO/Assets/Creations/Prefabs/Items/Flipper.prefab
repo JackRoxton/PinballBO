@@ -132,8 +132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7adcceb7d6ef5e74884a82d3c4b55d79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 1000
-  factor: 100
+  force: 10
+  factor: 10
   point: 0
   Neons:
   - {fileID: 6971655909549993929}
@@ -143,8 +143,8 @@ MonoBehaviour:
   - {r: 0, g: 0.25309038, b: 1, a: 1}
   - {r: 0, g: 0.25490198, b: 1, a: 1}
   - {r: 1, g: 0.9094448, b: 0, a: 1}
-  speed: 0.1
-  angle: 60
+  speed: 10
+  angle: 50
   random: 1
 --- !u!54 &8400633438868369996
 Rigidbody:

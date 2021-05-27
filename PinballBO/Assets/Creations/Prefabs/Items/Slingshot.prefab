@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 775981492194064400}
   - component: {fileID: 4342886997767092704}
-  - component: {fileID: 3157265633060303362}
-  - component: {fileID: 8261901176574322493}
   - component: {fileID: 808051910278934338}
   m_Layer: 0
   m_Name: Slingshot
@@ -59,38 +57,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3157265633060303362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 112316911566545578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b06fc273fc5d4b47ba0ed90c2858e5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  force: 800
-  factor: 60
-  point: 200
-  meshRenderers: []
---- !u!54 &8261901176574322493
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 112316911566545578}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!82 &808051910278934338
 AudioSource:
   m_ObjectHideFlags: 0
@@ -288,6 +254,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6558934121839183084}
+  - component: {fileID: 5740018552472268569}
+  - component: {fileID: 7693471135488708644}
   m_Layer: 0
   m_Name: Trigger
   m_TagString: Untagged
@@ -312,6 +280,39 @@ Transform:
   m_Father: {fileID: 775981492194064400}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5740018552472268569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075573691470938502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b06fc273fc5d4b47ba0ed90c2858e5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 800
+  factor: 60
+  point: 200
+  Neons: []
+  Colors: []
+--- !u!54 &7693471135488708644
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075573691470938502}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &1079575698708069398
 GameObject:
   m_ObjectHideFlags: 0
@@ -570,7 +571,7 @@ GameObject:
   - component: {fileID: 5655403949415515497}
   - component: {fileID: 8336331674481917972}
   m_Layer: 0
-  m_Name: Capsule_3
+  m_Name: ShootLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -598,7 +599,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4155697365127938805}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.4017244
   m_Height: 3.191178
@@ -802,7 +803,7 @@ GameObject:
   - component: {fileID: 8459950623435100300}
   - component: {fileID: 302308574342861656}
   m_Layer: 0
-  m_Name: Capsule_2
+  m_Name: ShootRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -830,7 +831,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5504772584510480660}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.43805635
   m_Height: 4.0910263
@@ -1065,7 +1066,7 @@ GameObject:
   - component: {fileID: 6403750389442034354}
   - component: {fileID: 675320874494032494}
   m_Layer: 0
-  m_Name: Capsule_1
+  m_Name: ShootForward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1093,7 +1094,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8750781221668590575}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.39847237
   m_Height: 6.13873

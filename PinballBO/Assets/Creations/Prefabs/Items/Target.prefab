@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 7961527859638072002}
   - component: {fileID: 1693449086034183260}
   - component: {fileID: 7099462000985200771}
-  - component: {fileID: 6739100860764455801}
+  - component: {fileID: 8267808528575298133}
   m_Layer: 0
   m_Name: Bounds
   m_TagString: Untagged
@@ -193,7 +193,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &6739100860764455801
+--- !u!64 &8267808528575298133
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,7 +204,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5495902117074765545, guid: 7c82bddc11a05e5488232cd470b34b84, type: 3}
 --- !u!1 &8016182065757225036
@@ -332,8 +332,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 500
-  factor: 0
-  point: 1
   lightOn: {fileID: 2100000, guid: 97a0a3da7b57f1041a6951b0ebed7ec2, type: 2}
   neon: {fileID: 7099462000985200771}
   lightState: 0

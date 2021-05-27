@@ -96,7 +96,8 @@ public class Flipper : BumpObject
 
         if (bill != null && IsMoving)
         {
-            Vector3 direction = Quaternion.Euler(0, transform.eulerAngles.y + angle, 0)     // Direction depends of the revolution of the flipper
+            float angleShoot = angle > 0 ? angle + 20 : angle - 20;
+            Vector3 direction = Quaternion.Euler(0, transform.eulerAngles.y + angleShoot, 0)     // Direction depends of the revolution of the flipper
                 * (-Vector3.forward * force * speed);
             Bump(bill, direction);
         }

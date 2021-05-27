@@ -4,50 +4,20 @@ using UnityEngine;
 
 public class Slingshot : BumpObject
 {
-    private void OnTriggerEnter(Collider other)
+    private void Awake()
     {
-        Bill bill = other.GetComponent<Bill>();
+        animator = transform.parent.GetComponent<Animator>();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Bill bill = collision.gameObject.GetComponent<Bill>();
         if (bill != null)
         {
-            if (transform.localScale.x > 0)
-                NormalShoot(bill);
-            else
-                InverseShoot(bill);
+            Vector3 direction = -collision.GetContact(0).normal;
+            Debug.Log(collision.GetContact(0).thisCollider.name);
+            Bump(bill, direction, collision.GetContact(0).thisCollider.name);
         }
     }
 
-    private void NormalShoot(Bill bill) // if scale = 1
-    {
-        float angle = Vector3.SignedAngle(transform.forward, bill.transform.position - transform.position, transform.up) * transform.localScale.x;
-
-        //Shoot Right
-        if (angle > -38 && angle < 33)
-            Bump(bill, Quaternion.Euler(0, 15, 0) * transform.forward, "ShootRight");
-
-        // Shoot Left
-        else if (angle > 33 && angle <= 163)
-            Bump(bill, Quaternion.Euler(0, 90, 0) * transform.forward, "ShootLeft");
-
-        // Shoot Forward
-        else
-            Bump(bill, Quaternion.Euler(0, -121, 0) * transform.forward, "ShootForward");
-    }
-
-    private void InverseShoot(Bill bill) // if scale = -1
-    {
-        float angle = -Vector3.SignedAngle(transform.forward, bill.transform.position - transform.position, transform.up) * transform.localScale.x;
-
-        //Shoot Right
-        if (angle > -52 && angle <= 46)
-            Bump(bill, Quaternion.Euler(0, -15, 0) * transform.forward, "ShootRight");
-
-        // Shoot Left
-        else if (angle < -52 && angle >= -167)
-            Bump(bill, Quaternion.Euler(0, -90, 0) * transform.forward, "ShootLeft");
-
-        // Shoot Forward
-        else
-            Bump(bill, Quaternion.Euler(0, 121, 0) * transform.forward, "ShootForward");
-
-    }
 }

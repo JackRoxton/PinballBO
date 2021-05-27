@@ -99,7 +99,10 @@ public class FlipperChallenge : MonoBehaviour
         // items do not earn points anymore
         BumpObject[] bumpers = GetComponentsInChildren<BumpObject>();
         foreach (BumpObject bump in bumpers)
+        {
+            bump.InvokeRepeating("Rainbow", 0, Time.deltaTime);
             bump.SetChallenge(null);
+        }
 
         Targets[] targets = GetComponentsInChildren<Targets>();
         foreach (Targets target in targets)

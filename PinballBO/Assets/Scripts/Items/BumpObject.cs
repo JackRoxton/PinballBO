@@ -140,7 +140,7 @@ public class BumpObject : MonoBehaviour
     }
 
 
-    protected void Rainbow()
+    public void Rainbow()
     {
         foreach (MeshRenderer renderer in Neons)
         {
