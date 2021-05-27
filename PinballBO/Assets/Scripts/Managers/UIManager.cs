@@ -117,7 +117,7 @@ public class UIManager : MonoBehaviour
 
         winBestScoreText.text = "Best Time = " + System.Math.Round(bestTime, 2).ToString();
         winCurrentScoreText.text = "Your Time = " + System.Math.Round(Time.timeSinceLevelLoad, 2).ToString();
-        winScoreText.text = coins + "/100";
+        winScoreText.text = coins + "/40";
 
 
         if (bestTime > Time.timeSinceLevelLoad)
@@ -145,11 +145,11 @@ public class UIManager : MonoBehaviour
         coins = GameManager.Instance.coins;
         if (coins < 10)
         {
-            coinsCount.text = "     " + coins.ToString() + ("/100");
+            coinsCount.text = "     " + coins.ToString() + ("/40");
         }
         else if (coins >= 10 && coins < 100)
         {
-            coinsCount.text = "   " + coins.ToString() + ("/100");
+            coinsCount.text = "   " + coins.ToString() + ("/40");
         }
         else
         {
