@@ -17,14 +17,20 @@ public class SpinnerChallenge : MonoBehaviour
         if (bill != null)
         {
             stateSpun = true;
-            Loupiote.GetComponent<MeshRenderer>().material = Light;
-            LoupioteDoor.GetComponent<MeshRenderer>().material = Light;
+            StartCoroutine(waitForLight());
         }
     }
 
     public bool SendState()
     {
         return stateSpun;
+    }
+
+    IEnumerator waitForLight()
+    {
+        yield return new WaitForSeconds(2);
+        Loupiote.GetComponent<MeshRenderer>().material = Light;
+        LoupioteDoor.GetComponent<MeshRenderer>().material = Light;
     }
 
 }
