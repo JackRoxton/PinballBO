@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour
                         PlayerPrefs.SetInt("BestCoinLevel" + currentLevel, coins); //saves the best coin record
                     }
 
-                    Time.timeScale = 0;
+                    //Time.timeScale = 0;
                     break;
 
 
