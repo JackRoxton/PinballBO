@@ -44,7 +44,7 @@ public class Door : MonoBehaviour
         {
             throw new System.Exception("doorUseError");
         }
-        pos = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y - 5, this.transform.localPosition.z);
+        pos = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y - 10, this.transform.localPosition.z);
         for (int i = 0; i < offTargetsCount; i++)
         {
             targets[Random.Range(0, targets.Count)].SetLights(false);
