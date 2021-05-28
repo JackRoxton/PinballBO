@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
-  m_LookaheadTime: 0
+  m_LookaheadTime: 0.1
   m_LookaheadSmoothing: 10
   m_LookaheadIgnoreY: 0
   m_HorizontalDamping: 0.5
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1570161259192599422}
-  m_PathPosition: 0
+  m_PathPosition: 0.1
   m_PositionUnits: 2
   m_PathOffset: {x: 0, y: 0, z: 0}
   m_XDamping: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_YawDamping: 0
   m_RollDamping: 0
   m_AutoDolly:
-    m_Enabled: 0
+    m_Enabled: 1
     m_PositionOffset: 0
     m_SearchRadius: 2
     m_SearchResolution: 5
@@ -15671,7 +15671,15 @@ MonoBehaviour:
     inactivePathColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     width: 0.2
   m_Looped: 0
-  m_Waypoints: []
+  m_Waypoints:
+  - position: {x: 0.058588263, y: -0.054454666, z: 0.0355054}
+    roll: 0
+  - position: {x: -0.008816148, y: 0.098253034, z: 0.1140163}
+    roll: 0
+  - position: {x: 0.19434395, y: 0.17731506, z: 0.18897285}
+    roll: 0
+  - position: {x: 0.24278447, y: -0.107562, z: 0.060346786}
+    roll: 0
 --- !u!1 &5459490429236246910
 GameObject:
   m_ObjectHideFlags: 0
@@ -19187,7 +19195,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 0
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
