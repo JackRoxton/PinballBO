@@ -9,6 +9,7 @@ public class FlipperChallenge : MonoBehaviour
     public GameObject door;
     public Cinemachine.CinemachineVirtualCamera doorCamera;
     public GameObject[] lightPack;
+    public Color[] colors;
 
     public int score { get; private set; }
     public int bestScore { get; private set; }
@@ -143,20 +144,20 @@ public class FlipperChallenge : MonoBehaviour
 
     IEnumerator Tunnel()
     {
-        int index = 0;
+        int offset = 0;
         while (true)
         {
-            for (int i = 0; i < lightPack.Length; i++)
+            for (int i = 1; i < lightPack.Length - colors.Length; i++)
             {
                 foreach (Light light in lightPack[i].GetComponentsInChildren<Light>())
                 {
-                    Color color = i == index ? Color.yellow : Color.cyan;
+                    Color color = colors[(i + offset) % colors.Length];
+                    Debug.Log(i % colors.Length);
                     light.color = color;
                 }
             }
-            yield return new WaitForSeconds(.05f);
-            index = index == lightPack.Length ? 0 : index + 1;
-
+            yield return new WaitForSeconds(.2f);
+            offset++;
         }
     }
 }
