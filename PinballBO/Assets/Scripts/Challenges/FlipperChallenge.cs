@@ -8,11 +8,13 @@ public class FlipperChallenge : MonoBehaviour
     [SerializeField] private ParticleSystem yeah;
     public GameObject door;
     public Cinemachine.CinemachineVirtualCamera doorCamera;
+    public GameObject[] lightPack;
 
     public int score { get; private set; }
     public int bestScore { get; private set; }
     public int goal { get; private set; }
     public int scoreToReach;
+
     private float targetCount = 1;
     private bool playing = false;
 
@@ -21,7 +23,7 @@ public class FlipperChallenge : MonoBehaviour
         Instance = this;
 
         yeah.gameObject.SetActive(false);
-
+        StartCoroutine(Tunnel());
     }
 
     public void Begin()
@@ -135,5 +137,26 @@ public class FlipperChallenge : MonoBehaviour
         }        
         yield return new WaitForSeconds(2);
         CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainCam.gameObject);
+    }
+
+
+
+    IEnumerator Tunnel()
+    {
+        int index = 0;
+        while (true)
+        {
+            for (int i = 0; i < lightPack.Length; i++)
+            {
+                foreach (Light light in lightPack[i].GetComponentsInChildren<Light>())
+                {
+                    Color color = i == index ? Color.yellow : Color.cyan;
+                    light.color = color;
+                }
+            }
+            yield return new WaitForSeconds(.05f);
+            index = index == lightPack.Length ? 0 : index + 1;
+
+        }
     }
 }
