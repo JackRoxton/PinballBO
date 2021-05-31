@@ -174,7 +174,7 @@ public class FlipperChallenge : MonoBehaviour
                 foreach (Light light in lightPack[i].GetComponentsInChildren<Light>())
                 {
                     light.color = Color.cyan;
-                    yield return new WaitForSeconds(.02f);
+                    yield return new WaitForSeconds(.005f);
                 }
             }
         }
