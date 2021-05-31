@@ -147,16 +147,15 @@ public class FlipperChallenge : MonoBehaviour
         int offset = 0;
         while (true)
         {
-            for (int i = 1; i < lightPack.Length - colors.Length; i++)
+            for (int i = 0; i < lightPack.Length - colors.Length; i++)
             {
                 foreach (Light light in lightPack[i].GetComponentsInChildren<Light>())
                 {
                     Color color = colors[(i + offset) % colors.Length];
-                    Debug.Log(i % colors.Length);
                     light.color = color;
                 }
             }
-            yield return new WaitForSeconds(.2f);
+            yield return new WaitForSeconds(.05f);
             offset++;
         }
     }
