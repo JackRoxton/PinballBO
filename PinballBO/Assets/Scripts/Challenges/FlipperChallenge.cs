@@ -24,7 +24,7 @@ public class FlipperChallenge : MonoBehaviour
         Instance = this;
 
         yeah.gameObject.SetActive(false);
-        StartCoroutine(Tunnel());
+        StartCoroutine(Allumage());
     }
 
     public void Begin()
@@ -142,7 +142,7 @@ public class FlipperChallenge : MonoBehaviour
 
 
 
-    IEnumerator Tunnel()
+    IEnumerator LinearLight()
     {
         int offset = 0;
         while (true)
@@ -157,6 +157,26 @@ public class FlipperChallenge : MonoBehaviour
             }
             yield return new WaitForSeconds(.05f);
             offset++;
+        }
+    }
+
+
+    IEnumerator Allumage()
+    {
+        foreach (GameObject go in lightPack)
+            foreach (Light light in go.GetComponentsInChildren<Light>())
+                light.color = Color.black;
+
+        while (true)
+        {
+            for (int i = 0; i < lightPack[i].GetComponentsInChildren<Light>().Length; i++)
+            {
+                foreach (Light light in lightPack[i].GetComponentsInChildren<Light>())
+                {
+                    light.color = Color.cyan;
+                    yield return new WaitForSeconds(.02f);
+                }
+            }
         }
     }
 }
