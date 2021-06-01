@@ -10,6 +10,7 @@ public class FlipperChallenge : MonoBehaviour
     public Cinemachine.CinemachineVirtualCamera doorCamera;
     public GameObject[] lightPack;
     public Color[] colors;
+    private Coroutine tunnel;
 
     public int score { get; private set; }
     public int bestScore { get; private set; }
@@ -24,7 +25,6 @@ public class FlipperChallenge : MonoBehaviour
         Instance = this;
 
         yeah.gameObject.SetActive(false);
-        StartCoroutine(Allumage());
     }
 
     public void Begin()
@@ -54,11 +54,11 @@ public class FlipperChallenge : MonoBehaviour
     {
         playing = false;
         GameManager.Instance.SetCurrentChallenge(GameManager.Challenge.Free);
-    } 
+    }
 
     public void ChangeScore(int amount, GameObject item)
     {
-        if (!playing || 
+        if (!playing ||
             GameManager.Instance.GameState == GameManager.gameState.Win) return;
 
         // Increase Score
@@ -116,14 +116,19 @@ public class FlipperChallenge : MonoBehaviour
             rail.SetChallenge(null);
 
         playing = false;
+        StopCoroutine(tunnel);
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Bill>() != null)
-            if(!playing)
+            if (!playing)
                 Begin();
+
+        if (tunnel != null)
+            StopCoroutine(tunnel);
+        tunnel = StartCoroutine(Tunnel());
     }
 
     IEnumerator OpenDoor()
@@ -135,25 +140,24 @@ public class FlipperChallenge : MonoBehaviour
         {
             door.transform.position = Vector3.MoveTowards(door.transform.position, targetPos, Time.deltaTime);
             yield return new WaitForEndOfFrame();
-        }        
+        }
         yield return new WaitForSeconds(2);
         CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainCam.gameObject);
     }
 
 
-
-    IEnumerator LinearLight()
+    #region Tunnel
+    IEnumerator Tunnel()
     {
+        yield return Allumage();
+        yield return Vortex();
         int offset = 0;
         while (true)
         {
-            for (int i = 0; i < lightPack.Length - colors.Length; i++)
+            for (int i = 0; i < lightPack.Length; i++)
             {
-                foreach (Light light in lightPack[i].GetComponentsInChildren<Light>())
-                {
-                    Color color = colors[(i + offset) % colors.Length];
-                    light.color = color;
-                }
+                Color color = colors[(i + offset) % colors.Length];
+                ArcLight(lightPack[i].GetComponentsInChildren<Light>(), color);
             }
             yield return new WaitForSeconds(.05f);
             offset++;
@@ -167,16 +171,53 @@ public class FlipperChallenge : MonoBehaviour
             foreach (Light light in go.GetComponentsInChildren<Light>())
                 light.color = Color.black;
 
-        while (true)
+        for (int i = 0; i < lightPack[i].GetComponentsInChildren<Light>().Length; i++)
         {
-            for (int i = 0; i < lightPack[i].GetComponentsInChildren<Light>().Length; i++)
+            foreach (Light light in lightPack[i].GetComponentsInChildren<Light>())
             {
-                foreach (Light light in lightPack[i].GetComponentsInChildren<Light>())
-                {
-                    light.color = Color.cyan;
-                    yield return new WaitForSeconds(.005f);
-                }
+                light.color = Color.cyan;
+                yield return new WaitForSeconds(.006f);
             }
         }
     }
+
+    IEnumerator Vortex()
+    {
+        int length = lightPack[0].GetComponentsInChildren<Light>().Length - 1;
+        foreach (GameObject go in lightPack)
+            ArcLight(go.GetComponentsInChildren<Light>(), Color.black);
+
+        for (int i = 0; i < length; i += 2)
+        {
+            EdgeLight(i, Color.white);
+            if (i > 0)
+                EdgeLight(i - 1, Color.black);
+            yield return new WaitForSeconds(.07f);
+        }
+
+        EdgeLight(length, Color.black);
+
+        for (int i = length; i > 0; i -= 2)
+        {
+            EdgeLight(i, Color.white);
+            yield return new WaitForSeconds(.07f);
+        }
+    }
+
+    private void ArcLight(Light[] arc, Color color)
+    {
+        foreach (Light light in arc)
+        {
+            light.color = color;
+        }
+    }
+
+    private void EdgeLight(int index, Color color)
+    {
+        foreach (GameObject go in lightPack)
+        {
+            go.GetComponentsInChildren<Light>()[index].color = color;
+        }
+    }
+    #endregion
 }
