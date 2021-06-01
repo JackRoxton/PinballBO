@@ -19,11 +19,12 @@ public class FlipperChallenge : MonoBehaviour
 
     private float targetCount = 1;
     private bool playing = false;
+    public bool cleared { get; private set; }
 
     private void Start()
     {
         Instance = this;
-
+        cleared = false;
         yeah.gameObject.SetActive(false);
     }
 
@@ -117,6 +118,8 @@ public class FlipperChallenge : MonoBehaviour
 
         playing = false;
         StopCoroutine(tunnel);
+
+        cleared = true;
     }
 
 

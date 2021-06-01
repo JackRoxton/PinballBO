@@ -37,6 +37,7 @@ public class Bill : MonoBehaviour
     float tour;
     Vector3 slopeNormal = Vector3.up;
     bool canBreak = false;
+    bool canCharge { get { return FlipperChallenge.Instance.cleared; } }
 
 
     private void Awake()
@@ -90,11 +91,14 @@ public class Bill : MonoBehaviour
         if (Input.GetButton("Break")) // Break
             Break();
 
-        if (Input.GetKey(KeyCode.F)) // Charge
+        if (Input.GetButton("Charge")) // Charge
         {
-            currentState = ChargingState;
-            chargeRotation = currentRotation;
-            chargeAcceleration = 0;
+            if (canCharge)
+            {
+                currentState = ChargingState;
+                chargeRotation = currentRotation;
+                chargeAcceleration = 0;
+            }
         }
 
         Debug.DrawRay(transform.position, slopeNormal * 2, Color.blue);
