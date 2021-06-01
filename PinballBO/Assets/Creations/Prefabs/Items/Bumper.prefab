@@ -437,7 +437,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e9925bf90899d34408a079760d61eac1, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 9221699182ed38f4397d64c970ed27d9, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -544,7 +544,6 @@ MonoBehaviour:
   Colors:
   - {r: 1, g: 0.6901961, b: 0, a: 1}
   - {r: 1, g: 0.6901961, b: 0, a: 1}
-  neonBehaviour: 2
   bumpParticle: {fileID: 4166583257526116529, guid: 3b5fd193cb137474ea197abeba814c92,
     type: 3}
 --- !u!1 &3879081959276674961

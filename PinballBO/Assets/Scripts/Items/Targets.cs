@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class Targets : MonoBehaviour
 {
     private FlipperChallenge challenge;
@@ -9,10 +10,15 @@ public class Targets : MonoBehaviour
     [SerializeField] MeshRenderer neon;
     [SerializeField] private bool lightState = false;
     
+    [Space]
+    private AudioSource source;
+    [SerializeField] private AudioClip hit;
+    [SerializeField] private AudioClip lightedHit;
 
     private void Awake()
     {
-        initial = neon.materials[1];    
+        initial = neon.materials[1];
+        source = GetComponent<AudioSource>();
     }
 
     public void SetLights(bool state)
@@ -20,6 +26,7 @@ public class Targets : MonoBehaviour
         lightState = state;
         var matArray = neon.materials;
         matArray[1] = state ? lightOn : initial;
+        source.PlayOneShot(hit);
 
         neon.materials = matArray;
     }
@@ -36,10 +43,10 @@ public class Targets : MonoBehaviour
         {
             if (!lightState)
                 SetLights(true);
+            source.PlayOneShot(lightedHit);
 
-            //Rigidbody billBody = bill.GetComponent<Rigidbody>();
-            //billBody.velocity = Vector3.zero;
-            //billBody.AddForce(-collision.GetContact(0).normal * force);
+            Rigidbody billBody = bill.GetComponent<Rigidbody>();
+            billBody.AddForce(-collision.GetContact(0).normal * force);
 
             if (challenge != null)
                 IncreaseMultiplicater();

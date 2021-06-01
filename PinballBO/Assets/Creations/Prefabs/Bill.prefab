@@ -241,7 +241,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3198534529653465503}
-  m_LocalRotation: {x: -0.43358102, y: -0.5593631, z: 0.4367375, w: -0.55532044}
+  m_LocalRotation: {x: -0.43358105, y: -0.55936307, z: 0.43673748, w: -0.5553205}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -305,7 +305,7 @@ GameObject:
   - component: {fileID: 3429964829404882297}
   - component: {fileID: 3429964829404882244}
   - component: {fileID: 3429964829404882245}
-  - component: {fileID: 4045361531912973659}
+  - component: {fileID: 5192416050685084108}
   m_Layer: 11
   m_Name: Bill
   m_TagString: Player
@@ -426,9 +426,11 @@ MonoBehaviour:
   highSpeedControl: 0.8
   onRailAcceleration: 1.05
   onRailMaxSpeed: 14
+  hit: {fileID: 8300000, guid: 393f501af2055794198d2e19bb3e3157, type: 3}
+  land: {fileID: 8300000, guid: f1ca96bed9c70314dbf2fcc92f2cb07b, type: 3}
   brakeParticles: {fileID: 3144660823519731202, guid: aad81c7bc4ffeab458dc6d77184a35f3,
     type: 3}
---- !u!82 &4045361531912973659
+--- !u!82 &5192416050685084108
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -438,7 +440,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 80ff75325fcd9b24aaa37e219cbff8a4, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -548,7 +550,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6017232712829960499}
-  m_LocalRotation: {x: -0.43358007, y: -0.55936384, z: 0.4367385, w: -0.55531967}
+  m_LocalRotation: {x: -0.4335801, y: -0.5593638, z: 0.4367384, w: -0.5553197}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1080,7 +1082,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9029255203816801879}
-  m_LocalRotation: {x: 0.40420562, y: 0.5812547, z: -0.40714988, w: 0.5770527}
+  m_LocalRotation: {x: 0.4042056, y: 0.5812547, z: -0.4071499, w: 0.5770527}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

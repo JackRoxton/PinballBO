@@ -16,6 +16,7 @@ public class Bumper : BumpObject
         if (bill != null)
         {
             BumpAway(bill, "Bump");
+            source.Play();
             ParticleSystem newParticle = Instantiate(bumpParticle, particlePos, Quaternion.identity) as ParticleSystem;  // instatiate the object
             newParticle.transform.localScale = new Vector3(this.transform.localScale.x, this.transform.localScale.y, this.transform.localScale.z); // change its local scale in x y z format
         }

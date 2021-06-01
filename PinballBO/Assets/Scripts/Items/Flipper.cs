@@ -55,6 +55,8 @@ public class Flipper : BumpObject
         foreach (BoxCollider trigger in triggers)   // Enable triggers to push the ball
             trigger.gameObject.SetActive(true);
 
+        source.Play();
+
         while (Quaternion.Angle(transform.rotation, target) > 3) // Rotate the flipper
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, target, speed * Time.deltaTime);

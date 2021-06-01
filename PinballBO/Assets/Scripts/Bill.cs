@@ -19,13 +19,16 @@ public class Bill : MonoBehaviour
     [Header("On Rails")]
     [Range(1, 1.25f)] public float onRailAcceleration;
     [Range(1, 20)] public float onRailMaxSpeed;
+    [Space]
+    [SerializeField] private AudioClip hit;
+    [SerializeField] private AudioClip land;
 
     [SerializeField] private ParticleSystem brakeParticles;
     private Vector3 brakeParticlePos;
     float particleFlag = 0;
-
+    
+    private AudioSource source;
     Rigidbody rb;
-    AudioSource source;
     CinemachineVirtualCamera camera;
 
     private float currentRotation = 0;
@@ -33,6 +36,7 @@ public class Bill : MonoBehaviour
     private float chargeAcceleration = 0;
     float tour;
     Vector3 slopeNormal = Vector3.up;
+    bool canBreak = false;
 
 
     private void Awake()
@@ -52,8 +56,8 @@ public class Bill : MonoBehaviour
     void FixedUpdate()
     {
         currentState();
-
     }
+
 
     void FreeMoving()
     {
@@ -116,6 +120,27 @@ public class Bill : MonoBehaviour
             currentState = FreeMoving;
             return;
         }
+    }
+
+    private void RotationOverDistance()
+    {
+        if (rb.velocity.magnitude > .1f)
+        {
+            // Angle to look at
+            float targetAngle = Mathf.Atan2(rb.velocity.x, rb.velocity.z) * Mathf.Rad2Deg;
+            // Rotate the character
+            float distance = rb.velocity.magnitude * Time.deltaTime;
+            currentRotation += (distance * 90) / tour;
+            transform.rotation = Quaternion.Euler(currentRotation, targetAngle, 0);
+            // Rolling Sound
+            source.volume = rb.velocity.magnitude / 10;
+            source.pitch = rb.velocity.magnitude / 10;
+        }
+    }
+
+    public void Bumped()
+    {
+        source.PlayOneShot(hit);
     }
 
     #region Rail
@@ -187,6 +212,8 @@ public class Bill : MonoBehaviour
             particleFlag -= rb.velocity.magnitude * .5f;
     }
 
+
+
     private void OnCollisionEnter(Collision collision)
     {
         Vector3 normal = collision.GetContact(0).normal;
@@ -194,7 +221,10 @@ public class Bill : MonoBehaviour
             slopeNormal = normal;
         if (collision.collider.material.name == "Floor (Instance)")
             if (!source.isPlaying)
+            {
+                source.PlayOneShot(land);
                 source.Play();
+            }
     }
 
     private void OnCollisionExit(Collision collision)
@@ -202,21 +232,5 @@ public class Bill : MonoBehaviour
         if (collision.collider.material.name == "Floor (Instance)")
             source.Stop();
     }
-
-    private void RotationOverDistance()
-    {
-        if (rb.velocity.magnitude > .1f)
-        {
-            // Angle to look at
-            float targetAngle = Mathf.Atan2(rb.velocity.x, rb.velocity.z) * Mathf.Rad2Deg;
-            // Rotate the character
-            float distance = rb.velocity.magnitude * Time.deltaTime;
-            currentRotation += (distance * 90) / tour;
-            transform.rotation = Quaternion.Euler(currentRotation, targetAngle, 0);
-            // Rolling Sound
-            source.volume = rb.velocity.magnitude / 10;
-            source.pitch = rb.velocity.magnitude / 10;
-        }
-    }
-
+    
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Coins : MonoBehaviour
 {
     public ParticleSystem deathParticle;
+    public AudioClip clip;
 
     private void FixedUpdate()
     {
@@ -19,7 +20,7 @@ public class Coins : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            AudioManager.Instance.Play("Coin");
+            AudioManager.Instance.PlayClip(AudioManager.Instance.effectSource, clip);
             GameManager.Instance.AddCoin();
             UIManager.Instance.AddCoin();
 

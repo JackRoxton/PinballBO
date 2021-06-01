@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class BumpObject : MonoBehaviour
 {
     protected FlipperChallenge challenge;
@@ -14,7 +15,7 @@ public class BumpObject : MonoBehaviour
     [SerializeField] protected Color[] Colors;
 
     protected Animator animator;
-    private AudioSource source;
+    protected AudioSource source;
 
     private void Awake()
     {
@@ -42,6 +43,7 @@ public class BumpObject : MonoBehaviour
         if (animatorString != "")
             animator.SetTrigger(animatorString);
 
+        bill.Bumped();
         Rigidbody billBody = bill.GetComponent<Rigidbody>();
         billBody.velocity = Vector3.zero;
         float force = this.force + billBody.velocity.magnitude * factor;
@@ -51,8 +53,6 @@ public class BumpObject : MonoBehaviour
         StartCoroutine(PostProcessBump());
         StartCoroutine(BumpBlinking());
         
-        source.PlayOneShot(AudioManager.Instance.GetAudioCLip("Bump"));
-
         if (challenge != null)
             AddPoints();
     }
