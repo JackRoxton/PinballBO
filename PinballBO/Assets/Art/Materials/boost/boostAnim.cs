@@ -30,7 +30,6 @@ public class boostAnim : MonoBehaviour
             {
                 o.GetComponent<MeshRenderer>().material = none;
             }
-            Debug.Log("Blinking");
         }
 
 
