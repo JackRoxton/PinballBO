@@ -4,12 +4,42 @@ using UnityEngine;
 
 public class boostAnim : MonoBehaviour
 {
-    public float scroll = 1f;
+    public float scroll = 0.5f;
+    public List<GameObject> arrows = new List<GameObject>();
+    int i = 0;
+    bool wait = false;
+
+    public Material neon;
+    public Material none;
 
     private void Update()
     {
-        float offset = Time.time * scroll;
-        this.GetComponent<Renderer>().material.mainTextureOffset = new Vector2(offset, offset);
+        if(!wait)
+            StartCoroutine(Blinking());
+    }
+
+    private IEnumerator Blinking()
+    {
+        foreach (GameObject o in arrows)
+        {
+            if (o == arrows[i])
+            {
+                o.GetComponent<MeshRenderer>().material = neon;
+            }
+            else
+            {
+                o.GetComponent<MeshRenderer>().material = none;
+            }
+        }
+
+
+        i++;
+        if (i >= arrows.Count)
+            i = 0;
+
+        wait = true;
+        yield return new WaitForSeconds(scroll);
+        wait = false;
     }
 }
 
