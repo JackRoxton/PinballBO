@@ -84,20 +84,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e42c7d0405cc48a7b83f63ea53bb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Path: {fileID: 0}
+  m_Path: {fileID: 1570161259192599422}
   m_PathPosition: 0.1
   m_PositionUnits: 2
   m_PathOffset: {x: 0, y: 0, z: 0}
-  m_XDamping: 0
-  m_YDamping: 0
-  m_ZDamping: 1
+  m_XDamping: 2
+  m_YDamping: 2
+  m_ZDamping: 2
   m_CameraUp: 0
   m_PitchDamping: 0
   m_YawDamping: 0
   m_RollDamping: 0
   m_AutoDolly:
     m_Enabled: 1
-    m_PositionOffset: 0
+    m_PositionOffset: -0.05
     m_SearchRadius: 2
     m_SearchResolution: 5
 --- !u!1 &30047163853607778
@@ -572,7 +572,7 @@ GameObject:
   - component: {fileID: 6704803894459448864}
   - component: {fileID: 5366647810022156661}
   - component: {fileID: 4040082772876708816}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1725,7 +1725,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0ab0e9d632093ab488b674aa854ee392, type: 2}
+  - {fileID: 2100000, guid: 433ca0470c50dc74eb5dc1f8cc7fd628, type: 2}
+  - {fileID: 2100000, guid: 656e49c5e9bb3a749b679aa198f75a0f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1772,8 +1773,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 390126d1e978c4c448b392a032b7a54c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
-  acceleration: 1.25
+  speed: 15
+  acceleration: 1.1
   point: 5
   ratePoints: 150
 --- !u!1 &949966355793264037
@@ -5957,7 +5958,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0ab0e9d632093ab488b674aa854ee392, type: 2}
+  - {fileID: 2100000, guid: 656e49c5e9bb3a749b679aa198f75a0f, type: 2}
+  - {fileID: 2100000, guid: 4e45d8e97f93dbc4b946dbd047765603, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5990,8 +5992,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 390126d1e978c4c448b392a032b7a54c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
-  acceleration: 1.25
+  speed: 15
+  acceleration: 1.2
   point: 20
   ratePoints: 300
 --- !u!64 &1667559495285589305
@@ -10740,7 +10742,7 @@ GameObject:
   - component: {fileID: 1351246293052047498}
   - component: {fileID: 5389842108935115127}
   - component: {fileID: 343220018032174607}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15993,16 +15995,22 @@ MonoBehaviour:
   m_Appearance:
     pathColor: {r: 0, g: 1, b: 0, a: 1}
     inactivePathColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    width: 0.2
+    width: 0.5
   m_Looped: 0
   m_Waypoints:
-  - position: {x: 0.058588263, y: -0.054454666, z: 0.0355054}
+  - position: {x: 0.0068779155, y: 0.044258907, z: 0.03220113}
     roll: 0
-  - position: {x: -0.008816148, y: 0.098253034, z: 0.1140163}
+  - position: {x: 0.04283797, y: 0.23964185, z: 0.1517732}
     roll: 0
-  - position: {x: 0.19434395, y: 0.17731506, z: 0.18897285}
+  - position: {x: 0.20681892, y: 0.21089688, z: 0.18147872}
     roll: 0
-  - position: {x: 0.24278447, y: -0.107562, z: 0.060346786}
+  - position: {x: 0.09017264, y: 0.09797085, z: 0.12971947}
+    roll: 0
+  - position: {x: 0.11630057, y: 0.16943714, z: 0.1320246}
+    roll: 0
+  - position: {x: 0.23059455, y: 0.02906993, z: 0.082055345}
+    roll: 0
+  - position: {x: 0.20490357, y: -0.13566712, z: 0.028983178}
     roll: 0
 --- !u!1 &5488753383001420726
 GameObject:
@@ -25306,6 +25314,7 @@ MeshRenderer:
   - {fileID: 2100000, guid: 154abe48b9cf0484fac3ecfc78f15d21, type: 2}
   - {fileID: 2100000, guid: 9bb1b608a9b65e54e91546cb77622cda, type: 2}
   - {fileID: 2100000, guid: a3be48c2177a0fb4891d32673a53ed46, type: 2}
+  - {fileID: 2100000, guid: 0ea39e5fcd5a0bb4ba6ee21709372915, type: 2}
   - {fileID: 2100000, guid: 0ea39e5fcd5a0bb4ba6ee21709372915, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
