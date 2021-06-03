@@ -16,6 +16,7 @@ public class BumpObject : MonoBehaviour
 
     protected Animator animator;
     protected AudioSource source;
+    protected Coroutine blinking;
 
     private void Awake()
     {
@@ -51,7 +52,9 @@ public class BumpObject : MonoBehaviour
 
         //Feedbacks
         StartCoroutine(PostProcessBump());
-        StartCoroutine(BumpBlinking());
+        if (blinking != null)
+            StopCoroutine(blinking);
+        blinking = StartCoroutine(BumpBlinking());
         
         if (challenge != null)
             AddPoints();
