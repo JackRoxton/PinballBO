@@ -403,7 +403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 14
   factor: 20
-  point: 0
+  point: 15
   Neons:
   - {fileID: 6220135834835482555}
   - {fileID: 436105753377240239}

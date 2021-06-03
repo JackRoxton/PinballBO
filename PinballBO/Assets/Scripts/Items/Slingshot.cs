@@ -7,6 +7,7 @@ public class Slingshot : BumpObject
     private void Awake()
     {
         animator = transform.parent.GetComponent<Animator>();
+        source = GetComponent<AudioSource>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -15,6 +16,7 @@ public class Slingshot : BumpObject
         if (bill != null)
         {
             Vector3 direction = -collision.GetContact(0).normal;
+            source.Play();
             Bump(bill, direction, collision.GetContact(0).thisCollider.name);
         }
     }
