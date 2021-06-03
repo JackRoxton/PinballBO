@@ -90,14 +90,14 @@ MonoBehaviour:
   m_PathOffset: {x: 0, y: 0, z: 0}
   m_XDamping: 2
   m_YDamping: 2
-  m_ZDamping: 2
+  m_ZDamping: 3
   m_CameraUp: 0
   m_PitchDamping: 0
   m_YawDamping: 0
   m_RollDamping: 0
   m_AutoDolly:
     m_Enabled: 1
-    m_PositionOffset: -0.1
+    m_PositionOffset: -0.05
     m_SearchRadius: 2
     m_SearchResolution: 5
 --- !u!1 &30047163853607778
