@@ -97,7 +97,7 @@ MonoBehaviour:
   m_RollDamping: 0
   m_AutoDolly:
     m_Enabled: 1
-    m_PositionOffset: -0.05
+    m_PositionOffset: -0.1
     m_SearchRadius: 2
     m_SearchResolution: 5
 --- !u!1 &30047163853607778
@@ -16004,11 +16004,13 @@ MonoBehaviour:
     roll: 0
   - position: {x: 0.20681892, y: 0.21089688, z: 0.18147872}
     roll: 0
-  - position: {x: 0.09017264, y: 0.09797085, z: 0.12971947}
+  - position: {x: 0.17274548, y: 0.08843763, z: 0.1548727}
     roll: 0
-  - position: {x: 0.11630057, y: 0.16943714, z: 0.1320246}
+  - position: {x: 0.03246302, y: 0.119021155, z: 0.12971947}
     roll: 0
-  - position: {x: 0.23059455, y: 0.02906993, z: 0.082055345}
+  - position: {x: 0.12618105, y: 0.19835687, z: 0.1320246}
+    roll: 0
+  - position: {x: 0.20460245, y: 0.044201672, z: 0.073420286}
     roll: 0
   - position: {x: 0.20490357, y: -0.13566712, z: 0.028983178}
     roll: 0
