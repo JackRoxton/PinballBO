@@ -336,8 +336,8 @@ MonoBehaviour:
   lightOn: {fileID: 2100000, guid: 97a0a3da7b57f1041a6951b0ebed7ec2, type: 2}
   neon: {fileID: 7099462000985200771}
   lightState: 0
-  hit: {fileID: 0}
-  lightedHit: {fileID: 0}
+  hit: {fileID: 8300000, guid: cbdf98669330ae94a990cb3257b4b4a8, type: 3}
+  lightedHit: {fileID: 8300000, guid: 808b10aaae9802d4fb5dd93fd14ac75b, type: 3}
 --- !u!82 &8705165759149931382
 AudioSource:
   m_ObjectHideFlags: 0
