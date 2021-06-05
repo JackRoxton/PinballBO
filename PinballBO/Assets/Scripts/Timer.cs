@@ -30,8 +30,6 @@ public class Timer : MonoBehaviour
     private void Start()
     {
         timeLeft = timeTotal;
-        Time.timeScale = 1;
-        GameManager.Instance.GameState = GameManager.gameState.InGame;
     }
 
     private void Update()

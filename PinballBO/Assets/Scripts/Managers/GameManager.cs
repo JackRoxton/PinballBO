@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
         currentLevel = SceneManager.GetActiveScene().buildIndex;
         GameState = gameState.MainMenu;
+        SetCurrentChallenge(Challenge.Free);
     }
 
     private void OnSceneLoaded(Scene aScene, LoadSceneMode aMode)
@@ -155,6 +156,7 @@ public class GameManager : MonoBehaviour
     {
         return currentChallenge;
     }
+
     public void SetCurrentChallenge(Challenge challenge)
     {
         if (currentState != gameState.InGame)
@@ -172,6 +174,8 @@ public class GameManager : MonoBehaviour
                 break;
             case Challenge.Parkour:
 
+                break;
+            default:
                 break;
         }
     }
