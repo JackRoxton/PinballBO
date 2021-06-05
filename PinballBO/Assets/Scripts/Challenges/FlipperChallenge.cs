@@ -54,6 +54,7 @@ public class FlipperChallenge : MonoBehaviour
     public void StopChallenge()
     {
         playing = false;
+        UIManager.Instance.FlipperChallengeWin();
         GameManager.Instance.SetCurrentChallenge(GameManager.Challenge.Free);
     }
 

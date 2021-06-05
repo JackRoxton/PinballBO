@@ -37,7 +37,7 @@ public class Bill : MonoBehaviour
     float tour;
     Vector3 slopeNormal = Vector3.up;
     bool canBreak; // { get { return SpinnerChallenge.cleared; } }
-    bool canCharge { get { return FlipperChallenge.Instance.cleared; } }
+    bool canCharge { get { return ChronoChallenge.cleared; } }
 
 
     private void Awake()

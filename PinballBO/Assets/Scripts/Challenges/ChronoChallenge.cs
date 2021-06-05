@@ -11,6 +11,7 @@ public class ChronoChallenge : MonoBehaviour
     private GameObject Bill;
     public Timer timer;
     private bool isFinished = true;
+    public static bool cleared = false;
 
     public float challengeTime = 60f; //change into the inspector depending on the challenge
     public Vector3 respawnPoint;
@@ -46,6 +47,7 @@ public class ChronoChallenge : MonoBehaviour
         if (win)
         {
             timer.SetTime(10000f, null);
+            cleared = true;
         }
         else
         {

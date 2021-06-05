@@ -169,14 +169,14 @@ public class UIManager : MonoBehaviour
     public void FlipperChallengeWin()
     {
         FlipperChallengeCanvas.SetActive(false);
-        timer.gameObject.SetActive(false);
+        timer.transform.GetChild(0).gameObject.SetActive(false);
     }
     public void InitializeFlipperChallengeUI(float goal)
     {
         FlipperChallengeCanvas.SetActive(true);
         FlipperChallengeScore.GetComponent<Text>().text = "0"; // Affiche le score
         FlipperChallengeScore.transform.parent.GetComponent<Text>().text = "      / " + goal.ToString(); // Affiche le score
-        timer.gameObject.SetActive(true);
+        timer.transform.GetChild(0).gameObject.SetActive(true);
         timer.SetScore(6, FlipperChallenge.Instance);
     }
 
