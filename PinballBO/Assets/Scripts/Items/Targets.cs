@@ -21,6 +21,11 @@ public class Targets : MonoBehaviour
         source = GetComponent<AudioSource>();
     }
 
+    private void Start()
+    {
+        AudioManager.Instance.effectSources.Add(this.source);        
+    }
+
     public void SetLights(bool state)
     {
         lightState = state;

@@ -21,13 +21,17 @@ public class BumpObject : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        source = GetComponent<AudioSource>();
+        source = GetComponent<AudioSource>();                
+    }
+
+    private void Start()
+    {
+        AudioManager.Instance.effectSources.Add(this.source);
 
         for (int i = 0; i < Neons.Length; i++)
-        {
             SetColor(Neons[i].material, Colors[i]);
-        }
     }
+
 
     #region Bumping
     protected void BumpAway(Bill bill, string animatorString = "")  // Bump Bill in the direction from the bumper to Bill's position

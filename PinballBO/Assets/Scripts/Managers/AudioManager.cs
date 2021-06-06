@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource ambianceSource;
 
-    private List<AudioSource> effectSources = new List<AudioSource>();
+    [HideInInspector] public List<AudioSource> effectSources = new List<AudioSource>();
 
     [Space]
     public float musicVolume = 1;
@@ -24,7 +24,7 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] private AudioClip music;
 
-    void Start()
+    void Awake()
     {
         effectVolume = GameManager.Instance.effectVolume;
         musicVolume = GameManager.Instance.musicVolume;
@@ -43,23 +43,30 @@ public class AudioManager : MonoBehaviour
             PlayMusic(music);
 
         #region Effect Sources Initialisation
-        Bumper[] bumpers = FindObjectsOfType<Bumper>();
-        foreach (Bumper bumper in bumpers)
+        //Bumper[] bumpers = FindObjectsOfType<Bumper>();
+        //foreach (Bumper bumper in bumpers)
+        //{
+        //    AudioSource source = bumper.GetComponent<AudioSource>();
+        //    effectSources.Add(source);
+
+        //source.playOnAwake = false;
+        //source.volume = effectVolume;
+        //source.pitch = Random.Range(.7f, 1.2f);
+        //}
+
+        //Targets[] targets = FindObjectsOfType<Targets>();
+        //foreach (Targets target in targets)
+        //{
+        //    AudioSource source = target.GetComponent<AudioSource>();
+        //    effectSources.Add(source);
+
+        //    source.playOnAwake = false;
+        //    source.volume = effectVolume;
+        //    source.pitch = Random.Range(.7f, 1.2f);
+        //}
+
+        foreach (AudioSource source in effectSources)
         {
-            AudioSource source = bumper.GetComponent<AudioSource>();
-            effectSources.Add(source);
-
-            source.playOnAwake = false;
-            source.volume = effectVolume;
-            source.pitch = Random.Range(.7f, 1.2f);
-        }
-
-        Targets[] targets = FindObjectsOfType<Targets>();
-        foreach (Targets target in targets)
-        {
-            AudioSource source = target.GetComponent<AudioSource>();
-            effectSources.Add(source);
-
             source.playOnAwake = false;
             source.volume = effectVolume;
             source.pitch = Random.Range(.7f, 1.2f);
