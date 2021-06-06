@@ -16,6 +16,8 @@ public class Slingshot : BumpObject
         if (bill != null)
         {
             Vector3 direction = -collision.GetContact(0).normal;
+            direction.y = 0;
+            direction = Vector3.ProjectOnPlane(direction, transform.up);
             source.Play();
             Bump(bill, direction, collision.GetContact(0).thisCollider.name);
         }

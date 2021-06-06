@@ -66,17 +66,28 @@ public class UIManager : MonoBehaviour
         else bestTime = 60;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (GameManager.Instance.GameState == GameManager.gameState.InGame && Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.Escape))
         {
-            Debug.Log("Pause");
-            GameManager.Instance.GameState = GameManager.gameState.Pause;
-            pauseBestTimeText.text = "Best Time = " + System.Math.Round(bestTime, 2).ToString();
-            pauseCurrentTimeText.text = "Current Time = " + System.Math.Round(Time.timeSinceLevelLoad, 2).ToString();
+            if (GameManager.Instance.GameState == GameManager.gameState.InGame)
+            {                
+                GameManager.Instance.GameState = GameManager.gameState.Pause;
+                pauseBestTimeText.text = "Best Time = " + System.Math.Round(bestTime, 2).ToString();
+                pauseCurrentTimeText.text = "Current Time = " + System.Math.Round(Time.timeSinceLevelLoad, 2).ToString();
+
+                if (GameManager.Instance.GetCurrentChallenge() == GameManager.Challenge.Flipper)
+                    FlipperChallengeCanvas.SetActive(false);
+
+                pauseScreen.SetActive(true);
+            }
+            else if (GameManager.Instance.GameState == GameManager.gameState.Pause)
+            {
+                GameManager.Instance.GameState = GameManager.gameState.InGame;
+                OnClickEnter("Resume");
+            }
 
 
-            pauseScreen.SetActive(true);
         }
 
     }
@@ -104,6 +115,8 @@ public class UIManager : MonoBehaviour
             case "Resume":
                 pauseScreen.SetActive(false);
                 GameManager.Instance.GameState = GameManager.gameState.InGame;
+                if (GameManager.Instance.GetCurrentChallenge() == GameManager.Challenge.Flipper)
+                    FlipperChallengeCanvas.SetActive(true);
                 break;
 
             default:
