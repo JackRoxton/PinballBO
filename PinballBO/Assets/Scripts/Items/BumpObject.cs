@@ -78,7 +78,6 @@ public class BumpObject : MonoBehaviour
     }
     #endregion
 
-
     // Feedbacks
     protected virtual IEnumerator PostProcessBump()
     {
@@ -110,7 +109,7 @@ public class BumpObject : MonoBehaviour
         mat.SetColor("_EmissionColor", color);
     }
 
-    protected void RandomColor()
+    public void RandomColor()
     {
 
         foreach (MeshRenderer renderer in Neons)
@@ -128,7 +127,7 @@ public class BumpObject : MonoBehaviour
         }
     }
 
-    protected void SmoothRandomColor()
+    public void SmoothRandomColor()
     {
         foreach (MeshRenderer renderer in Neons)
         {

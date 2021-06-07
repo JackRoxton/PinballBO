@@ -125,17 +125,16 @@ public class Door : MonoBehaviour   // Quentin Lamy
     }
     IEnumerator OpenBoss()
     {
-        bill = GameObject.Find("Bill");
-        Rigidbody rb = bill.GetComponent<Rigidbody>();
-
         if (cinematic)
         {
             CameraManager.Instance.SetCameraActive(camera.gameObject);
-            rb.isKinematic = true;
         }
 
         if (challengesDone == challengesCount)
+        {
             win.ParticlesWin();
+            GameManager.Instance.GameState = GameManager.gameState.Win;
+        }
         yield return new WaitForSeconds(2);
         //turn on the lights of a "lock"
         if (challengesDone == challengesCount)
@@ -148,7 +147,6 @@ public class Door : MonoBehaviour   // Quentin Lamy
         if (cinematic)
         {
             CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainCam.gameObject);
-            rb.isKinematic = false;
         }
     }
 
@@ -156,5 +154,11 @@ public class Door : MonoBehaviour   // Quentin Lamy
     {
         if (other.GetComponent<Bill>() != null)
             CameraManager.Instance.SetCameraActive(endCam.gameObject);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<Bill>() != null)
+            CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainCam.gameObject);
     }
 }

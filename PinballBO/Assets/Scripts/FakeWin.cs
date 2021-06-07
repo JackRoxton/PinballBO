@@ -42,6 +42,8 @@ public class FakeWin : MonoBehaviour    // Quentin Lejuez
             n.SetActive(true);
             n.GetComponent<ParticleSystem>().Play();
         }
+        foreach (Bumper bump in FindObjectsOfType<Bumper>())
+            bump.InvokeRepeating("Rainbow", 0, Time.deltaTime);
     }
 
     public void ParticlesWin()
