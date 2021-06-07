@@ -36,7 +36,7 @@ public class Bill : MonoBehaviour
     private float chargeAcceleration = 0;
     float tour;
     Vector3 slopeNormal = Vector3.up;
-    bool canBreak; // { get { return SpinnerChallenge.cleared; } }
+    bool canBreak; // { get { return ParkourChallenge.cleared; } }
     bool canCharge { get { return ChronoChallenge.cleared; } }
 
 
@@ -50,6 +50,8 @@ public class Bill : MonoBehaviour
     }
     void Start()
     {
+        AudioManager.Instance.effectSources.Add(source);
+
         currentState = FreeMoving;
     }
 
@@ -138,7 +140,7 @@ public class Bill : MonoBehaviour
             transform.rotation = Quaternion.Euler(currentRotation, targetAngle, 0);
             // Rolling Sound
             source.volume = rb.velocity.magnitude / 10;
-            source.pitch = rb.velocity.magnitude / 10;
+            source.pitch = (rb.velocity.magnitude / 10) * Time.deltaTime;
         }
     }
 
@@ -223,6 +225,8 @@ public class Bill : MonoBehaviour
         Vector3 normal = collision.GetContact(0).normal;
         if (normal.y > .7f)
             slopeNormal = normal;
+        else
+            source.PlayOneShot(hit);
         if (collision.collider.material.name == "Floor (Instance)")
             if (!source.isPlaying)
             {
@@ -237,4 +241,8 @@ public class Bill : MonoBehaviour
             source.Stop();
     }
     
+    public void IncreasePerformance()
+    {
+
+    }
 }
