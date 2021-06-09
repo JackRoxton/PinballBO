@@ -17,6 +17,7 @@ public class FlipperChallenge : MonoBehaviour
 
     private float targetCount = 1;
     private bool playing = false;
+    private bool clearedOnce = false;
 
     private void Start()
     {
@@ -44,6 +45,10 @@ public class FlipperChallenge : MonoBehaviour
         goal = scoreToReach;
 
         GameManager.Instance.SetCurrentChallenge(GameManager.Challenge.Flipper);
+
+        if (clearedOnce)
+            foreach (BumpObject bump in GetComponentsInChildren<BumpObject>())
+                bump.InvokeRepeating("Rainbow", 0, Time.deltaTime);
     }
 
     public void StopChallenge()
@@ -51,6 +56,9 @@ public class FlipperChallenge : MonoBehaviour
         playing = false;
         UIManager.Instance.FlipperChallengeWin();
         GameManager.Instance.SetCurrentChallenge(GameManager.Challenge.Free);
+
+        foreach (BumpObject bump in GetComponentsInChildren<BumpObject>())
+            bump.CancelInvoke();
     }
 
     public void ChangeScore(int amount, GameObject item)
@@ -89,7 +97,7 @@ public class FlipperChallenge : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {
+    {        
         if (other.GetComponent<Bill>() != null)
             if (!playing)
                 Begin();
@@ -125,6 +133,10 @@ public class FlipperChallenge : MonoBehaviour
 
         playing = false;
         StopCoroutine(tunnel);
+
+        Bill.Instance.IncreasePerformance();
+
+        clearedOnce = true;
     }
 
     IEnumerator OpenDoor() // Open Exit Door
