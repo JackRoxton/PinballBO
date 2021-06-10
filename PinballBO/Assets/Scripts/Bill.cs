@@ -40,6 +40,7 @@ public class Bill : MonoBehaviour
     Vector3 slopeNormal = Vector3.up;
     bool canBreak; // { get { return ParkourChallenge.cleared; } }
     bool canCharge { get { return ChronoChallenge.cleared; } }
+    private Vector3 startPos;
 
 
     private void Awake()
@@ -51,6 +52,7 @@ public class Bill : MonoBehaviour
         tour = Mathf.PI * GetComponent<SphereCollider>().radius;
 
         camera = GetComponentInChildren<CinemachineVirtualCamera>();
+        startPos = transform.position;
     }
     void Start()
     {
@@ -247,9 +249,22 @@ public class Bill : MonoBehaviour
     
     public void IncreasePerformance()
     {
+        acceleration = 25;
         speed = 15;
         breakForce = .1f;
         chargeForce = .8f;
         lossSpeedOnSlopes = 0;
+    }
+
+    public void Reset()
+    {
+        transform.position = startPos;
+        acceleration = 20;
+        speed = 12;
+        breakForce = .05f;
+        chargeForce = .6f;
+        lossSpeedOnSlopes = 1.5f;
+        highSpeedControl = .8f;
+        rb.velocity = Vector3.zero;
     }
 }

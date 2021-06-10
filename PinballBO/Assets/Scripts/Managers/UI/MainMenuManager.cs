@@ -19,6 +19,8 @@ public class MainMenuManager : MonoBehaviour
             case "StartGame":
                 //levelManagerUI.SetActive(true);
                 GameManager.Instance.GameState = GameManager.gameState.InGame;
+                GameManager.Instance.coins = 0;
+                Bill.Instance.Reset();
                 UIManager.Instance.coinsCount.gameObject.SetActive(true);
                 CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainCam.gameObject);
                 gameObject.SetActive(false);
@@ -39,7 +41,7 @@ public class MainMenuManager : MonoBehaviour
                 break;
 
             default:
-                Debug.LogError("\"" + button + "\"" + " not found in switch statement");
+                Debug.LogError(button + " not found in switch statement");
                 break;
         }
     }

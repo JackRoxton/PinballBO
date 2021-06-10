@@ -36,7 +36,6 @@ public class FakeWin : MonoBehaviour    // Quentin Lejuez
         CameraManager.Instance.SetCameraActive(cam.gameObject);
         GameManager.Instance.GameState = GameManager.gameState.Win;
         uimanager.Win();
-        bill.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         foreach(GameObject n in particles)
         {
             n.SetActive(true);

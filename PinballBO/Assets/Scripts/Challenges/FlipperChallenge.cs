@@ -17,7 +17,7 @@ public class FlipperChallenge : MonoBehaviour
 
     private float targetCount = 1;
     private bool playing = false;
-    private bool clearedOnce = false;
+    public bool clearedOnce = false;
 
     private void Start()
     {
