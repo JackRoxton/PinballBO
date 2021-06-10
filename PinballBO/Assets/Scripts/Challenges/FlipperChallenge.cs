@@ -200,7 +200,7 @@ public class FlipperChallenge : MonoBehaviour
             EdgeLight(i, Color.white);
             if (i > 0)
                 EdgeLight(i - 1, Color.black);
-            yield return new WaitForSeconds(.07f);
+            yield return new WaitForSeconds(.04f);
         }
 
         EdgeLight(length, Color.black);
@@ -208,7 +208,7 @@ public class FlipperChallenge : MonoBehaviour
         for (int i = length; i > 0; i -= 2)
         {
             EdgeLight(i, Color.white);
-            yield return new WaitForSeconds(.07f);
+            yield return new WaitForSeconds(.04f);
         }
     }
 
