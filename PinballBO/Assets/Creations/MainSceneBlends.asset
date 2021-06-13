@@ -45,7 +45,7 @@ MonoBehaviour:
   - m_From: CameraBeforeShoot_Flipper
     m_To: '**ANY CAMERA**'
     m_Blend:
-      m_Style: 2
+      m_Style: 7
       m_Time: 3
       m_CustomCurve:
         serializedVersion: 2
@@ -62,11 +62,11 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 1
           value: 1
-          inSlope: Infinity
-          outSlope: Infinity
+          inSlope: 3.234901
+          outSlope: 3.234901
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0
+          inWeight: 0.24657542
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -103,8 +103,8 @@ MonoBehaviour:
   - m_From: CM FreeLook1
     m_To: CM LaunchRail
     m_Blend:
-      m_Style: 6
-      m_Time: 1
+      m_Style: 4
+      m_Time: 1.7
       m_CustomCurve:
         serializedVersion: 2
         m_Curve:
