@@ -19,7 +19,7 @@ public class SpinnerChallenge : MonoBehaviour
         if (bill != null)
         {
             stateSpun = true;
-            StartCoroutine(waitForLight(bill));
+            StartCoroutine(waitForLight());
             if (flipper != null)
                 flipper.StopChallenge();
         }
@@ -30,13 +30,11 @@ public class SpinnerChallenge : MonoBehaviour
         return stateSpun;
     }
 
-    IEnumerator waitForLight(Bill bill)
+    IEnumerator waitForLight()
     {
-        bill.GetComponent<Rigidbody>().isKinematic = true;
         yield return new WaitForSeconds(2);
         Loupiote.GetComponent<MeshRenderer>().material = Light;
         LoupioteDoor.GetComponent<MeshRenderer>().material = Light;
-        bill.GetComponent<Rigidbody>().isKinematic = false;
     }
 
     static void Reset()

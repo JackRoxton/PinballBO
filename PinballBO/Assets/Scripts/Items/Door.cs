@@ -47,7 +47,7 @@ public class Door : MonoBehaviour   // Quentin Lamy
         {
             throw new System.Exception("doorUseError");
         }
-        pos = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y - 20, this.transform.localPosition.z);
+        pos = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y - 15, this.transform.localPosition.z);
         for (int i = 0; i < offTargetsCount; i++)
         {
             targets[Random.Range(0, targets.Count)].SetLights(false);
@@ -133,7 +133,7 @@ public class Door : MonoBehaviour   // Quentin Lamy
         if (challengesDone == challengesCount)
         {
             win.ParticlesWin();
-            //GameManager.Instance.GameState = GameManager.gameState.Win;
+            GameManager.Instance.GameState = GameManager.gameState.Win;
         }
         yield return new WaitForSeconds(2);
         //turn on the lights of a "lock"
