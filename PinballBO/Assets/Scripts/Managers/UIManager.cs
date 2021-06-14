@@ -39,7 +39,6 @@ public class UIManager : MonoBehaviour
 
     [Header("Misc")]
     public Timer timer;
-    public GameObject timerVisual;
     public Text coinsCount;
     private float bestTime;
 
@@ -80,7 +79,6 @@ public class UIManager : MonoBehaviour
                 if (GameManager.Instance.GetCurrentChallenge() == GameManager.Challenge.Flipper)
                     FlipperChallengeCanvas.SetActive(false);
 
-                coinsCount.gameObject.SetActive(false);
                 pauseScreen.SetActive(true);
             }
             else if (GameManager.Instance.GameState == GameManager.gameState.Pause)
@@ -100,7 +98,6 @@ public class UIManager : MonoBehaviour
         switch (button)
         {
             case "GoMainMenu":
-                pauseScreen.SetActive(false);
                 GameManager.Instance.GameState = GameManager.gameState.MainMenu;
                 mainMenu.gameObject.SetActive(true);
                 mainMenu.OnClickEnter("BackToMenu");
@@ -117,7 +114,6 @@ public class UIManager : MonoBehaviour
 
             case "Resume":
                 pauseScreen.SetActive(false);
-                coinsCount.gameObject.SetActive(true);
                 GameManager.Instance.GameState = GameManager.gameState.InGame;
                 if (GameManager.Instance.GetCurrentChallenge() == GameManager.Challenge.Flipper)
                     FlipperChallengeCanvas.SetActive(true);
@@ -188,14 +184,14 @@ public class UIManager : MonoBehaviour
     public void FlipperChallengeWin()
     {
         FlipperChallengeCanvas.SetActive(false);
-        timerVisual.gameObject.SetActive(false);
+        timer.transform.GetChild(0).gameObject.SetActive(false);
     }
     public void InitializeFlipperChallengeUI(float goal)
     {
         FlipperChallengeCanvas.SetActive(true);
         FlipperChallengeScore.GetComponent<Text>().text = "0"; // Affiche le score
         FlipperChallengeScore.transform.parent.GetComponent<Text>().text = "      / " + goal.ToString(); // Affiche le score
-        timerVisual.SetActive(true);
+        timer.transform.GetChild(0).gameObject.SetActive(true);
         timer.SetScore(6, FlipperChallenge.Instance);
     }
 

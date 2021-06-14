@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.AI;
 using Cinemachine;
 
-public class FakeWin : MonoBehaviour    // Quentin Lejuez
+public class FakeWin : MonoBehaviour
 {
     public List<GameObject> particles = new List<GameObject>();
     public CinemachineVirtualCamera cam;
@@ -38,15 +38,6 @@ public class FakeWin : MonoBehaviour    // Quentin Lejuez
         uimanager.Win();
         bill.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         foreach(GameObject n in particles)
-        {
-            n.SetActive(true);
-            n.GetComponent<ParticleSystem>().Play();
-        }
-    }
-
-    public void ParticlesWin()
-    {
-        foreach (GameObject n in particles)
         {
             n.SetActive(true);
             n.GetComponent<ParticleSystem>().Play();

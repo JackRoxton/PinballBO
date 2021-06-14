@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource ambianceSource;
 
-    public List<AudioSource> effectSources = new List<AudioSource>();
+    [HideInInspector] public List<AudioSource> effectSources = new List<AudioSource>();
 
     [Space]
     public float musicVolume = 1;
@@ -42,6 +42,36 @@ public class AudioManager : MonoBehaviour
         if (music != null)
             PlayMusic(music);
 
+        #region Effect Sources Initialisation
+        //Bumper[] bumpers = FindObjectsOfType<Bumper>();
+        //foreach (Bumper bumper in bumpers)
+        //{
+        //    AudioSource source = bumper.GetComponent<AudioSource>();
+        //    effectSources.Add(source);
+
+        //source.playOnAwake = false;
+        //source.volume = effectVolume;
+        //source.pitch = Random.Range(.7f, 1.2f);
+        //}
+
+        //Targets[] targets = FindObjectsOfType<Targets>();
+        //foreach (Targets target in targets)
+        //{
+        //    AudioSource source = target.GetComponent<AudioSource>();
+        //    effectSources.Add(source);
+
+        //    source.playOnAwake = false;
+        //    source.volume = effectVolume;
+        //    source.pitch = Random.Range(.7f, 1.2f);
+        //}
+
+        foreach (AudioSource source in effectSources)
+        {
+            source.playOnAwake = false;
+            source.volume = effectVolume;
+            source.pitch = Random.Range(.7f, 1.2f);
+        }
+        #endregion
 
         //update the sliders for each scene
         musicSlider.value = musicVolume;
@@ -49,17 +79,6 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-        foreach (AudioSource source in effectSources)
-        {
-            source.playOnAwake = false;
-            source.volume = effectVolume;
-            if (source.GetComponent<Bill>() == null)
-                source.pitch = Random.Range(.7f, 1.2f);
-        }
-        
-    }
 
     #region ChangeVolume
     public void ChangeMusicVolume(float volume)

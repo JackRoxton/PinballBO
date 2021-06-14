@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class Door : MonoBehaviour   // Quentin Lamy
+public class Door : MonoBehaviour
 {
-    public FakeWin win;
-    public Cinemachine.CinemachineVirtualCamera endCam;
-
     [Header("Mode")]
     [SerializeField]
     private bool useTargets;
@@ -47,7 +44,7 @@ public class Door : MonoBehaviour   // Quentin Lamy
         {
             throw new System.Exception("doorUseError");
         }
-        pos = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y - 15, this.transform.localPosition.z);
+        pos = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y - 10, this.transform.localPosition.z);
         for (int i = 0; i < offTargetsCount; i++)
         {
             targets[Random.Range(0, targets.Count)].SetLights(false);
@@ -110,17 +107,22 @@ public class Door : MonoBehaviour   // Quentin Lamy
 
     IEnumerator Open()
     {
+        bill = GameObject.Find("Bill");
+        Rigidbody rb = bill.GetComponent<Rigidbody>();
+
         if (cinematic)
         {
             CameraManager.Instance.SetCameraActive(camera.gameObject);
+            rb.isKinematic = true;
         }
         yield return new WaitForSeconds(2);
         this.transform.localPosition = Vector3.MoveTowards(this.transform.localPosition, pos, 2f);
-        open = true;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+        open = true;
         yield return new WaitForSeconds(2);
         if (cinematic)
         {
             CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainCam.gameObject);
+            rb.isKinematic = false;
         }
     }
     IEnumerator OpenBoss()
@@ -133,14 +135,11 @@ public class Door : MonoBehaviour   // Quentin Lamy
             CameraManager.Instance.SetCameraActive(camera.gameObject);
             rb.isKinematic = true;
         }
-
-        if (challengesDone == challengesCount)
-            win.ParticlesWin();
         yield return new WaitForSeconds(2);
         //turn on the lights of a "lock"
         if (challengesDone == challengesCount)
         {
-            this.transform.localPosition = Vector3.MoveTowards(this.transform.localPosition, pos, 0.1f);
+            this.transform.localPosition = Vector3.MoveTowards(this.transform.localPosition, pos, 0.05f);
             open = true;
         }
         yield return new WaitForSeconds(2);
@@ -150,11 +149,5 @@ public class Door : MonoBehaviour   // Quentin Lamy
             CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainCam.gameObject);
             rb.isKinematic = false;
         }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.GetComponent<Bill>() != null)
-            CameraManager.Instance.SetCameraActive(endCam.gameObject);
     }
 }

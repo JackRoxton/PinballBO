@@ -5,6 +5,7 @@ using UnityEngine;
 public class FlipperChallenge : MonoBehaviour
 {
     public static FlipperChallenge Instance;
+    [SerializeField] private ParticleSystem yeah;
     public GameObject door;
     public Cinemachine.CinemachineVirtualCamera doorCamera;
     public GameObject[] lightPack;
@@ -12,15 +13,19 @@ public class FlipperChallenge : MonoBehaviour
     private Coroutine tunnel;
 
     public int score { get; private set; }
+    public int bestScore { get; private set; }
     public int goal { get; private set; }
     public int scoreToReach;
 
     private float targetCount = 1;
     private bool playing = false;
+    public bool cleared { get; private set; }
 
     private void Start()
     {
         Instance = this;
+        cleared = false;
+        yeah.gameObject.SetActive(false);
     }
 
     public void Begin()
@@ -88,23 +93,12 @@ public class FlipperChallenge : MonoBehaviour
         return targetCount * UIManager.Instance.timer.multiplier;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.GetComponent<Bill>() != null)
-            if (!playing)
-                Begin();
-
-        if (tunnel != null)
-            StopCoroutine(tunnel);
-        tunnel = StartCoroutine(Tunnel());
-    }
-
-    #region Winning
     private void Victory()
     {
+        if (score > bestScore) bestScore = score;
         UIManager.Instance.FlipperChallengeWin();
+        yeah.gameObject.SetActive(true);
 
-        // Exit the challenge
         StartCoroutine(OpenDoor());
 
         // items do not earn points anymore
@@ -125,9 +119,23 @@ public class FlipperChallenge : MonoBehaviour
 
         playing = false;
         StopCoroutine(tunnel);
+
+        cleared = true;
     }
 
-    IEnumerator OpenDoor() // Open Exit Door
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Bill>() != null)
+            if (!playing)
+                Begin();
+
+        if (tunnel != null)
+            StopCoroutine(tunnel);
+        tunnel = StartCoroutine(Tunnel());
+    }
+
+    IEnumerator OpenDoor()
     {
         Vector3 targetPos = door.transform.position + Vector3.up * 2.5f;
         CameraManager.Instance.SetCameraActive(doorCamera.gameObject);
@@ -140,7 +148,7 @@ public class FlipperChallenge : MonoBehaviour
         yield return new WaitForSeconds(2);
         CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainCam.gameObject);
     }
-    #endregion
+
 
     #region Tunnel
     IEnumerator Tunnel()

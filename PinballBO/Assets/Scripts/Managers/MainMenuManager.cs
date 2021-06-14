@@ -19,7 +19,6 @@ public class MainMenuManager : MonoBehaviour
             case "StartGame":
                 //levelManagerUI.SetActive(true);
                 GameManager.Instance.GameState = GameManager.gameState.InGame;
-                UIManager.Instance.coinsCount.gameObject.SetActive(true);
                 CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainCam.gameObject);
                 gameObject.SetActive(false);
                 break;
