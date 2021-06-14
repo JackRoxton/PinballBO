@@ -119,7 +119,6 @@ public class UIManager : MonoBehaviour
 
             case "Credit":
                 winScreen.SetActive(false);
-                mainMenu.gameObject.SetActive(false);
                 StartCoroutine(Credit());
                 break;
 
