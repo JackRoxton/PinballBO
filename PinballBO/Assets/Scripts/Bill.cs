@@ -6,8 +6,6 @@ using Cinemachine;
 
 public class Bill : MonoBehaviour
 {
-    public static Bill Instance;
-
     private Action currentState;
 
     [Header("Speed")]
@@ -44,8 +42,6 @@ public class Bill : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
-
         rb = GetComponent<Rigidbody>();
         source = GetComponent<AudioSource>();
         tour = Mathf.PI * GetComponent<SphereCollider>().radius;
@@ -247,9 +243,6 @@ public class Bill : MonoBehaviour
     
     public void IncreasePerformance()
     {
-        speed = 15;
-        breakForce = .1f;
-        chargeForce = .8f;
-        lossSpeedOnSlopes = 0;
+
     }
 }

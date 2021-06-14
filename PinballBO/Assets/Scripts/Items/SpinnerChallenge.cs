@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SpinnerChallenge : MonoBehaviour
 {
-    public FlipperChallenge flipper;
     public GameObject LoupioteDoor;
     public GameObject Loupiote;
     public Material Light;
@@ -19,8 +18,6 @@ public class SpinnerChallenge : MonoBehaviour
         {
             stateSpun = true;
             StartCoroutine(waitForLight());
-            if (flipper != null)
-                flipper.StopChallenge();
         }
     }
 
