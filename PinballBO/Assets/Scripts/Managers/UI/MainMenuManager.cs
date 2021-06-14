@@ -24,7 +24,6 @@ public class MainMenuManager : MonoBehaviour
                 UIManager.Instance.coinsCount.gameObject.SetActive(true);
                 CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainCam.gameObject);
                 gameObject.SetActive(false);
-                UIManager.Instance.AddCoin();
                 break;
 
             case "Options":
