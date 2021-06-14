@@ -47,7 +47,7 @@ public class Fronton : MonoBehaviour
 
         indicator++;
         wait = true;
-        yield return new WaitForSecondsRealtime(.3f);
+        yield return new WaitForSeconds(1);
         wait = false;
     }
 }

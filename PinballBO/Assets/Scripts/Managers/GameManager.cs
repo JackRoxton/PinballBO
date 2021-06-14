@@ -44,14 +44,12 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
     }
 
     private void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         currentLevel = SceneManager.GetActiveScene().buildIndex;
-        GameState = gameState.MainMenu;
     }
 
     private void OnSceneLoaded(Scene aScene, LoadSceneMode aMode)
@@ -87,8 +85,6 @@ public class GameManager : MonoBehaviour
                 case gameState.MainMenu:
                     Cursor.lockState = CursorLockMode.Confined;
                     Cursor.visible = true;
-                    CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainMenuCamera.gameObject);
-                    Time.timeScale = 0;
                     break;
 
                 case gameState.InGame:
@@ -119,8 +115,8 @@ public class GameManager : MonoBehaviour
                     }
                     //else if (currentChallenge == Challenge.Parkour)
                     //{
-                    //UIManager.Instance.TimerParkourWin();
-
+                        //UIManager.Instance.TimerParkourWin();
+                        
                     //}
 
 
@@ -168,10 +164,10 @@ public class GameManager : MonoBehaviour
 
                 break;
             case Challenge.Timer:
-
+                
                 break;
             case Challenge.Parkour:
-
+                
                 break;
         }
     }

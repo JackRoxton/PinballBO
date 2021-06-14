@@ -8,13 +8,18 @@ public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject optionUI;
     [SerializeField] private GameObject menuUI;
-
+    
     //If Multiple Levels are in the game
     //[SerializeField] private GameObject levelManagerUI;
 
     void Start()
     {
         GameManager.Instance.GameState = GameManager.gameState.MainMenu;
+    }
+
+    void Update()
+    {
+        
     }
 
     public void OnClickEnter(string button)
@@ -24,7 +29,7 @@ public class MainMenuManager : MonoBehaviour
             case "StartGame":
                 //levelManagerUI.SetActive(true);
                 GameManager.Instance.GameState = GameManager.gameState.InGame;
-                CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainCam.gameObject);
+                SceneManager.LoadScene(1);
                 break;
 
             case "Options":

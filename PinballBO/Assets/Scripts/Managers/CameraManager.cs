@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class CameraManager : MonoBehaviour  // Emile
+public class CameraManager : MonoBehaviour
 {
     public static CameraManager Instance { get; private set; }
     [HideInInspector] public GameObject currentCam;
     public CinemachineFreeLook mainCam;
-    public CinemachineVirtualCamera mainMenuCamera;
 
-    private void Awake()
+    private void Start()
     {
         Instance = this;
         currentCam = mainCam.gameObject;

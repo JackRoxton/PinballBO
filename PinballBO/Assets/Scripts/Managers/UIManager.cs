@@ -18,8 +18,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public MainMenuManager mainMenu;
-    [Space]
+
     int coins = 0;
     [Header("Pause UI")]
     public GameObject pauseScreen;
@@ -88,8 +87,7 @@ public class UIManager : MonoBehaviour
         {
             case "GoMainMenu":
                 GameManager.Instance.GameState = GameManager.gameState.MainMenu;
-                mainMenu.gameObject.SetActive(true);
-                mainMenu.OnClickEnter("BackToMenu");
+                SceneManager.LoadScene(0);
                 break;
 
             case "Restart":
