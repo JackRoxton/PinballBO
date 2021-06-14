@@ -126,7 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathParticle: {fileID: 7054832595196094986, guid: 59fc122ade2541440851c6b25cee5038,
     type: 3}
-  clip: {fileID: 0}
+  clip: {fileID: 8300000, guid: cafa074db2b6ecf4d8292b84ba05ae39, type: 3}
 --- !u!1 &6926795439209099305
 GameObject:
   m_ObjectHideFlags: 0
