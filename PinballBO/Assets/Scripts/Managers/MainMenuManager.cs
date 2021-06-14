@@ -20,7 +20,6 @@ public class MainMenuManager : MonoBehaviour
                 //levelManagerUI.SetActive(true);
                 GameManager.Instance.GameState = GameManager.gameState.InGame;
                 CameraManager.Instance.SetCameraActive(CameraManager.Instance.mainCam.gameObject);
-                gameObject.SetActive(false);
                 break;
 
             case "Options":
