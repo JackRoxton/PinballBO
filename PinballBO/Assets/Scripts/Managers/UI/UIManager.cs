@@ -36,7 +36,6 @@ public class UIManager : MonoBehaviour
     public Text winCurrentScoreText;
     public Text winScoreText;
     public GameObject NewRecord;
-    public GameObject credit;
 
     [Header("Misc")]
     public Timer timer;
@@ -73,7 +72,7 @@ public class UIManager : MonoBehaviour
         if (Input.GetKey(KeyCode.Escape))
         {
             if (GameManager.Instance.GameState == GameManager.gameState.InGame)
-            {
+            {                
                 GameManager.Instance.GameState = GameManager.gameState.Pause;
                 pauseBestTimeText.text = "Best Time = " + System.Math.Round(bestTime, 2).ToString();
                 pauseCurrentTimeText.text = "Current Time = " + System.Math.Round(Time.timeSinceLevelLoad, 2).ToString();
@@ -102,24 +101,18 @@ public class UIManager : MonoBehaviour
         {
             case "GoMainMenu":
                 pauseScreen.SetActive(false);
-                winScreen.SetActive(false);
                 GameManager.Instance.GameState = GameManager.gameState.MainMenu;
                 mainMenu.gameObject.SetActive(true);
                 mainMenu.OnClickEnter("BackToMenu");
-                Bill.Instance.Reset();
-                break;
-            case "Restart":
-                Bill.Instance.Reset();
-                GameManager.Instance.coins = 0;
-                FlipperChallenge.Instance.clearedOnce = false;
-                GameManager.Instance.GameState = GameManager.gameState.InGame;
-                OnClickEnter("Resume");
-                AddCoin();
                 break;
 
-            case "Credit":
-                winScreen.SetActive(false);
-                StartCoroutine(Credit());
+            case "Restart":
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                GameManager.Instance.GameState = GameManager.gameState.InGame;
+                break;
+
+            case "NextLevel":
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                 break;
 
             case "Resume":
@@ -128,7 +121,6 @@ public class UIManager : MonoBehaviour
                 GameManager.Instance.GameState = GameManager.gameState.InGame;
                 if (GameManager.Instance.GetCurrentChallenge() == GameManager.Challenge.Flipper)
                     FlipperChallengeCanvas.SetActive(true);
-                AddCoin();
                 break;
 
             default:
@@ -154,25 +146,6 @@ public class UIManager : MonoBehaviour
 
     }
 
-    IEnumerator Credit()
-    {
-        Vector3 initial = credit.GetComponent<RectTransform>().localPosition;
-        credit.SetActive(true);
-        Vector3 target = credit.GetComponent<RectTransform>().localPosition;
-        target.y += credit.GetComponent<RectTransform>().rect.height;
-        yield return new WaitForSecondsRealtime(2);
-
-        for (float d = 0; d < target.y; d += 2)
-        {
-            credit.GetComponent<RectTransform>().localPosition = Vector3.MoveTowards(credit.GetComponent<RectTransform>().localPosition, target, 2);
-            yield return new WaitForEndOfFrame();
-        }
-        credit.SetActive(false);
-        credit.GetComponent<RectTransform>().localPosition = initial;
-
-        OnClickEnter("GoMainMenu");
-    }
-
     private void SetBestTime()
     {
         if (bestTime > Time.timeSinceLevelLoad)
@@ -191,11 +164,11 @@ public class UIManager : MonoBehaviour
         coins = GameManager.Instance.coins;
         if (coins < 10)
         {
-            coinsCount.text = "     " + coins.ToString() + " / " + Coins.count.ToString();
+            coinsCount.text = "     " + coins.ToString() + ("/40");
         }
         else if (coins >= 10 && coins < 100)
         {
-            coinsCount.text = "   " + coins.ToString() + " / " + Coins.count.ToString();
+            coinsCount.text = "   " + coins.ToString() + ("/40");
         }
         else
         {

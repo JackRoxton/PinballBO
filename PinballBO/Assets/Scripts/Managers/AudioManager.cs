@@ -35,7 +35,6 @@ public class AudioManager : MonoBehaviour
         ambianceSource.volume = 10;
         ambianceSource.time = 78;
         ambianceSource.loop = true;
-        effectSources.Add(ambianceSource);
         musicSource.loop = true;
         musicSource.volume = musicVolume;
         effectSource.volume = effectVolume;

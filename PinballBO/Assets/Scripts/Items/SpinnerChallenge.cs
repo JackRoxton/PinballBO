@@ -7,7 +7,6 @@ public class SpinnerChallenge : MonoBehaviour
     public FlipperChallenge flipper;
     public GameObject LoupioteDoor;
     public GameObject Loupiote;
-    public Material noLight;
     public Material Light;
 
     [SerializeField]
@@ -35,16 +34,6 @@ public class SpinnerChallenge : MonoBehaviour
         yield return new WaitForSeconds(2);
         Loupiote.GetComponent<MeshRenderer>().material = Light;
         LoupioteDoor.GetComponent<MeshRenderer>().material = Light;
-    }
-
-    static void Reset()
-    {
-        foreach(SpinnerChallenge spinner in FindObjectsOfType<SpinnerChallenge>())
-        {
-            spinner.Loupiote.GetComponent<MeshRenderer>().material = spinner.noLight;
-            spinner.LoupioteDoor.GetComponent<MeshRenderer>().material = spinner.noLight;
-            spinner.stateSpun = false;
-        }
     }
 
 }

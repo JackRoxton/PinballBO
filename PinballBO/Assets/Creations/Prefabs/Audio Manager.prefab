@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5113656081791874195}
-  - component: {fileID: 2752364635228191156}
   - component: {fileID: 6765268611706766070}
+  - component: {fileID: 2752364635228191156}
   - component: {fileID: 560905895498932464}
   - component: {fileID: 5589468031038695204}
   m_Layer: 0
@@ -34,27 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2752364635228191156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7167920402446820220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6371dd3d372da54eb72b5e62217f4b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectSource: {fileID: 6765268611706766070}
-  musicSource: {fileID: 560905895498932464}
-  ambianceSource: {fileID: 5589468031038695204}
-  effectSources: []
-  musicVolume: 1
-  effectVolume: 1
-  musicSlider: {fileID: 0}
-  effectSlider: {fileID: 0}
-  music: {fileID: 8300000, guid: 549cf6c7ba01c5e46b316f121f7615cc, type: 3}
 --- !u!82 &6765268611706766070
 AudioSource:
   m_ObjectHideFlags: 0
@@ -151,6 +130,32 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2752364635228191156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7167920402446820220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6371dd3d372da54eb72b5e62217f4b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectSource: {fileID: 6765268611706766070}
+  musicSource: {fileID: 560905895498932464}
+  ambianceSource: {fileID: 5589468031038695204}
+  musicVolume: 1
+  effectVolume: 1
+  musicSlider: {fileID: 0}
+  effectSlider: {fileID: 0}
+  Sounds:
+  - Coin
+  - Bump
+  audioArray:
+  - {fileID: 8300000, guid: cafa074db2b6ecf4d8292b84ba05ae39, type: 3}
+  - {fileID: 8300000, guid: e9925bf90899d34408a079760d61eac1, type: 3}
+  music: {fileID: 8300000, guid: 549cf6c7ba01c5e46b316f121f7615cc, type: 3}
 --- !u!82 &560905895498932464
 AudioSource:
   m_ObjectHideFlags: 0
@@ -161,7 +166,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 549cf6c7ba01c5e46b316f121f7615cc, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -257,7 +262,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2a8f376e06cd25049b499f963c16ca19, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

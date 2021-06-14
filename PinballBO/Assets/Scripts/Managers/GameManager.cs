@@ -107,6 +107,17 @@ public class GameManager : MonoBehaviour
                 case gameState.Win:
                     Cursor.lockState = CursorLockMode.Confined;
                     Cursor.visible = true;
+
+                    if (currentChallenge == Challenge.Timer)
+                    {
+                        UIManager.Instance.Win();
+
+                    }
+                    else if (currentChallenge == Challenge.Flipper)
+                    {
+                        UIManager.Instance.FlipperChallengeWin();
+
+                    }
                     //else if (currentChallenge == Challenge.Parkour)
                     //{
                     //UIManager.Instance.TimerParkourWin();

@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class Coins : MonoBehaviour
 {
-    public static int count;
     public ParticleSystem deathParticle;
     public AudioClip clip;
-
-    private void Awake()
-    {
-        count = FindObjectsOfType<Coins>().Length;
-    }
 
     private void FixedUpdate()
     {
@@ -31,7 +25,7 @@ public class Coins : MonoBehaviour
             UIManager.Instance.AddCoin();
 
             Instantiate(deathParticle, transform.position, Quaternion.identity);
-            gameObject.SetActive(false);
+            Destroy(this.gameObject);
         }
     }
 }
