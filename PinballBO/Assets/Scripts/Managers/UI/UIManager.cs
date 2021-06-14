@@ -192,11 +192,11 @@ public class UIManager : MonoBehaviour
         coins = GameManager.Instance.coins;
         if (coins < 10)
         {
-            coinsCount.text = "     " + coins.ToString() + " / " + Coins.count.ToString();
+            coinsCount.text = "     " + coins.ToString() + "/" + Coins.count.ToString();
         }
         else if (coins >= 10 && coins < 100)
         {
-            coinsCount.text = "   " + coins.ToString() + " / " + Coins.count.ToString();
+            coinsCount.text = "   " + coins.ToString() + "/" + Coins.count.ToString();
         }
         else
         {
