@@ -12,6 +12,11 @@ public class MainMenuManager : MonoBehaviour
     //If Multiple Levels are in the game
     //[SerializeField] private GameObject levelManagerUI;
 
+    void Start()
+    {
+        GameManager.Instance.GameState = GameManager.gameState.MainMenu;
+    }
+
     public void OnClickEnter(string button)
     {
         switch (button)
