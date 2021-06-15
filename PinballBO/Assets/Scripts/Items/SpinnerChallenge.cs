@@ -18,8 +18,8 @@ public class SpinnerChallenge : MonoBehaviour
         Bill bill = collision.gameObject.GetComponent<Bill>();
         if (bill != null)
         {
-            stateSpun = true;
             StartCoroutine(waitForLight(bill));
+            stateSpun = true;
             if (flipper != null)
                 flipper.StopChallenge();
         }
@@ -32,7 +32,9 @@ public class SpinnerChallenge : MonoBehaviour
 
     IEnumerator waitForLight(Bill bill)
     {
-        bill.GetComponent<Rigidbody>().isKinematic = true;
+        if(!stateSpun)
+            bill.GetComponent<Rigidbody>().isKinematic = true;
+
         yield return new WaitForSeconds(2);
         Loupiote.GetComponent<MeshRenderer>().material = Light;
         LoupioteDoor.GetComponent<MeshRenderer>().material = Light;
