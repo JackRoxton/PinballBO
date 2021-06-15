@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     public int currentLevel;
     public int coins = 0;
+    public List<GameObject> coinList;
     [System.NonSerialized] public float musicVolume = 1;
     [System.NonSerialized] public float effectVolume = 1;
 
@@ -170,7 +171,13 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-
+    public void ResetCoins()
+    {
+        foreach(GameObject coin in coinList)
+        {
+            coin.gameObject.SetActive(true);
+        }
+    }
     public void AddCoin()
     {
         coins++;

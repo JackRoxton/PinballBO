@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class Coins : MonoBehaviour
 {
-    public static int count;
     public ParticleSystem deathParticle;
     public AudioClip clip;
 
+    private void Start()
+    {
+        GameManager.Instance.coinList.Add(this.gameObject);
+    }
+
     private void Awake()
     {
-        count = FindObjectsOfType<Coins>().Length;
+
     }
 
     private void FixedUpdate()

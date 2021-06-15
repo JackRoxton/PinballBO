@@ -107,14 +107,17 @@ public class UIManager : MonoBehaviour
                 mainMenu.gameObject.SetActive(true);
                 mainMenu.OnClickEnter("BackToMenu");
                 Bill.Instance.Reset();
+                GameManager.Instance.ResetCoins();
                 break;
             case "Restart":
                 Bill.Instance.Reset();
+                winScreen.SetActive(false);
                 GameManager.Instance.coins = 0;
                 FlipperChallenge.Instance.clearedOnce = false;
                 GameManager.Instance.GameState = GameManager.gameState.InGame;
                 OnClickEnter("Resume");
                 AddCoin();
+                GameManager.Instance.ResetCoins();
                 break;
 
             case "Credit":
@@ -192,11 +195,11 @@ public class UIManager : MonoBehaviour
         coins = GameManager.Instance.coins;
         if (coins < 10)
         {
-            coinsCount.text = "     " + coins.ToString() + "/" + Coins.count.ToString();
+            coinsCount.text = "     " + coins.ToString() + "/40";
         }
         else if (coins >= 10 && coins < 100)
         {
-            coinsCount.text = "   " + coins.ToString() + "/" + Coins.count.ToString();
+            coinsCount.text = "   " + coins.ToString() + "/40";
         }
         else
         {
