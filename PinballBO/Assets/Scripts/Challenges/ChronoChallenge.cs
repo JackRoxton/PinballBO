@@ -7,6 +7,7 @@ public class ChronoChallenge : MonoBehaviour
     public GameObject endChallenge;
     public ChronoChallengeEnd EndOfTheChallenge;
 
+    public Animation TimesUp;
     public GameObject timerVisual;
     private GameObject Bill;
     public Timer timer;
@@ -53,6 +54,7 @@ public class ChronoChallenge : MonoBehaviour
         {
             Bill = GameObject.FindGameObjectWithTag("Player");
             Bill.transform.position = respawnPoint;
+            TimesUp.Play("Popup");
         }
         EndOfTheChallenge.Closed();
         StartCoroutine(Open());
