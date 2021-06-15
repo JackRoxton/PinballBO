@@ -25,6 +25,8 @@ public class UIManager : MonoBehaviour
     public GameObject pauseScreen;
     public Text pauseCurrentTimeText;
     public Text pauseBestTimeText;
+    public Button reflectionButton;
+    private bool billReflection = false;
 
     [Header("Defeat UI")]
     public GameObject defeatScreen;
@@ -139,6 +141,14 @@ public class UIManager : MonoBehaviour
                 Debug.LogError("\"" + button + "\"" + " not found in switch statement");
                 break;
         }
+    }
+
+    public void BillReflection()
+    {
+        billReflection = !billReflection;
+        Bill.Instance.Reflection(billReflection);
+        reflectionButton.image.color = billReflection ? Color.white : Color.grey;
+        reflectionButton.GetComponentInChildren<Text>().enabled = billReflection;
     }
 
     public void Win()

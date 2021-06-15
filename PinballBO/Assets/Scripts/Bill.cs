@@ -225,6 +225,12 @@ public class Bill : MonoBehaviour
     }
 
 
+    public void Reflection(bool setActive)
+    {
+        GetComponent<ReflectionProbe>().enabled = setActive;
+    }
+
+
 
     private void OnCollisionEnter(Collision collision)
     {
